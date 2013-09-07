@@ -1,0 +1,113 @@
+<?php
+
+class Subject_Relations extends HistoricalTable
+{
+	/**
+	 * Database table name
+	 * @var string
+	 */
+	protected $_table = 'relations';
+
+    /**
+     * gets list of subject relations by given relationship
+     * @param integer $rel_id
+     * @return mysqli result
+     */
+    public function getAllSubjectRelations($rel_id)
+    {
+        $query = "
+        SELECT
+                subject_relations.id AS subject_relation_id,
+                subject_relations.rel_type_id,
+								subjects.id AS subject_id,
+                getNContactName(subjects.n_contact_id) AS n_contact_name,
+            	getNContactName(subjects.j_contact_id) AS j_contact_name,
+                subject_relation_types.label AS name,
+
+                FROM bs_subject_relations subject_relations
+                    AND subject_relations.new_id IS NULL AND subject_relations.del_user_id IS NULL
+                LEFT JOIN bs_subject_relation_types subject_relation_types ON subject_relation_types.id = subject_relations.rel_type_id
+                LEFT JOIN bs_subject_relation_items subject_relation_items ON subject_relation_items.subject_rel_id = subject_relations.id
+                LEFT JOIN bs_subjects subjects ON subject_relation_items.subject_id = subjects.id
+                      AND subjects.new_id IS NULL AND subjects.del_user_id IS NULL
+                LEFT JOIN bs_n_contacts n_contacts ON n_contacts.id = subjects.n_contacts_id
+                    AND n_contacts.new_id IS NULL AND n_contacts.del_user_id IS NULL
+			    LEFT JOIN bs_j_contacts j_contacts ON j_contacts.id = subjects.j_contacts_id
+			        AND j_contacts.new_id IS NULL AND j_contacts.del_user_id IS NULL
+                WHERE
+                subject_relations.rel_id = ".intval($rel_id)."
+        ";
+        return $this->db_query($query);
+    }
+    /**
+     * get subjects relations
+     * @param integer $rel_id
+     * @return mysqli result
+     */
+    public function getSubjectRelations($rel_id)
+    {
+        $query = "
+            SELECT
+                subject_relations.id AS subject_relation_id,
+                subject_relations.rel_type_id,
+                subject_relation_types.label AS name
+                    FROM
+                bs_subject_relations subject_relations
+                LEFT JOIN bs_subject_relation_types subject_relation_types ON subject_relation_types.id = subject_relations.rel_type_id
+                    AND bs_subject_relations.new_id IS NULL AND subject_relations,del_user_id IS NULL
+                WHERE
+                AND subject_relations.rel_id = ".intval($rel_id)."
+        ";
+        return $this->db_query($query);
+    }
+
+    /**
+     * gets list of subjects by given integer value subject_relation_id
+     * @param $subject_relation_id
+     * @return mysqli_result
+     */
+    public function getSubjectsByRelation($subject_relation_id)
+    {
+        $query = "
+            SELECT
+                subjects.id AS subject_id,
+                getContactName(contacts.id) AS contact_name
+                FROM
+                bs_subject_relation_items subject_relation_items
+                LEFT JOIN bs_subjects subjects ON subject_relation_items.subject_id = subjects.id
+                LEFT JOIN bs_n_contacts contacts ON subjects_dt.contact_id = contacts.id
+                WHERE subjects.is_deleted = 0
+                AND subjects_dt.is_last = 1
+                AND subject_relation_items.subject_rel_dt_id = ".intval($subject_relation_id)."
+        ";
+        return $this->db_query($query);
+    }
+
+    /**
+     * Add subject relation
+     * @param array $data    An array with data for 'subject_relations' table
+	 * @return integer    Id of newly inserted record
+     */
+    public function addSubjectRelation($data)
+    {
+		$insert_data = array('rel_id' => $data['rel_id']);
+		return $this->insertUsingAdjacencyListModel($insert_data);
+    }
+
+    /**
+     * adds subject relation item
+     * @param $data
+     */
+    public function addSubjectRelationItem($data)
+    {
+       if($data['subject_id'] == 0)
+       {
+           $data['subject_id'] = $data['serviceSubject'][ md5(serialize($data['serviceData'])) ];
+       }
+       $this->db_insert('subject_relation_items', array(
+               'subject_rel_id' => $data['subject_relation_id'],
+               'subject_id' => $data['subject_id']
+           )
+       );
+    }
+}

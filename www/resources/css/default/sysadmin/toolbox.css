@@ -1,0 +1,39 @@
+.toolbox-sprite, .toolbox-sysadmin-Home, .toolbox-sysadmin-cache-Purge, .toolbox-sysadmin-menu-Manage, .toolbox-sysadmin-module-Manage, .toolbox-sysadmin-resource-Manage, .x-btn .toolbox-sysadmin-Home, .x-btn .toolbox-sysadmin-cache-Purge, .x-btn .toolbox-sysadmin-menu-Manage, .x-btn .toolbox-sysadmin-module-Manage, .x-btn .toolbox-sysadmin-resource-Manage {
+  background: url('../../../images/default/sysadmin/toolbox-s60e8c2f8de.png') no-repeat;
+}
+
+.toolbox-sysadmin-Home {
+  background-position: 0 -48px;
+}
+
+.toolbox-sysadmin-cache-Purge {
+  background-position: 0 -32px;
+}
+
+.toolbox-sysadmin-menu-Manage {
+  background-position: 0 -64px;
+}
+
+.toolbox-sysadmin-module-Manage {
+  background-position: 0 0;
+}
+
+.toolbox-sysadmin-resource-Manage {
+  background-position: 0 -16px;
+}
+
+.x-btn .toolbox-sysadmin-Home {
+  background-position: 0 -48px;
+}
+.x-btn .toolbox-sysadmin-cache-Purge {
+  background-position: 0 -32px;
+}
+.x-btn .toolbox-sysadmin-menu-Manage {
+  background-position: 0 -64px;
+}
+.x-btn .toolbox-sysadmin-module-Manage {
+  background-position: 0 0;
+}
+.x-btn .toolbox-sysadmin-resource-Manage {
+  background-position: 0 -16px;
+}

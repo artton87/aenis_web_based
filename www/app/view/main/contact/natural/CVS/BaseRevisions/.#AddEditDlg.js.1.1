@@ -1,0 +1,260 @@
+Ext.require([
+    'Ext.form.field.Date',
+    'Ext.form.field.Hidden',
+    'Ext.form.Label'
+]);
+
+Ext.define('Aenis.view.main.contact.natural.AddEditDlg', {
+    extend:'Ext.window.Window',
+
+    alias: 'widget.mainContactNaturalAddEditDlg',
+
+    modal: true,
+    closeAction: 'destroy',
+    maximizable: true,
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.main.contact.natural.AddEdit',
+        'BestSoft.mixin.Localized'
+    ],
+
+    layout: {
+        type:'fit'
+    },
+    border:false,
+
+    initComponent: function(){
+        Ext.apply(this, {
+            ref: 'naturalContactPanel',
+            title: this.T('add_natural_contact'),
+            items:[
+                {
+                    xtype:'form',
+                    ref: 'addNaturalForm',
+                    layout:{
+                        type:'vbox',
+                        align:'center'
+                    },
+                    messages:{
+                        "add_natural_contact_title":this.T("add_natural_contact"),
+                        "edit_natural_contact_title":this.T("edit_natural_contact"),
+                        createSuccess: this.T("msg_create_success"),
+                        updateSuccess: this.T("msg_update_success")
+                    },
+                    fieldDefaults: {
+                        labelAlign: 'top',
+                        anchor: '100%',
+                        margin: 10,
+                        msgTarget: 'side',
+                        labelWidth: 120
+                    },
+                    items:[
+                        {
+                            xtype:'container',
+                            layout:{
+                                'type':'hbox',
+                                'align':'stretch'
+                            },
+                            items:[
+                                {
+                                    xtype:'fieldcontainer',
+                                    layout:{
+                                        type:'vbox',
+                                        align:'stretch'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'first_name',
+                                            afterLabelTextTpl: BestSoft.required,
+                                            flex:1,
+                                            fieldLabel:this.T('first_name'),
+                                            allowBlank:false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'last_name',
+                                            afterLabelTextTpl: BestSoft.required,
+                                            flex:1,
+                                            fieldLabel:this.T('last_name'),
+                                            allowBlank:false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'second_name',
+                                            flex:1,
+                                            fieldLabel:this.T('second_name'),
+                                            allowBlank:false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'email',
+                                            flex:1,
+                                            fieldLabel:this.T('email')
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'fax',
+                                            flex:1,
+                                            fieldLabel:this.T('fax')
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'phone_home',
+                                            flex:1,
+                                            fieldLabel:this.T('home_telephone'),
+                                            vtype:'phone'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'phone_office',
+                                            flex:1,
+                                            fieldLabel:this.T('work_telephone'),
+                                            vtype:'phone'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype:'fieldcontainer',
+                                    flex:5,
+                                    layout:{
+                                        type:'vbox',
+                                        align:'stretch'
+                                    },
+                                    items:[
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'phone_mobile',
+                                            flex:1,
+                                            fieldLabel:this.T('mobile_telephone'),
+                                            vtype:'phone'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'organization_name',
+                                            flex:1,
+                                            fieldLabel:this.T('company')
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'staff_name',
+                                            flex:1,
+                                            fieldLabel:this.T('staff')
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            name: 'social_card_number',
+                                            flex:1,
+                                            fieldLabel:this.T('social_card_number'),
+                                            afterLabelTextTpl: BestSoft.required,
+                                            vtype: 'am_ssn',
+                                            allowBlank:false
+                                        },
+                                        {
+                                            xtype:'fieldcontainer',
+                                            layout:{
+                                                type:'hbox',
+                                                align:'stretch'
+                                            },
+                                            items: [
+                                                {
+                                                    xtype:'textfield',
+                                                    ref: 'countryLabel',
+                                                    flex:1,
+                                                    fieldLabel:this.T("country"),
+                                                    name:'country_label'
+                                                },
+                                                {
+                                                    xtype:'button',
+                                                    flex:1,
+                                                    text:this.T("select"),
+                                                    iconCls:'icon-browse',
+                                                    action:'selectCountry'
+                                                },
+                                                {
+                                                    xtype:'hidden',
+                                                    ref: 'countryId',
+                                                    name:'country_id'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype:'textfield',
+                                            name:'passport_number',
+                                            afterLabelTextTpl: BestSoft.required,
+                                            fieldLabel:this.T("passport_number"),
+                                            flex:1,
+                                            vtype: 'am_passport',
+                                            allowBlank:false
+                                        },
+                                        {
+                                            xtype:'datefield',
+                                            name:'date_of_birth',
+                                            fieldLabel:this.T("date_of_birth"),
+                                            emptyText:this.T("dmy"),
+                                            flex:1
+                                        },
+                                        {
+                                            xtype:'hidden',
+                                            name:'contact_id'
+                                        },
+                                        {
+                                            xtype:'hidden',
+                                            name:'contact_type',
+                                            value:1
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            xtype:'hidden',
+                            name:'storage',
+                            value:'from_db'
+                        },
+                        {
+                            xtype:'fieldcontainer',
+                            layout:{
+                                type:'hbox',
+                                align:'stretch'
+                            },
+                            items: [
+                                {
+                                    xtype:'textfield',
+                                    name:'address',
+                                    flex:1,
+                                    fieldLabel:this.T("address")
+                                },
+                                {
+                                    xtype:'button',
+                                    flex:1,
+                                    text:this.T("select"),
+                                    iconCls:'icon-browse'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            buttons:[
+                {
+                    xtype: 'bsbtnAdd',
+                    ref: 'addAction',
+                    iconCls: 'icon-add'
+                },
+                {
+                    xtype: 'bsbtnSave',
+                    ref: 'saveAction',
+                    iconCls:'icon-save'
+                },
+                {
+                    text: this.T('close'),
+                    action: 'cancel',
+                    iconCls: 'icon-cancel'
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});

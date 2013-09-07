@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Aenis" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/app/build-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "page" target performs the call to Sencha Cmd to build the 'all-classes.js' file.
+
+            <target name="-before-page"/>
+            <target name="-after-page"/>
+
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+
+    <target name="-before-page">
+        <echo message="Collecting all controllers in application class property ... "/>
+        <fileset id="app_controllers" dir="${app.dir}/app/controller" casesensitive="yes">
+            <include name="**/*.js"/>
+        </fileset>
+        <pathconvert pathsep="," property="app_controller_names" refid="app_controllers" targetos="unix">
+            <chainedmapper>
+                <globmapper from="${app.dir}/app/*" to="${ant.project.name}/*" casesensitive="no" handledirsep="yes"/>
+                <chainedmapper>
+                    <regexpmapper from="^(.*)\.js$$" to='"\1"'/>
+                    <filtermapper>
+                        <replacestring from="/" to="."/>
+                        <replacestring from="\" to="."/>
+                    </filtermapper>
+                </chainedmapper>
+            </chainedmapper>
+        </pathconvert>
+        <echo message="Collected controllers: ${app_controller_names}"/>
+
+        <echo message="Injecting into app.js ..."/>
+        <replaceregexp file="${app.dir}/app/app.js"
+                       match="/\*ant-generated-content-start\*/(.*)/\*ant-generated-content-end\*/"
+                       replace="/*ant-generated-content-start*/ ${app_controller_names} /*ant-generated-content-end*/"
+                       byline="true"
+                />
+    </target>
+
+    <target name="-after-page">
+        <echo message="Reverting to original app.js ..."/>
+        <replaceregexp file="${app.dir}/app/app.js"
+                       match="/\*ant-generated-content-start\*/(.*)/\*ant-generated-content-end\*/"
+                       replace="/*ant-generated-content-start*/ /*ant-generated-content-end*/"
+                       byline="true"
+                />
+    </target>
+
+    <target name="-after-build">
+        <echo message="Copying TinyMCE to ${build.dir} ..."/>
+        <copy todir="${build.dir}/tinymce">
+            <fileset dir="tinymce"/>
+        </copy>
+        <echo message="Copying PHP files to ${build.dir} ..."/>
+        <copy todir="${build.dir}/../aenis-backend">
+            <fileset dir="../aenis-backend"/>
+        </copy>
+        <copy file="php/index.php" todir="${build.dir}/php"/>
+        <echo message="Applying ${args.environment} environment to .htaccess file ..."/>
+        <copy file="build.php.htaccess" tofile="${build.dir}/php/.htaccess">
+            <filterset>
+                <filter token="environment" value="${args.environment}"/>
+            </filterset>
+        </copy>
+        <echo message="Truncating application logs ..."/>
+        <truncate file="${build.dir}/../aenis-backend/logs/debug.log" />
+        <truncate file="${build.dir}/../aenis-backend/logs/exception.log" />
+    </target>
+
+</project>

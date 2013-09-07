@@ -1,0 +1,35 @@
+Ext.define('Aenis.model.workflow.transaction.relationship.party.subject.Group', {
+    extend: 'Ext.data.Model',
+
+    idProperty: "id",
+
+    requires: [
+        'Aenis.model.workflow.transaction.relationship.party.subject.group.Properties'
+    ],
+
+    fields: [
+        {type: 'int', name: 'id'},
+        {type: 'int', name:'subject_id'}
+    ],
+
+    hasMany:[
+        {
+            foreignKey: 'subject_id',
+            associationKey: 'agents',
+            name: 'agents',
+            model: 'Aenis.model.workflow.transaction.relationship.party.subject.Agent'
+        },
+        {
+            foreignKey: 'subject_id',
+            associationKey: 'documents',
+            name: 'documents',
+            model: 'Aenis.model.docmgmt.Document'
+        },
+        {
+            foreignKey: 'subject_group_id',
+            associationKey: 'subject_group_properties',
+            name: 'subject_group_properties',
+            model: 'Aenis.model.workflow.transaction.relationship.party.subject.group.Properties'
+        }
+    ]
+});

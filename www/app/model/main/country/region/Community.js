@@ -1,0 +1,56 @@
+Ext.define('Aenis.model.main.country.region.Community', {
+    extend: 'Ext.data.Model',
+
+    requires:[
+        'Aenis.model.main.country.region.community.Content'
+    ],
+
+    idProperty: 'id',
+
+    fields: [
+        {name: 'id', type: 'int'},
+        {name: 'region_id', type: 'int'},
+        {name: 'is_urban', type: 'boolean'},
+        {name: 'contentData', type: 'auto'}
+    ],
+
+
+    /**
+     * Returns community name in a first language
+     * @return {String}
+     */
+    getTitle: function() {
+        return this.content().first().get('name');
+    },
+
+    hasMany:[
+        {
+            foreignKey: 'community_id',
+            associationKey: 'content',
+            name: 'content',
+            model: 'Aenis.model.main.country.region.community.Content'
+        }
+    ],
+
+    proxy: {
+        type: 'ajax',
+
+        reader: {
+            type: 'json',
+            root: 'data'
+        },
+
+        writer: {
+            type: 'json',
+            root: 'data',
+            encode: true
+        },
+
+        api: {
+            create: 'main/country/region/community/add_edit.php',
+            read: 'main/country/region/community/communities.json.php',
+            update: 'main/country/region/community/add_edit.php',
+            destroy: 'main/country/region/community/delete.php'
+        }
+    }
+});

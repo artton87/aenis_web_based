@@ -1,0 +1,373 @@
+<?php
+/**
+ * Wills management
+ * @package aenis
+ */
+
+/**
+ * Methods for working with wills
+ * @author BestSoft
+ * @package aenis\workflow
+ */
+
+class Inheritances extends Transactions
+{
+    /**
+     * Returns list of wills
+     * @param array $search
+     * @param int $start
+     * @param int $limit
+     * @param bool $returnCount
+     * @return integer|mysqli_result
+     */
+    public function getInheritances($search = array(), $start = 0, $limit = 0, $returnCount = false)
+    {
+        $where = array(
+            "tr_types.ui_type = 'inheritance'",
+            "tr.new_id IS NULL"
+        );
+        $joins = array(
+            'JOIN bs_transaction_types tr_types ON tr_types.id = tr.tr_type_id'
+        );
+
+        if(empty($search['transaction_id']))
+        {
+            $where[] = 'tr.del_user_id IS NULL';
+        }
+        else
+        {
+            $where[] = "tr.id = '".intval($search['id'])."'";
+        }
+
+        if(!empty($search['tr_type_id']))
+            $where[] = 'tr.tr_type_id = '.$search['tr_type_id'].'';
+
+
+        if((!empty($search['subject_first_name']) && !empty($search['subject_second_name'])
+                && !empty($search['subject_last_name']))
+            || !empty($search['subject_passport_number']) || !empty($search['subject_social_card_number']))
+        {
+            $contact_search_params = App_Array::pick($search,
+                array(
+                    'subject_first_name' => 'first_name',
+                    'subject_second_name' => 'second_name',
+                    'subject_last_name' => 'last_name',
+                    'subject_passport_number' => 'passport_number',
+                    'subject_social_card_number' => 'social_card_number'
+                )
+            );
+
+            $contact_ids = array();
+            $oNaturalContact = new Contact_Natural();
+            $contactResult = $oNaturalContact->getContacts($contact_search_params);
+            while($contactRow = $this->db_fetch_array($contactResult))
+            {
+                $contact_ids[] = $contactRow['id'];
+            }
+
+            if(empty($contact_ids))
+            {
+                $where[] = '1=0'; //should be an empty result in this case
+            }
+            else
+            {
+                $where[] = "(
+					SELECT
+						subjects.id
+					FROM bs_subjects subjects
+					JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL AND parties.new_id IS NULL
+					JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+					WHERE subjects.del_user_id IS NULL
+						  AND rel.tr_id = tr.id
+						  AND subjects.n_contact_id IN (".implode(',', $contact_ids).")
+					LIMIT 1
+				) IS NOT NULL";
+            }
+        }
+
+        if(!Acl()->allowed('inheritance.show_all_inheritances'))
+        {
+            $joins[] = 'JOIN bs_staff_user staff_user ON staff_user.user_id = tr.lu_user_id AND staff_user.is_active = 1';
+            $joins[] = 'JOIN bs_staff staff ON staff_user.staff_id = staff.id';
+            $joins[] = 'JOIN bs_departments dep ON staff.dep_id = dep.id AND dep.notarial_office_id = '.App_Registry::get('temp_sn')->notarial_office_id;
+        }//??? discuss
+
+        $where = implode(' AND ', array_unique($where));
+        $joins = implode(PHP_EOL, array_unique($joins));
+
+        if($returnCount)
+        {
+            $q = "SELECT
+					COUNT(tr.id)
+				FROM bs_transactions tr
+				$joins
+				WHERE $where
+			";
+            $result = $this->db_query($q);
+            if($row = $this->db_fetch_row($result))
+            {
+                return intval($row[0]);
+            }
+            return 0;
+        }
+        else
+        {
+            $limit = intval($limit);
+            $start = intval($start);
+            $limit = ($limit > 0) ? "LIMIT $start, $limit" : '';
+
+            $oLanguages = new Languages();
+            $default_lang_id = $oLanguages->getDefaultLanguage()->id;
+            $q = "SELECT
+					tr.*,
+					getTransactionPropertyValue(tr.id, 'transaction_code') AS transaction_code,
+					tr_types.state_fee_coefficient,
+					tr_types.service_fee_coefficient_min,
+					tr_types.service_fee_coefficient_max,
+					getUserFullName(tr.lu_user_id, $default_lang_id) AS input_user,
+					getUserFullName(tr.notary_id, $default_lang_id) AS notary,
+					transaction_statuses.code AS tr_status_code,
+					transaction_statuses.title AS tr_status_title,
+					tr_types_content.label AS tr_type_label,
+					cases.case_code
+				FROM (
+					SELECT tr.id
+					FROM bs_transactions tr
+		            $joins
+					WHERE $where
+					ORDER BY tr.id DESC
+					$limit
+				) tmp
+				JOIN bs_transactions tr ON tr.id = tmp.id AND tr.del_user_id IS NULL
+				LEFT JOIN bs_transaction_types tr_types ON tr.tr_type_id = tr_types.id
+				LEFT JOIN bs_transaction_types_content tr_types_content
+			         ON tr_types_content.tr_type_id = tr_types.id AND tr_types_content.lang_id = $default_lang_id
+				LEFT JOIN bs_transactions_status tr_status ON tr_status.tr_id = tr.id AND tr_status.new_id IS NULL AND tr_status.del_user_id IS NULL
+				LEFT JOIN bs_transaction_statuses transaction_statuses ON transaction_statuses.id = tr_status.tr_status_id
+                LEFT JOIN bs_cases cases ON tr.case_id = cases.id
+                WHERE $where
+           ";
+            return $this->db_query($q);
+        }
+    }
+
+    /**
+     * Add new inheritance transaction
+     * @access public
+     * @param array $data    Array with data for transaction and related tables
+     * @return integer    Id of newly inserted transaction
+     */
+    public function addInheritance($data)
+    {
+        $oCase = new Cases();
+        $data['case_id'] = $oCase->addCase(
+            array(
+                'input_user_id' => App_Registry::get('temp_sn')->user_id,
+                'notary_user_id' => $data['notary_id']
+            )
+        );
+
+        //$data['tr_type_id'] = Transaction_Types::TRANSACTION_TYPE_INHERITANCE;
+        //if(Transaction_Types::TRANSACTION_TYPE_INHERITANCE_BY_WILL == $data['tr_type_id'])
+            //$data['tr_type_id'] = TRANSACTION_TYPE_WILL;
+        $data['tr_id'] = $this->addTransaction($data);
+        $this->addTransactionChildren($data);
+        return $data['tr_id'];
+
+    }
+
+
+
+    /**
+     * Edit an existing inheritance transaction
+     * @access public
+     * @param integer $transaction_id    Transaction ID
+     * @param array $data   Associative array with fields as in 'transaction' database table
+     * @throws App_Db_Exception_Table if transaction id is not specified
+     * @return integer    Id of newly inserted transaction
+     */
+    public function updateInheritance($transaction_id, $data)
+    {
+        if(empty($transaction_id))
+            throw new App_Db_Exception_Table('Transaction id is not specified');
+
+        if($row = $this->getActualUsingAdjacencyListModel(array('id'=>$transaction_id)))
+        {
+            $data['case_id'] = $row['case_id'];
+        }
+
+        //$data['tr_type_id'] = Transaction_Types::TRANSACTION_TYPE_INHERITANCE;
+        $data['tr_id'] = $this->updateTransaction($transaction_id, $data);
+
+        $this->addTransactionChildren($data);
+        return $data['tr_id'];
+    }
+
+
+
+    /**
+     * Add transaction child tables data for inheritances
+     * @param array $data
+     * @return int
+     */
+    public function addTransactionChildren($data)
+    {
+        //Logger::out($data);
+        $oTransactionStatus = new Transactions_Status();
+        $oTransactionStatus->setTransactionStatus($data['tr_id'], Transaction_Statuses::STATUS_SUBMITTED);
+        $oProperties = new Transaction_Properties();
+        //$oProperties->addProperty($data['tr_id'], 'inheritance_by_law', $data['inheritance_type']);
+        $oProperties->addProperty($data['tr_id'], 'transaction_password', $this->generatePassword());
+
+        $oRelationship = new Transaction_Relationships();
+        $relationship_id = $oRelationship->addRelationship($data);
+        $oRelationship->handleRelationshipUploadedFiles(
+            $relationship_id,
+            $data['case_id'],
+            $data['relationship_documents'],
+            $this->getUploadedFiles('relationship_documents')
+        );
+
+        $oParty = new Transaction_Relationship_Parties();
+        $data['rel_id'] = $relationship_id;
+        $oProperties->addProperty($data['tr_id'], 'template_content', $data['content']);
+        /*$party_codes = array('testator', 'inheritor');
+
+        $oSubjects = new Transaction_Relationship_Party_Subjects();
+
+
+        foreach($party_codes as $party_code)
+        {
+            $data['party_type_code'] = $party_code;
+            $party_id = $oParty->addParty($data);
+
+            foreach($data[$party_code] as $item)
+            {
+                $item['party_id'] = $party_id;
+
+                $subject_id = $oSubjects->addSubject($item);
+                $oSubjects->handleSubjectUploadedFiles(
+                    $subject_id,
+                    $data['case_id'],
+                    $item['fileData']['existing_files'],
+                    $this->getUploadedFiles($item['hash'])
+                );
+            }
+        }*/
+
+
+        foreach($data['parties'] as $party_data)
+        {
+            $party_data['rel_id'] = $relationship_id;
+            $party_id = $oParty->addParty($party_data);
+
+            $oSubjects = new Transaction_Relationship_Party_Subjects();
+            foreach($party_data['data'] as $item)
+            {
+                $item['party_id'] = $party_id;
+                $subject_id = $oSubjects->addSubject($item);
+
+                $oSubjects->handleSubjectUploadedFiles(
+                    $subject_id,
+                    $data['case_id'],
+                    $item['fileData']['existing_files'],
+                    $this->getUploadedFiles($item['hash'])
+                );
+            }
+        }
+
+
+        // objects part
+        $oObject = new Transaction_Relationship_Objects();
+        foreach($data['objects'] as $item)
+        {
+            $data['rel_id'] = $relationship_id;
+            $data['object_type'] = $item['objectType'];
+
+            $object_id = $oObject->addObject($data, $item['objectData']);
+
+            $oObject->handleObjectUploadedFiles(
+                $object_id,
+                $data['case_id'],
+                $item['fileData']['existing_files'],
+                $this->getUploadedFiles($item['hash'])
+            );
+        }
+    }
+
+    /**
+     * approve inheritance
+     * @param $data
+     * @param $file
+     * @internal param $transaction_id
+     */
+    public function approveInheritance($data, $file)
+    {
+        $oRelationships = new Transaction_Relationships();
+        $result = $oRelationships->getRelationships(array('transaction_id' => $data['transaction_id']));
+        if($row = $this->db_fetch_array($result)) //assume, that there can be only one relationship for warrant
+        {
+            $relationship_id = $row['id'];
+        }
+
+        $row = $this->getActualUsingAdjacencyListModel(array('id'=>$data['transaction_id']));
+        $case_id = $row['case_id'];
+
+        $oLanguages = new Languages();
+        $lang_id = $oLanguages->getDefaultLanguage()->id;
+
+        /*$oDocTypes = new Document_Types();
+        $result = $oDocTypes->getItems(array('doc_type_code'=>'testament_original'), array($lang_id));
+        if($row = $oDocTypes->db_fetch_array($result))
+        {
+            $doc_type_id = $row['id'];
+        }*/
+
+        $oDocTypes = new Document_Types();
+        $result = $oDocTypes->getItems(array('tr_type_id'=>$data['tr_type_id']), array($lang_id));
+        if($row = $oDocTypes->db_fetch_array($result))
+        {
+            $doc_type_id = $row['id'];
+        }
+
+        $oDocument = new Documents();
+        $doc_dt_id = $oDocument->addDocument(
+            array(
+                'case_id' => $case_id,
+                'rel_id' => $relationship_id,
+                'doc_type_id' => $doc_type_id,
+                'insert_type' =>4
+            )
+        )->dt_id;
+
+        $oDocument_Files = new Document_Files();
+
+        $result = $this->db_select('cases',array('case_code'), array('id'=>$case_id));
+        if($row = $this->db_fetch_row($result))
+        {
+            $case_code = $row[0];
+        }
+
+        $oDocument_Files->insert($doc_dt_id, $file, $case_code, true);
+
+
+        $oTransactionStatuses = new Transactions_Status();
+        $oTransactionStatuses->setTransactionStatus($data['transaction_id'], Transaction_Statuses::STATUS_APPROVED);
+
+        $this->db_insert('payments',array(
+                'transaction_id' => $data['transaction_id'],
+                'type_id' => 1,
+                'amount' => $data['duty'],
+                'creation_date' => self::$DB_TIMESTAMP
+            )
+        );
+
+        $this->db_insert('payments',array(
+                'transaction_id' => $data['transaction_id'],
+                'type_id' => 2,
+                'amount' => $data['paymentNotary'],
+                'creation_date' => self::$DB_TIMESTAMP
+            )
+        );
+    }
+}

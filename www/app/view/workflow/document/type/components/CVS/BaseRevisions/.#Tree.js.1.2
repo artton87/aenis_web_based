@@ -1,0 +1,55 @@
+Ext.require([
+    'BestSoft.tree.Panel',
+    'BestSoft.tree.filter.Text',
+    'Aenis.store.workflow.document.Types'
+]);
+
+/**
+ * A tree for selecting document types
+ */
+Ext.define('Aenis.view.workflow.document.type.components.Tree', {
+    extend: 'BestSoft.tree.Panel',
+    alias: 'widget.workflow.document.type.Tree',
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'BestSoft.mixin.Localized',
+        'BestSoft.mixin.MultiLanguageContentRenderer'
+    ],
+
+
+    initComponent: function() {
+        Ext.apply(this, {
+            header: false,
+            hideHeaders: true,
+            border: false,
+            stateId: this.alias,
+            collapsible: false,
+            rootVisible: false,
+            useArrows: true,
+            animate: false,
+            tbar: [
+                {
+                    xtype: 'bsTreeFilterText',
+                    tree: this,
+                    emptyText: this.T('quick_search'),
+                    width: 300,
+                    filterFn: function(node) {
+                        var val = this.getValue();
+                        return (val == "") || (node.get('label').indexOf(val)>=0);
+                    }
+                },
+                '->'
+            ],
+            columns: [
+                {
+                    xtype: 'treecolumn',
+                    flex: 1,
+                    dataIndex: 'label',
+                    renderer: this.singleLanguageContentRenderer
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});

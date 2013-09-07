@@ -1,0 +1,279 @@
+Ext.require([
+    'BestSoft.tree.Panel',
+    'Ext.layout.container.Border',
+    'Ext.form.Panel',
+    'Ext.form.field.Checkbox',
+    'Ext.form.field.Number',
+    'Ext.form.FieldContainer',
+    'Ext.grid.column.Boolean',
+    'Ext.grid.column.Number',
+    'Aenis.store.main.Languages'
+]);
+
+
+Ext.define('Aenis.view.workflow.document.type.Manage', {
+	extend: 'Ext.container.Container',
+	alias: 'widget.workflowDocumentTypeManage',
+	
+	layout: {
+        type: 'border'
+    },
+    
+	mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.document.type.Manage',
+        'BestSoft.mixin.Localized',
+        'BestSoft.mixin.MultiLanguageContentRenderer',
+        'BestSoft.mixin.ShowConditionalElements'
+    ],
+
+    initComponent: function() {
+
+        var languagesStore = Ext.create('Aenis.store.main.Languages');
+
+        this.itemsTreeRenderer = function(value, metaData, record) {
+            if(record.get('hidden'))
+                metaData.style += 'opacity:0.4;';
+            return value;
+        };
+
+        Ext.apply(this, {
+            tabConfig: {
+                title: this.T("types")
+            },
+            items: [
+                {
+                    split: true,
+                    collapsible: true,
+                    title: this.T('manage_form_title'),
+                    xtype: 'form',
+                    ref: 'detailsForm',
+                    region: 'west',
+                    width: '25%',
+                    minWidth: 270,
+                    autoScroll: true,
+                    bodyStyle: 'padding:10px 30px',
+                    fieldDefaults: {
+                        labelAlign: 'top',
+                        anchor: '100%',
+                        margin: '10px 0'
+                    },
+
+                    defaultType: 'textfield',
+
+                    messages: {
+                        createSuccess: this.T("msg_create_success"),
+                        updateSuccess: this.T("msg_update_success")
+                    },
+
+                    items: [
+                        {
+                            ref: 'contentDetailsTabs',
+                            xtype: 'tabpanel',
+                            enableTabScroll: true,
+                            plain: true,
+                            tabContentConfig: {
+                                xtype: 'fieldcontainer',
+                                layout: {
+                                    type: 'vbox',
+                                    align: 'stretch'
+                                },
+                                fieldDefaults: {
+                                    labelAlign: 'top',
+                                    afterLabelTextTpl: BestSoft.required,
+                                    submitValue: false,
+                                    margin: '2px 2px 6px 2px'
+                                },
+                                defaultType: 'textfield',
+                                items: [
+                                    {
+                                        fieldLabel: this.T('label'),
+                                        name: 'label'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            xtype: 'fieldcontainer',
+                            fieldLabel: this.T('parent'),
+                            layout: 'hbox',
+                            items: [
+                                {
+                                    xtype: 'textfield',
+                                    ref: 'parentItemField',
+                                    flex: 1,
+                                    submitValue: false,
+                                    readOnly: true
+                                },
+                                {
+                                    xtype: 'button',
+                                    tooltip: this.T("select"),
+                                    iconCls: 'icon-browse',
+                                    ref: 'parentItemSelectAction',
+                                    margin: '0 0 0 2px'
+                                },
+                                {
+                                    xtype: 'button',
+                                    tooltip: this.T("reset"),
+                                    iconCls: 'icon-reset',
+                                    ref: 'parentItemResetAction',
+                                    margin: '0 0 0 2px',
+                                    disabled: true
+                                }
+                            ]
+                        },
+                        {
+                            fieldLabel: this.T('doc_type_code'),
+                            name: 'doc_type_code',
+                            resourceRequiredToShow: {
+                                toBeRoot: true
+                            },
+                            vtype: 'alphanum'
+                        },
+                        {
+                            xtype: 'numberfield',
+                            labelAlign: 'right',
+                            labelWidth: 120,
+                            maxValue: 999,
+                            minValue: 0,
+                            fieldLabel: this.T('order_in_list'),
+                            name: 'order_in_list'
+                        },
+                        {
+                            xtype: 'fieldcontainer',
+                            fieldLabel: this.T('transaction_type'),
+                            layout: 'hbox',
+                            items: [
+                                {
+                                    xtype: 'textfield',
+                                    ref: 'transactionTypeField',
+                                    flex: 1,
+                                    submitValue: false,
+                                    readOnly: true
+                                },
+                                {
+                                    xtype: 'button',
+                                    tooltip: this.T("transaction_type_select_tip"),
+                                    iconCls: 'icon-browse',
+                                    ref: 'transactionTypeSelectAction',
+                                    margin: '0 0 0 2px'
+                                },
+                                {
+                                    xtype: 'button',
+                                    tooltip: this.T("reset"),
+                                    iconCls: 'icon-reset',
+                                    ref: 'transactionTypeResetAction',
+                                    margin: '0 0 0 2px',
+                                    disabled: true
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'checkbox',
+                            boxLabel: this.T('is_used_in_portal'),
+                            name: 'is_used_in_portal',
+                            inputValue: true
+                        },
+                        {
+                            xtype: 'checkbox',
+                            boxLabel: this.T('hidden'),
+                            name: 'hidden',
+                            inputValue: true
+                        }
+                    ],
+
+                    bbar: [
+                        '->',
+                        {
+                            xtype: 'bsbtnReset'
+                        },
+                        ' ',
+                        {
+                            xtype: 'bsbtnAdd',
+                            ref: 'addAction'
+                        },
+                        ' ',
+                        {
+                            xtype: 'bsbtnSave',
+                            ref: 'editAction',
+                            disabled: true
+                        },
+                        '->'
+                    ]
+                },
+                {
+                    xtype: 'bstree',
+                    ref: 'itemsTree',
+                    stateId: 'workflow.document.Types',
+                    flex: 1,
+                    title: this.T('types'),
+                    region: 'center',
+                    collapsible: false,
+                    autoLoadStore: false,
+                    rootVisible: false,
+                    useArrows: true,
+                    rowLines: true,
+                    animate: false,
+                    store: Ext.create('Aenis.store.workflow.document.Types'),
+                    languagesStore: languagesStore,
+                    bbar: [
+                        {
+                            xtype: 'bsbtnDelete',
+                            ref: 'deleteAction',
+                            disabled: true
+                        }
+                    ],
+                    columns: [
+                        {
+                            text: this.T('id'),
+                            dataIndex: 'id',
+                            width: 60
+                        },
+                        {
+                            text: this.T('languages'),
+                            minWidth: 70,
+                            width: 70,
+                            sortable: false,
+                            hideable: false,
+                            dataIndex: 'label',
+                            showData: false,
+                            langMissingText: this.T("not_filled_in"),
+                            renderer: this.multiLanguageContentRenderer
+                        },
+                        {
+                            xtype: 'treecolumn',
+                            text: this.T('label'),
+                            flex: 2,
+                            hideable: false,
+                            //renderer: this.itemsTreeRenderer,
+                            dataIndex: 'label',
+                            renderer: this.singleLanguageContentRenderer
+                        },
+                        {
+                            text: this.T('doc_type_code'),
+                            flex: 1,
+                            renderer: this.itemsTreeRenderer,
+                            resourceRequiredToShow: {
+                                toBeRoot: true
+                            },
+                            dataIndex: 'doc_type_code'
+                        },
+                        {
+                            xtype: 'booleancolumn',
+                            text: this.T('is_used_in_portal'),
+                            dataIndex: 'is_used_in_portal',
+                            width: 160
+                        },
+                        {
+                            xtype: 'numbercolumn',
+                            format: '0',
+                            text: this.T('order_in_list'),
+                            dataIndex: 'order_in_list'
+                        }
+                    ]
+                }
+            ]
+        });
+    	this.callParent(arguments);
+    }
+});

@@ -1,0 +1,25 @@
+.transaction_status-sprite, .transaction_status-approved, .transaction_status-in_progress, .transaction_status-terminated {
+  background: url('../../../../images/default/workflow/warrant/transaction_status-sd19430ae54.png') no-repeat;
+}
+
+.transaction_status-approved {
+  background-position: 0 0;
+}
+
+.transaction_status-in_progress {
+  background-position: 0 -28px;
+}
+
+.transaction_status-terminated {
+  background-position: 0 -14px;
+}
+
+.transaction_status {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.locked .x-grid-cell {
+  background-color: #ffe2e2;
+}

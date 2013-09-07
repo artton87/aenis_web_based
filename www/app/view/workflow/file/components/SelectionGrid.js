@@ -1,0 +1,330 @@
+Ext.define('Aenis.view.workflow.file.components.SelectionGrid', {
+    extend: 'BestSoft.grid.Panel',
+    alias: 'widget.workflowFileSelectionGrid',
+
+    requires: [
+        'Ext.grid.feature.Grouping',
+        'Ext.selection.CellModel',
+        'Ext.form.field.File',
+        'Aenis.store.workflow.file.Selection'
+    ],
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.file.components.SelectionGrid',
+        'BestSoft.mixin.Localized'
+    ],
+
+
+    /**
+     * @cfg {String} hash
+     * A key to be used in file names during submit.
+     * Field names will be in <hash>[<doc_type_id>] format.
+     */
+    hash: 'files',
+
+
+    /**
+     * Returns true, if file selection grid contains no contacts, false - otherwise
+     * @return {Boolean}
+     */
+    isEmpty: function() {
+        return (null == this.getStore().first());
+    },
+
+
+    /**
+     * Returns true, if file selection grid contains invalid records, false - otherwise.
+     * For example, record with selected document type, but without attached file is invalid.
+     * @return {Boolean}
+     */
+    isValid: function() {
+        var valid = true;
+        this.getStore().each(function(record) {
+            if(record.get('file_name') == '')
+            {
+                valid = false;
+                return false;
+            }
+            return true;
+        });
+        return valid;
+    },
+
+
+    /**
+     * Collects all items from this grid.
+     * @return {Aenis.model.workflow.file.Selection[]}
+     */
+    getFileRecords: function() {
+        return this.getStore().getRecords(['doc_type_id', 'file_id']);
+    },
+
+
+    /**
+     * Cleans content of all hidden file inputs.
+     * Should be called, when form submission fails on order to clean displayed
+     * file names, which are not backed by real file input element.
+     */
+    resetFileFields: function() {
+        this.getStore().each(function(record) {
+            if(0 == record.get('file_id') && '' != record.get('file_name'))
+            {
+                record.set('file_name', '');
+                record.destroyHiddenFileField();
+            }
+        });
+    },
+
+
+    /**
+     * Loads grid using data from given documents store
+     * @param {Ext.data.Store} store    A store of Aenis.model.workflow.Document models
+     */
+    loadFromDocumentsStore: function(store) {
+        var gridStore = this.getStore();
+        store.each(function(docModel) {
+
+            var model;
+            model = Ext.create('Aenis.model.workflow.file.Selection', {
+                doc_type_id: docModel.get('doc_type_id'),
+                doc_type_label: docModel.get('doc_type_label')
+            });
+
+            var fileModel = docModel.files().first();
+            if(fileModel)
+            {
+                model.set({
+                    file_id: fileModel.getId(),
+                    file_name: fileModel.get('file_name')
+                });
+            }
+
+            gridStore.add(model);
+        }, this);
+    },
+
+
+    initComponent: function() {
+        var me = this;
+
+        me._refs = {};
+
+        me._refs['delete'] = Ext.ComponentManager.create({
+            xtype: 'button',
+            text: me.T("delete"),
+            iconCls: 'icon-delete',
+            listeners: {
+                click: {fn: this.onDeleteFile, scope: me}
+            },
+            disabled: true
+        });
+
+        me._refs['edit_document_type'] = Ext.ComponentManager.create({
+            xtype: 'menuitem',
+            disabled: true,
+            text: this.T("edit_document_type"),
+            listeners: {
+                click: {fn: this.onEditDocumentType, scope: me}
+            }
+        });
+        me._refs['edit_attachment'] = Ext.ComponentManager.create({
+            xtype: 'menuitem',
+            disabled: true,
+            text: this.T("edit_attachment"),
+            iconCls: 'icon-attach',
+            listeners: {
+                click: {fn: this.onEditAttachment, scope: me}
+            }
+        });
+        var editBtn = Ext.ComponentManager.create({
+            xtype: 'bsbtnEdit',
+            menu: {
+                items: [
+                    me._refs['edit_document_type'],
+                    me._refs['edit_attachment']
+                ]
+            }
+        });
+
+        me._refs['attach'] = Ext.ComponentManager.create({
+            xtype: 'button',
+            action: 'attach',
+            text: me.T('attach_files'),
+            iconCls: 'icon-attach',
+            listeners: {
+                click: {fn: this.onChooseFile, scope: me}
+            }
+        });
+
+        var cfg = {
+            collapsible: true,
+            hideHeaders: false,
+            autoLoadStore: false,
+            enableColumnMove: false,
+            resizable: true,
+            resizeHandles: 's e se',
+            tools:[],
+            selModel: {
+                selType: 'cellmodel'
+            },
+            columns: [
+                {
+                    text: me.T('doc_type_label'),
+                    tooltip: me.T('doc_type_label'),
+                    flex: 2,
+                    groupable: false,
+                    hideable: false,
+                    dataIndex: 'doc_type_label'
+                },
+                {
+                    text: me.T('file_name'),
+                    tooltip: me.T('file_name'),
+                    flex: 1,
+                    groupable: false,
+                    hideable: false,
+                    dataIndex: 'file_name',
+                    renderer: function(value, metaData, record) {
+                        if(record.get('file_name') == "")
+                        {
+                            return "...";
+                        }
+                        return value;
+                    }
+                }
+            ],
+            bbar: [
+                '->',
+                me._refs['delete'],
+                ' ',
+                editBtn,
+                ' ',
+                me._refs['attach']
+            ]
+        };
+        if(!this.store)
+        {
+            cfg.store = Ext.create('Aenis.store.workflow.file.Selection');
+        }
+        Ext.applyIf(this, cfg);
+        this.callParent(arguments);
+        this.mon(this, 'selectionchange', this.onSelectionChange, this);
+        this.mon(this, 'celldblclick', this.onDoubleClickCell, this);
+    },
+
+
+    onDoubleClickCell: function(oView, td, cellIndex, record) {
+        var fileId = record.get('file_id');
+        if(fileId>0)
+        {
+            var oController = Aenis.application.loadController('workflow.file.ViewDlg');
+            oController.showDialog(fileId, record.get('file_name'));
+        }
+    },
+
+    onSelectionChange: function(model, selected) {
+        if(selected.length > 0)
+        {
+            this._refs['delete'].enable();
+            this._refs['edit_document_type'].enable();
+            this._refs['edit_attachment'].enable();
+        }
+        else
+        {
+            this._refs['delete'].disable();
+            this._refs['edit_document_type'].disable();
+            this._refs['edit_attachment'].disable();
+        }
+    },
+
+
+    onChooseFile: function() {
+        var oController = Aenis.application.loadController('workflow.document.type.SelectDlg');
+        oController.showDialog().on({
+            itemSelected: function(docTypeModel) {
+                var newDocTypeId = docTypeModel.getId(),
+                    //newDocTypeLabel = docTypeModel.get('label');
+                    newDocTypeLabel = docTypeModel.getTitle();
+                if(this.getStore().getById(newDocTypeId))
+                {
+                    Ext.Msg.alert(
+                        Aenis.application.title,
+                        Ext.String.format(
+                            this.T("document_type_already_exists"),
+                            newDocTypeLabel
+                        )
+                    );
+                    return false;
+                }
+                var model = Ext.create('Aenis.model.workflow.file.Selection', {
+                    doc_type_label:newDocTypeLabel,
+                    doc_type_id: newDocTypeId,
+                    file_id: 0,
+                    file_name: '',
+                    hash: this.hash
+                });
+                model.createHiddenFileField(this);
+                this.getStore().add(model);
+                model.pickFile();
+                return true;
+            },
+            scope: this
+        });
+    },
+
+
+
+    onDeleteFile: function() {
+        var selection = this.getSelectionModel().getSelection();
+        if(selection.length>0)
+        {
+            this.getStore().remove(selection);
+        }
+    },
+
+
+    onEditDocumentType: function() {
+        var selection = this.getSelectionModel();
+        if(selection.hasSelection())
+        {
+            var me = this,
+                record = selection.getLastSelected(),
+                oController = Aenis.application.loadController('workflow.document.type.SelectDlg');
+            oController.showDialog().on({
+                itemSelected: function(docTypeModel) {
+                    var newDocTypeId = docTypeModel.getId(),
+                        //newDocTypeLabel = docTypeModel.get('label');
+                        newDocTypeLabel = docTypeModel.getTitle();
+                    if(this.getStore().getById(newDocTypeId))
+                    {
+                        Ext.Msg.alert(
+                            Aenis.application.title,
+                            Ext.String.format(
+                                this.T("document_type_already_exists"),
+                                newDocTypeLabel
+                            )
+                        );
+                        return false;
+                    }
+                    record.set({
+                        doc_type_label: newDocTypeLabel,
+                        doc_type_id: newDocTypeId
+                    });
+                    record.updateHiddenFileFieldName();
+                    return true;
+                },
+                scope: this
+            });
+        }
+    },
+
+    onEditAttachment: function() {
+        var selection = this.getSelectionModel();
+        if(selection.hasSelection())
+        {
+            var record = selection.getLastSelected();
+            record.createHiddenFileField(this);
+            record.pickFile();
+        }
+    }
+});

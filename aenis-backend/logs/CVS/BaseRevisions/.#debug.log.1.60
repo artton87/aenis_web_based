@@ -1,0 +1,3139 @@
+Array
+(
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [date_of_birth] => 04/11/1988
+    [email] => 
+    [fax] => 
+    [address] => Արագածոտն, Օշական, Նալբանդյան փ. 3 նրբ., 1, Տ
+    [given_date] => 16/06/2011
+)
+
+------------------------------
+Array
+(
+    [id] => 932
+    [first_id] => 932
+    [new_id] => 
+    [lu_user_id] => 522
+    [lu_date] => 2013-07-31 15:36:56
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [date_of_birth] => 1988-11-04
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [authority] => 
+    [given_date] => 2011-06-16 00:00:00
+    [country_id] => 7
+    [address] => 
+    [zip] => 
+    [email] => 
+    [fax] => 
+    [phone_home] => 
+    [phone_office] => 
+    [phone_mobile] => 
+    [organization_name] => 
+    [staff_name] => 
+    [address_id] => 
+    [from_portal] => 0
+    [country_name] => Հայաստան
+)
+
+contact id
+932
+Array
+(
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [date_of_birth] => 04/11/1988
+    [email] => 
+    [fax] => 
+    [address] => Արագածոտն, Օշական, Նալբանդյան փ. 3 նրբ., 1, Տ
+    [given_date] => 16/06/2011
+)
+
+------------------------------
+Array
+(
+    [id] => 934
+    [first_id] => 934
+    [new_id] => 
+    [lu_user_id] => 522
+    [lu_date] => 2013-07-31 15:41:23
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [date_of_birth] => 1988-11-04
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [authority] => 
+    [given_date] => 2011-06-16 00:00:00
+    [country_id] => 7
+    [address] => 
+    [zip] => 
+    [email] => 
+    [fax] => 
+    [phone_home] => 
+    [phone_office] => 
+    [phone_mobile] => 
+    [organization_name] => 
+    [staff_name] => 
+    [address_id] => 
+    [from_portal] => 0
+    [country_name] => Հայաստան
+)
+
+Array
+(
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [date_of_birth] => 04/11/1988
+    [email] => 
+    [fax] => 
+    [address] => Արագածոտն, Օշական, Նալբանդյան փ. 3 նրբ., 1, Տ
+    [given_date] => 16/06/2011
+)
+
+------------------------------
+Array
+(
+    [id] => 932
+    [first_id] => 932
+    [new_id] => 
+    [lu_user_id] => 522
+    [lu_date] => 2013-07-31 15:36:56
+    [first_name] => Գեվորգ
+    [last_name] => Դարբինյան
+    [second_name] => Համբարձումի
+    [date_of_birth] => 1988-11-04
+    [social_card_number] => 1411880447
+    [passport_number] => AG0468380
+    [authority] => 
+    [given_date] => 2011-06-16 00:00:00
+    [country_id] => 7
+    [address] => 
+    [zip] => 
+    [email] => 
+    [fax] => 
+    [phone_home] => 
+    [phone_office] => 
+    [phone_mobile] => 
+    [organization_name] => 
+    [staff_name] => 
+    [address_id] => 
+    [from_portal] => 0
+    [country_name] => Հայաստան
+)
+
+contact id
+932
+contact id
+
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+vehicle##XTA210700L0515924##01_LL_007
+Array
+(
+    [id] => 
+    [vin] => XTA210700L0515924
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՊՈՒՅՏ ՄՈՒԳ ԿԱՊՈՒՅՏ 
+    [engine_number] => 1077853
+    [engine_power] => 57
+    [model] => VAZ 2107 
+    [model_year] => 1989
+    [number] => 01 LL 007
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԼԻԼԻԹ ԲԱԿԱԼՅԱՆ
+)
+
+vehicle##WVWZZZ3BZXP259813##10_LL_120
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+testing
+Array
+(
+    [id] => 
+    [certificate_number] => ՄՏ-31102012-11-0019
+    [given_date] => 
+    [address] => Մարզ Տավուշ, համայնք Իջևան ք.  Մեհրաբյան փողոց  38
+    [building_type] => Բնակելի
+    [parcel_codes] => 11-001-0062-0039
+    [building_codes] => 11-001-0062-0039-001-000, 11-001-0062-0039-002-000, 11-001-0062-0039-003, 11-001-0062-0039-004-000
+    [parcel_total_area] => 0.0564 հա
+    [building_total_area] => 284.3 ք.մ.
+    [description] => 
+)
+
+testing
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [given_date] => 
+    [address] => Մարզ Տավուշ, համայնք Իջևան ք.  Մեհրաբյան փողոց  38
+    [building_type] => Բնակելի
+    [parcel_codes] => 11-001-0062-0039
+    [building_codes] => 11-001-0062-0039-001-000, 11-001-0062-0039-002-000, 11-001-0062-0039-003, 11-001-0062-0039-004-000
+    [parcel_total_area] => 0.0564 հա
+    [building_total_area] => 284.3 ք.մ.
+    [description] => 
+    [certificate_number] => ՄՏ-31102012-11-0019
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+WVWZZZ3BZXP259813
+10 LL 120
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+WVWZZZ3BZXP259813
+10 LL 120
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+WVWZZZ3BZXP259813
+10 LL 120
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+WVWZZZ3BZXP259813
+10 LL 120
+other##1332781181
+Array
+(
+    [name] => Car
+)
+
+Array
+(
+    [id] => 
+    [vin] => WBADD61090BR32626
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [number] => 01 LL 100
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+WBADD61090BR32626
+01 LL 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+WVWZZZ3BZXP259813
+10 LL 120
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [name] => Car
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+realty##ՄՏ-31102012-10-0004
+Array
+(
+    [id] => 
+    [certificate_number] => ՄՏ-31102012-10-0004
+    [given_date] => 
+    [address] => Մարզ Վայոց  Ձոր, համայնք Վայք ք.  Մյասնիկյան փողոց  22
+    [building_type] => Բնակելի
+    [parcel_codes] => 10-003-0022-0019
+    [building_codes] => 10-003-0022-0019-001, 10-003-0022-0019-002, 10-003-0022-0019-003, 10-003-0022-0019-004, 10-003-0022-0019-006
+    [parcel_total_area] => 0.0661 հա
+    [building_total_area] => 169.5 ք.մ.
+    [description] => 
+)
+
+realty##ՄՏ-31102012-10-0004
+Array
+(
+    [id] => 
+    [given_date] => 
+    [address] => Մարզ Վայոց  Ձոր, համայնք Վայք ք.  Մյասնիկյան փողոց  22
+    [building_type] => Բնակելի
+    [parcel_codes] => 10-003-0022-0019
+    [building_codes] => 10-003-0022-0019-001, 10-003-0022-0019-002, 10-003-0022-0019-003, 10-003-0022-0019-004, 10-003-0022-0019-006
+    [parcel_total_area] => 0.0661 հա
+    [building_total_area] => 169.5 ք.մ.
+    [description] => 
+    [certificate_number] => ՄՏ-31102012-10-0004
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [name] => adasdsada
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => 2320888
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [number] => 05 LO 100
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՖՈՒՐԳՈՆ
+    [brand] => 
+    [chassis_number] => 2320888
+    [color] => ԿԱՊՈՒՅՏ ԿԱՊՈՒՅՏ 
+    [engine_number] => 743947
+    [engine_power] => 110
+    [model] => ZIL 130B 
+    [model_year] => 1984
+    [type] => ԲԵՌՆԱՏԱՐ
+    [owner] => ՎԱՐԴԱՆ ՀԱՄԲԱՐՁՈՒՄՅԱՆ
+)
+
+2320888
+05 LO 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => WBADD61090BR32626
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [number] => 01 LL 100
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+WBADD61090BR32626
+01 LL 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+WBADD61090BR32626
+01 LL 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 24528724286
+    [engine_power] => 141
+    [model] => BMW 528 I 
+    [model_year] => 1997
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀՀ ՏՐԱՆՍՊՈՐՏԻ ԵՒ ԿԱՊԻ ՆԱԽԱՐԱՐՈՒԹՅՈՒՆ
+)
+
+WBADD61090BR32626
+01 LL 100
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTA210700L0515924
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՊՈՒՅՏ ՄՈՒԳ ԿԱՊՈՒՅՏ 
+    [engine_number] => 1077853
+    [engine_power] => 57
+    [model] => VAZ 2107 
+    [model_year] => 1989
+    [number] => 01 LL 007
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԼԻԼԻԹ ԲԱԿԱԼՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՊՈՒՅՏ ՄՈՒԳ ԿԱՊՈՒՅՏ 
+    [engine_number] => 1077853
+    [engine_power] => 57
+    [model] => VAZ 2107 
+    [model_year] => 1989
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԼԻԼԻԹ ԲԱԿԱԼՅԱՆ
+)
+
+XTA210700L0515924
+01 LL 007
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՊՈՒՅՏ ՄՈՒԳ ԿԱՊՈՒՅՏ 
+    [engine_number] => 1077853
+    [engine_power] => 57
+    [model] => VAZ 2107 
+    [model_year] => 1989
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԼԻԼԻԹ ԲԱԿԱԼՅԱՆ
+)
+
+XTA210700L0515924
+01 LL 007
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [name] => dsadasdas
+)
+
+other##-395484524
+Array
+(
+    [name] => dfasdaa
+)
+
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՊՈՒՅՏ ՄՈՒԳ ԿԱՊՈՒՅՏ 
+    [engine_number] => 1077853
+    [engine_power] => 57
+    [model] => VAZ 2107 
+    [model_year] => 1989
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԼԻԼԻԹ ԲԱԿԱԼՅԱՆ
+)
+
+XTA210700L0515924
+01 LL 007
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1HZTW388322
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՆԱՉ ԿԱՆԱՉ ՄԵՏԱՂԱԿԱՆ (ԱԴՐԻԱ) 
+    [engine_number] => 
+    [engine_power] => 66
+    [model] => VOLKSWAGEN VENTO 2.0 
+    [model_year] => 1996
+    [number] => 01 LL 010
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԱՐԹՈՒՐ ՄԱՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ԿԱՆԱՉ ԿԱՆԱՉ ՄԵՏԱՂԱԿԱՆ (ԱԴՐԻԱ) 
+    [engine_number] => 
+    [engine_power] => 66
+    [model] => VOLKSWAGEN VENTO 2.0 
+    [model_year] => 1996
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԱՐԹՈՒՐ ՄԱՄՅԱՆ
+)
+
+WVWZZZ1HZTW388322
+01 LL 010
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+WVWZZZ1JZ1P545136
+01 LL 022
+Array
+(
+    [name] => asdsadadad
+)
+
+Array
+(
+    [name] => asdsadads
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [name] => adsasda
+)
+
+Array
+(
+    [name] => asdasdsad
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+other##-662733300
+Array
+(
+    [name] => test
+)
+
+other##-1967989534
+Array
+(
+    [name] => test1
+)
+
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+other##-1967989534
+Array
+(
+    [name] => test1
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+other##-662733300
+Array
+(
+    [name] => test
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+other##331058520
+Array
+(
+    [name] => test2
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+other##1690090958
+Array
+(
+    [name] => test3
+)
+
+other##-86497171
+Array
+(
+    [name] => test4
+)
+
+vehicle##XTH311000W0118143##01_LL_001
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+other##-1914758917
+Array
+(
+    [name] => test5
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##-853299691
+Array
+(
+    [name] => popoq
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##1690090958
+Array
+(
+    [name] => test3
+)
+
+other##-1914758917
+Array
+(
+    [name] => test5
+)
+
+other##1690090958
+Array
+(
+    [name] => test3
+)
+
+other##-853299691
+Array
+(
+    [name] => popoq
+)
+
+other##-853299691
+Array
+(
+    [name] => popoq
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##1690090958
+Array
+(
+    [name] => test3
+)
+
+other##349587777
+Array
+(
+    [name] => test6
+)
+
+other##-1914758917
+Array
+(
+    [name] => test5
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+XTH311000W0118143
+01 LL 001
+other##331058520
+Array
+(
+    [name] => test2
+)
+

@@ -1,0 +1,19 @@
+.module-list-panel p {
+  line-height: 22px;
+}
+
+.module-list-panel .x-panel-body {
+  border-radius: 4px;
+}
+
+.module-list-panel .x-panel-body:hover {
+  cursor: pointer;
+  background-color: #DFE8F6;
+}
+
+.module-list-icon {
+  float: left;
+  margin-right: 12px;
+  width: 48px;
+  height: 48px;
+}

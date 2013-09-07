@@ -1,0 +1,196 @@
+<?php
+/**
+ * Documents management
+ * @package aenis
+ */
+
+/**
+ * Methods for working with documents
+ * @author BestSoft
+ * @package aenis\docmgmt
+ */
+class Documents extends App_Db_Table_Abstract
+{
+	/**
+	 * Database table name
+	 * @var string
+	 */
+	protected $_table = 'documents';
+
+
+	/**
+	 * Add new document
+	 * @param array $data     Associative array with 'documents' database table field values
+	 * @return Table_Insert_Result
+	 */
+	public function addDocument($data)
+	{
+
+		$this->db_insert('documents', array(
+			'case_id' => empty($data['case_id']) ? self::$DB_NULL : $data['case_id'],
+			'rel_id' => empty($data['rel_id']) ? self::$DB_NULL : $data['rel_id'],
+			'subject_id' => empty($data['subject_id']) ? self::$DB_NULL : $data['subject_id'],
+			'object_id' => empty($data['object_id']) ? self::$DB_NULL : $data['object_id'],
+			'is_deleted' => 0,
+			'lu_user_id' => App_Registry::get('temp_sn')->user_id,
+			'lu_date' => self::$DB_TIMESTAMP,
+            'insert_type' => empty($data['insert_type']) ? 1:$data['insert_type']
+		));
+
+        $document_id = $this->db_insert_id();
+		$insert_data = array(
+			'doc_id' => $document_id,
+			'document_description' => empty($data['document_description']) ? self::$DB_NULL : $data['document_description'],
+			'document_date' => self::$DB_TIMESTAMP,
+			'page_count' => $data['page_count'],
+			'doc_num_in_case' => empty($data['doc_num_in_case'])? self::$DB_NULL : $data['doc_num_in_case'],
+			'is_last' => 1,
+			'lu_user_id' => App_Registry::get('temp_sn')->user_id,
+			'lu_date' => self::$DB_TIMESTAMP
+		);
+		if(empty($data['doc_type_id']))
+		{
+			$insert_data['doc_type_id'] = array('value'=>'getDocumentTypeIdByCode("'.$data['doc_type_code'].'")', 'escape' => false);
+		}
+		else
+		{
+			$insert_data['doc_type_id'] = $data['doc_type_id'];
+		}
+
+		$this->db_insert('documents_dt', $insert_data);
+        return new Table_Insert_Result($document_id, $this->db_insert_id());
+	}
+
+	/**
+	 * Update a document
+	 * @param array $data     Associative array with 'documents' database table field values
+	 */
+	public function updateDocument($data)
+	{
+		//print_r($data); exit;
+		$update = array();
+		if($data['doc_type_id'])
+			$update['doc_type_id'] = $data['doc_type_id'];
+		if($data['document_description'])
+			$update['document_description'] = $data['document_description'];
+		if($data['page_count'])
+			$update['page_count'] = $data['page_count'];
+		if($data['doc_num_in_case'])
+			$update['doc_num_in_case'] = $data['doc_num_in_case'];
+
+		$this->db_update(
+			'documents_dt',
+			$update,
+			array('doc_id' => $data['id'])
+		);
+
+	}
+
+
+	/**
+	 * Returns documents
+	 * @access public
+	 * @param array $search    Array with search criteria:
+	 * 						   'document_id', 'document_dt_id', 'case_id'
+	 * @return mysqli_result
+	 */
+	public function getDocuments($search)
+	{
+		$where = array(
+			'doc_dt.is_last = ' . ((isset($search['is_last']) && 0==$search['is_last']) ? '0' : '1'),
+			'doc.is_deleted = ' . ((isset($search['is_deleted']) && 1==$search['is_deleted']) ? '1' : '0')
+		);
+		$joins = array();
+
+        if(!empty($search['rel_id']))
+            $where[] = "doc.rel_id = '".intval($search['rel_id'])."'";
+        if(!empty($search['lang_id']))
+            $where[] = "content.lang_id = '".intval($search['lang_id'])."'";
+
+        if(!empty($search['object_id']))
+            $where[] = "doc.object_id = '".intval($search['object_id'])."'";
+
+        if(!empty($search['subject_id']))
+            $where[] = "doc.subject_id = '".intval($search['subject_id'])."'";
+
+		if(!empty($search['document_id']))
+			$where[] = "doc.id = '".intval($search['document_id'])."'";
+
+		if(!empty($search['document_dt_id']))
+			$where[] = "doc_dt.id = '".intval($search['document_dt_id'])."'";
+
+		if(!empty($search['case_id']))
+			$where[] = "doc.case_id = '".intval($search['case_id'])."'";
+
+		$where = implode(' AND ', $where);
+		$joins = implode(PHP_EOL, array_unique($joins));
+
+		$q = "SELECT
+				doc.id AS id,
+				doc_dt.id AS dt_id,
+				doc.case_id,
+				doc.rel_id,
+				doc.object_id,
+				doc.subject_id,
+				doc_dt.doc_type_id,
+				document_types_content.label AS doc_type_label,
+				doc_dt.document_description,
+				doc_dt.document_date,
+				doc_dt.page_count,
+				doc_dt.doc_num_in_case,
+				bs_document_files.id as doc_file_id
+            FROM bs_documents_dt doc_dt
+            JOIN bs_documents doc ON doc.id = doc_dt.doc_id
+            LEFT JOIN bs_document_types doc_types ON doc_types.id = doc_dt.doc_type_id
+            LEFT JOIN bs_document_types_content document_types_content ON document_types_content.doc_type_id = doc_types.id
+            LEFT JOIN bs_document_files ON bs_document_files.doc_dt_id = doc_dt.id
+            $joins
+            WHERE $where
+        ";
+		return $this->db_query($q);
+	}
+
+	/**
+	 * Remove given template
+	 * @access public
+	 * @param integer $id    Document ID
+	 * @throws App_Db_Exception_Table if template id is not specified
+	 */
+	public function deleteDocument($id){
+		if(empty($id))
+			throw new App_Db_Exception_Table('Item ID is not specified');
+
+		$this->db_update(
+			$this->_table,
+			array(
+				'is_deleted' => 1,
+				'lu_user_id' => App_Registry::get('temp_sn')->user_id,
+				'lu_date' => self::$DB_TIMESTAMP
+			),
+			array('id' => $id)
+		);
+	}
+
+	/**
+	 * Returns pages count for a document
+	 * @access public
+	 * @param array $search    Array with search criteria:
+	 * @throws App_Db_Exception_Table if $search is not specified
+	 */
+	public function getPagesCount($search){
+		$where = array();
+		if(!empty($search['doc_id']))
+			$where[] = "pages.doc_id = ".intval($search['doc_id']);
+
+		if(count($where))
+			$where = implode(' AND ', $where);
+
+		$q = "SELECT COUNT(pages_dt.id)
+			FROM bs_pages pages
+			LEFT JOIN bs_pages_dt pages_dt ON pages_dt.page_id = pages.id
+			AND pages.is_deleted=0 AND pages_dt.is_last = 1
+			WHERE $where
+			";
+		return $this->db_query($q);
+	}
+}

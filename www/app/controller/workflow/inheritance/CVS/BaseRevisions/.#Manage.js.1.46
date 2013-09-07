@@ -1,0 +1,111 @@
+Ext.define('Aenis.controller.workflow.inheritance.Manage', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Aenis.view.workflow.inheritance.Manage'
+    ],
+
+    mixins:[
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.inheritance.Manage',
+        'BestSoft.mixin.Localized',
+        'BestSoft.mixin.StyleSheetLoader'
+    ],
+
+    onLaunch: function(app) {
+        app.loadMainViewTab(this, function(oView) {
+            this.addComponentRefs(oView);
+            oView.control({
+               '[ref=deadManSearchButton]': {
+                    click: this.deadManSearch
+                },
+                '[ref=createDeathInheritance]': {
+                    click: this.onClickCreateDeathInheritanceAction
+                },
+                '[ref=selectTransactionTypeAction]': {
+                    click: this.onClickselectTransactionTypeActionAction
+                },
+                '.':{
+                    afterrender: this.onAfterRenderAction
+                }
+            }, null, this);
+        });
+    },
+            
+            
+    onAfterRenderAction: function(){
+
+    },
+    
+    deadManSearch: function(){
+            var form = this.getInheritanceSearchForm().getForm();
+            var values = form.getValues();
+                values.loadMode = 'from_inheritance';
+        var me = this;
+        this.getInheritancesGrid().loadStore({
+                params:values,
+               callback:function(records/*, operation, success*/){
+                    
+                    me.getWillsGrid().show();
+                    me.getWillsGrid().loadStore({
+                        params:values
+                    });
+                }
+            });
+    },
+    
+    onClickselectTransactionTypeActionAction: function(){
+                var oController = this.application.loadController('workflow.transaction.type.SelectDlg');
+		oController.showDialog({uiType: 'inheritance_final_part'}).on({
+			itemSelected: function(model) {
+				this.getTransactionTypeField().setValue(model.getTitle());
+				this.getTransactionTypeField().transactionModel = model;
+				this.initWithTransactionType(model);
+			},
+			scope: this
+		});
+    },
+    
+    onClickCreateDeathInheritanceAction: function(){
+        var me = this;
+        var full_tr_list = [];
+        this.getDetailsForm().show();
+        var inheritancesGrid = this.getInheritancesGrid();
+        var willsGrid = this.getWillsGrid();
+        willsGrid.getStore().each(function(record){
+            full_tr_list.push(record.getId());
+        });
+        inheritancesGrid.getStore().each(function(record){
+            full_tr_list.push(record.getId());
+        });
+        me.getRelationshipDocumentsGrid().freeStore();
+        me.getObjectsGrid().freeStore();
+        //me.getPartiesPanel().freeStore();
+        full_tr_list.forEach(function(tr_id){ 
+             Ext.create('Aenis.model.workflow.Transaction', {id:tr_id}).reload(
+                {
+                    params: {
+                        info: 'properties,' +
+                            'relationships,relationship_documents,relationship_document_files,' +
+                            'parties,party_rights,' +
+                            'subjects,subject_documents,subject_document_files,subject_relations,' +
+                            'objects,object_documents,object_document_files'
+                    }
+                },
+                function(record, operation/*, success*/) {
+                    if(operation.wasSuccessful())
+                    {                     
+                        me.getObjectsGrid().loadFromObjectsStore(record.relationships().first().objects());
+                        me.getRelationshipDocumentsGrid().loadFromDocumentsStore(record.relationships().first().documents());
+                        
+                    }
+                });
+             
+             
+             
+         });
+
+        
+        
+    }
+});

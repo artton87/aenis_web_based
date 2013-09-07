@@ -1,0 +1,26 @@
+<?php
+user_auth_check();
+
+if(Acl()->denied('application.get'))
+    throw new App_Exception_Permission('Դուք չունեք բավարար իրավունքներ գործարքի դիմում(ներ)ի տվյալները ստանալու համար:');
+
+$oMsg = new Application_Messages();
+$params = App_Json::decode($_POST['params'], true);
+$messages = array();
+
+$result = $oMsg->getMessages($_POST['app_id']);
+while($row = $oMsg->db_fetch_array($result))
+{
+    $messages[] = array(
+        'id' => $row['id'],
+        'app_id' => $row['app_id'],
+        'message_date' => $row['message_date'],
+        'customer_id' => $row['customer_id'],
+        'message' => $row['message'],
+        'author' => $row['notary'].''.$row['customer_name'].' '.$row['customer_last_name']
+    );
+}
+//Logger::out($messages);
+Ext::sendResponse(true, array(
+    'data' => $messages
+));

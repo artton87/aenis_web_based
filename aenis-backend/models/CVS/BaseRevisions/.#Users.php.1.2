@@ -1,0 +1,539 @@
+<?php
+/**
+ * Users management
+ * @package aenis\Structure
+ */
+
+/**
+ * Methods for user management
+ * @author BestSoft
+ * @package aenis\Structure
+ */
+class Users extends App_Db_Table_Abstract
+{
+	/**
+	 * Tag for cache entry
+	 */
+	const CACHE_TAG = 'users';
+
+
+	/**
+	 * Database table name
+	 * @var string
+	 */
+	protected $_table = 'users';
+
+
+	/**
+	 * Checks user login and password against one stored in database
+	 * @access public
+	 * @param string $username    User login
+	 * @param string $password    User password
+	 * @return array|null    The record with user details or NULL
+	 */
+	public function checkCredentials($username, $password)
+	{
+		$oHashCheck = new App_PBKDF2();
+		$result = $this->db_query("
+			SELECT *
+			FROM bs_{$this->_table}
+			WHERE username='".$this->db_escape_string($username)."' AND is_ws_consumer=0
+		");
+		while($row = $this->db_fetch_array($result))
+		{
+			if($oHashCheck->validate_password($password, $row['pw'])) return $row;
+		}
+		return null;
+	}
+
+
+	/**
+	 * Checks if given agent/password combination belongs to web service consumer user.
+	 * Used for identifying web services and fetching user ids for them.
+	 * @access public
+	 * @param string $client    A username of web service client
+	 * @param string $password    A password of web service client
+	 * @return array|null    The record with user details or NULL
+	 */
+	public function checkWebServiceClientCredentials($client, $password)
+	{
+		if(empty($client) || empty($password)) return null;
+		$result = $this->db_select($this->_table, array(), array(
+			'username' => $client,
+			'pw' => $password,
+			'is_ws_consumer' => 1
+		));
+		if($row = $this->db_fetch_array($result))
+		{
+			return $row;
+		}
+		return null;
+	}
+
+
+	/**
+	 * Changes password of the given user
+	 * @access public
+	 * @param integer $user_id    User ID
+	 * @param string $old_password    Old password
+	 * @param string $new_password    New password
+	 * @throws App_Db_Exception_Table if user with given id does not exist
+	 * @throws App_Db_Exception_Validate if old password does not match
+	 */
+	public function setPassword($user_id, $old_password, $new_password)
+	{
+		$oHashCheck = new App_PBKDF2();
+		$result = $this->db_select($this->_table, array('pw'), array('id'=>$user_id));
+		if($row = $this->db_fetch_row($result))
+		{
+			if(!$oHashCheck->validate_password($old_password, $row[0]))
+				throw new App_Db_Exception_Validate('Հին գաղտնաբառը սխալ է տրված:');
+		}
+		else throw new App_Db_Exception_Table('User cannot be found');
+
+		$this->db_update($this->_table, array('pw'=>$oHashCheck->create_hash($new_password)), array('id'=>$user_id));
+	}
+
+
+	/**
+	 * Checks user fields
+	 * @access protected
+	 * @param integer $user_id    User ID
+	 * @param array $data   Associative array with fields as of 'users' table in database
+	 * @throws App_Db_Exception_Validate is some validations fail
+	 */
+	protected function validateUser($user_id, $data)
+	{
+		if(empty($data['username']))
+			throw new App_Db_Exception_Validate('Օգտվողի ծածկանունը դատարկ է:');
+
+		$oLanguages = new Languages();
+		$default_lang = $oLanguages->getDefaultLanguage();
+		if(empty($data['content'][$default_lang->id]['first_name']))
+			throw new App_Db_Exception_Validate('Օգտվողի անունը լրացված չէ '.mb_strtolower($default_lang->title).' լեզվի համար:');
+
+		if(empty($data['is_ws_consumer']))
+		{
+			if(empty($data['content'][$default_lang->id]['last_name']))
+				throw new App_Db_Exception_Validate('Օգտվողի ազգանունը լրացված չէ '.mb_strtolower($default_lang->title).' լեզվի համար:');
+		}
+
+		if($data['is_notary'])
+		{
+			if(empty($data['notary_code']))
+				throw new App_Db_Exception_Validate('Նոտարի կոդը դատարկ է:');
+
+			if(empty($data['passport']))
+				throw new App_Db_Exception_Validate('Նոտարի անձնագրի սերիան ու համարը լրացված չէ:');
+
+			if(empty($data['ssn']))
+				throw new App_Db_Exception_Validate('Նոտարի սոց. քարտի համարը լրացված չէ:');
+
+			$where = array('notary_code'=>$data['notary_code']);
+			if(!empty($user_id))
+				$where[] = 'id <> '.intval($user_id);
+
+			$result = $this->db_select($this->_table, array('id'), $where);
+			if(NULL !== $this->db_fetch_array($result))
+				throw new App_Db_Exception_Validate('Այսպիսի կոդով նոտար արդեն գրանցված է համակարգում:');
+		}
+
+		$where = array('username'=>$data['username']);
+		if(empty($user_id))
+		{
+			if(empty($data['password']))
+				throw new App_Db_Exception_Validate('Օգտվողի գաղտնաբառը դատարկ է:');
+		}
+		else
+		{
+			$where[] = 'id <> '.intval($user_id);
+		}
+
+		$result = $this->db_select($this->_table, array('id'), $where);
+		if(NULL !== $this->db_fetch_array($result))
+			throw new App_Db_Exception_Validate('Այսպիսի ծածկանունով օգտվող արդեն գրանցված է համակարգում:');
+	}
+
+
+	/**
+	 * Returns fields, which can be passed to database adapter's insert and update methods
+	 * @access protected
+	 * @param array $data    Associative array with user fields
+	 * @see Users::getRootMember()
+	 * @return array    Fields, which can be passed to database adapter methods
+	 */
+	protected function getDbFields($data)
+	{
+		return array(
+			'username' => $data['username'],
+			'email' => $data['email'],
+			'fax_number' => $data['fax_number'],
+			'phone' => $data['phone'],
+			'phone_mobile' => $data['phone_mobile'],
+			'passport' => empty($data['passport']) ? self::$DB_NULL : $data['passport'],
+			'ssn' => empty($data['ssn']) ? self::$DB_NULL : $data['ssn'],
+			'notary_code' => $data['is_notary'] ? $data['notary_code'] : self::$DB_NULL,
+			'is_ws_consumer' => $data['is_ws_consumer'] ? 1 : 0,
+			'is_notary' => $data['is_notary'] ? 1 : 0
+		);
+	}
+
+
+	/**
+	 * Add new user
+	 * @access public
+	 * @param array $data    Associative array with 'users' database table field values
+	 * @return integer    ID of newly added record
+	 */
+	function addUser($data)
+	{
+		$this->validateUser(0, $data);
+
+		$insert_data = $this->getDbFields($data);
+		if($insert_data['is_ws_consumer'])
+		{
+			$insert_data['pw'] = $data['password'];
+		}
+		else
+		{
+			$oHashCheck = new App_PBKDF2();
+			$insert_data['pw'] = $oHashCheck->create_hash($data['password']);
+		}
+		$this->db_insert($this->_table, $insert_data);
+		$id = $this->db_insert_id();
+
+		$this->setUserContent($id, $data['content']);
+
+		Table_Log::insert_added($this->_table, $id, $insert_data);
+		App_Cache()->refreshTags(self::CACHE_TAG);
+		return $id;
+	}
+
+
+	/**
+	 * Sets content for the user
+	 * @access protected
+	 * @param integer $id    User id
+	 * @param array $content_data    Associative array with 'users_content' database table field values
+	 */
+	protected function setUserContent($id, array $content_data)
+	{
+		foreach($content_data as $lang_id=>$data)
+		{
+			$data = array(
+				'first_name' => $data['first_name'],
+				'last_name' => $data['last_name'],
+				'second_name' => $data['second_name'],
+			);
+			$where = array('lang_id'=>$lang_id, 'user_id'=>$id);
+			$result = $this->db_select($this->_table.'_content', array('lang_id'), $where);
+			if(NULL !== $this->db_fetch_row($result))
+			{
+				$this->db_update($this->_table.'_content', $data, $where);
+			}
+			else
+			{
+				$data['lang_id'] = $lang_id;
+				$data['user_id'] = $id;
+				$this->db_insert($this->_table.'_content', $data);
+			}
+		}
+	}
+
+
+	/**
+	 * Edit an existing user
+	 * @access public
+	 * @param integer $user_id    User ID
+	 * @param array $data    Associative array with fields as of 'users' table in database
+	 * @throws App_Db_Exception_Table if user id is not specified
+	 */
+	public function updateUser($user_id, $data)
+	{
+		if(empty($user_id))
+			throw new App_Db_Exception_Table('User ID is not specified');
+
+		$this->validateUser($user_id, $data);
+
+		$update_data = $this->getDbFields($data);
+		if(!empty($data['password']))
+		{
+			if(1 == $update_data['is_ws_consumer'])
+			{
+				$update_data['pw'] = $data['password'];
+			}
+			else
+			{
+				$oHashCheck = new App_PBKDF2();
+				$update_data['pw'] = $oHashCheck->create_hash($data['password']);
+			}
+		}
+
+		$old_select = $this->db_select($this->_table, array(), array('id'=>$user_id));
+		Table_Log::insert_modified($this->_table, $user_id, $old_select, $update_data);
+
+		$this->db_update($this->_table, $update_data, array('id'=>$user_id));
+		$this->setUserContent($user_id, $data['content']);
+		App_Cache()->refreshTags(self::CACHE_TAG);
+	}
+
+
+	/**
+	 * Removes the given user
+	 * @access public
+	 * @param string $id    User ID
+	 * @throws App_Db_Exception_Table if user id is not specified
+	 */
+	public function deleteUser($id)
+	{
+		if(empty($id))
+			throw new App_Db_Exception_Table('User ID is not specified');
+
+		Table_Log::insert_deleted($this->_table, $id, 'id');
+		$this->db_delete($this->_table, array('id'=>$id));
+		App_Cache()->refreshTags(self::CACHE_TAG);
+	}
+
+
+	/**
+	 * Returns user name with initials
+	 * @access public
+	 * @param array $user_data    Array with fields as got from getUsers() call
+	 * @return string
+	 */
+	public function getNameInitials($user_data)
+	{
+		$first_name_initial = mb_substr($user_data['first_name'], 0, 2);
+		$first_name_initial = mb_strtoupper($first_name_initial);
+		if($first_name_initial === 'ՈՒ')
+		{
+			$first_name_initial = 'Ու';
+		}
+		else
+		{
+			$first_name_initial = mb_substr($first_name_initial, 0, 1);
+		}
+		$name = $first_name_initial.'. ';
+
+		if(!empty($user_data['second_name']))
+		{
+			$second_name_initial = mb_substr($user_data['second_name'], 0, 2);
+			$second_name_initial = mb_strtoupper($second_name_initial);
+			if($second_name_initial === 'ՈՒ')
+			{
+				$second_name_initial = 'Ու';
+			}
+			else
+			{
+				$second_name_initial = mb_substr($second_name_initial, 0, 1);
+			}
+			$name .= $second_name_initial.'. ';
+		}
+
+		$name .= $user_data['last_name'];
+		return $name;
+	}
+
+
+	/**
+	 * Returns list of users
+	 * @access public
+	 * @param array $search     Associative array with search parameters
+	 * @param array $lang_ids    In which languages to return results. If omitted, will return in all languages
+	 * @return mysqli_result
+	 */
+	public function getUsers(array $search = array(), array $lang_ids = array())
+	{
+		$where = array('tbl.is_root = 0');
+		$joins = array();
+
+		if(!empty($search['user_id']))
+			$where[] = 'tbl.id = '.intval($search['user_id']);
+
+		if(!empty($search['user_ids']))
+			$where[] = "tbl.id IN ('".implode(',', $search['user_ids'])."')";
+
+		if(isset($search['is_ws_consumer']))
+			$where[] = 'tbl.is_ws_consumer = '.($search['is_ws_consumer'] ? 1 : 0);
+
+		if(isset($search['is_notary']))
+			$where[] = 'tbl.is_notary = '.($search['is_notary'] ? 1 : 0);
+
+		if(!$search['user.show_all'])
+		{
+			$user_staff_ids = App_Registry::get('temp_sn')->user_staffs;
+			if($search['user.show_all_in_notarial_office'])
+			{
+				//if allowed, show all users in notarial office
+				$joins[] = '
+					LEFT JOIN bs_staff_user su ON su.user_id = tbl.id AND su.is_active = 1
+					LEFT JOIN bs_staff staff ON staff.id = su.staff_id
+					LEFT JOIN bs_departments dep ON dep.id = staff.dep_id
+				';
+				$where[] = '(dep.notarial_office_id IN (
+					SELECT dep.notarial_office_id
+					FROM bs_staff staff
+					LEFT JOIN bs_departments dep ON dep.id = staff.id
+					WHERE staff.id IN ('.implode(',',$user_staff_ids).')
+				) OR ISNULL(dep.notarial_office_id))';
+			}
+			else //by default is allowed to see users from his department only
+			{
+				$joins[] = '
+					LEFT JOIN bs_staff_user su ON su.user_id = tbl.id AND su.is_active = 1
+					LEFT JOIN bs_staff staff ON staff.id = su.staff_id
+				';
+				$where[] = '(staff.dep_id IN (
+					SELECT staff.dep_id
+					FROM bs_staff staff
+					WHERE staff.id IN ('.implode(',',$user_staff_ids).')
+				) OR ISNULL(staff.dep_id))';
+			}
+		}
+
+		$where = 'WHERE '.implode(' AND ', $where);
+		$joins = empty($joins) ? '' : implode(' ', $joins);
+
+		foreach($lang_ids as &$lang_id)
+			$lang_id = intval($lang_id);
+		$lang_id_condition = empty($lang_ids) ? '' : 'AND tbl_content.lang_id IN ('.implode(',',$lang_ids).')';
+
+		$q = "
+			SELECT
+				tbl.*,
+				tbl_content.first_name,tbl_content.last_name, tbl_content.second_name,
+				tbl_content.lang_id,
+				IF((
+					SELECT id
+					FROM bs_staff_user su
+					WHERE su.user_id = tbl.id AND su.is_active=1
+					LIMIT 1
+				)>0, 1, 0) AS has_position
+			FROM bs_{$this->_table} tbl
+			LEFT JOIN bs_{$this->_table}_content tbl_content ON tbl_content.user_id = tbl.id $lang_id_condition
+			$joins
+			$where
+			ORDER BY tbl.id ASC, tbl_content.lang_id ASC
+		";
+		return $this->db_query($q);
+	}
+
+
+	/**
+	 * Returns full name of the given user
+	 * @param integer $user_id    User ID
+	 * @param boolean $skip_position    Optional. If TRUE, will not include department and staff in the name
+	 * @return string    Full name of user
+	 */
+	public function getFullUserName($user_id, $skip_position=false)
+    {
+		$oLanguages = new Languages();
+		$default_lang_id = $oLanguages->getDefaultLanguage()->id;
+
+        $q = "SELECT
+        		dep.title AS dep_title,
+        		staff.title AS staff_title,
+        		uc.first_name,
+        		uc.last_name,
+        		uc.second_name
+            FROM bs_staff_user su
+            LEFT JOIN bs_users_content uc ON uc.user_id = su.user_id AND uc.lang_id = $default_lang_id
+            LEFT JOIN bs_staff staff ON staff.id = su.staff_id
+            LEFT JOIN bs_departments dep ON dep.id = staff.dep_id
+            WHERE su.user_id = ".intval($user_id)." AND su.is_active = 1
+        ";
+        $result = $this->db_query($q);
+		if($row = $this->db_fetch_array($result))
+		{
+			$full_name = $skip_position ? array() : array($row['dep_title'], $row['staff_title']);
+			if(!empty($row['first_name']))
+				$full_name[] = $row['first_name'];
+			if(!empty($row['last_name']))
+				$full_name[] = $row['last_name'];
+			if(!empty($row['second_name']))
+				$full_name[] = $row['second_name'];
+			return implode(' ', $full_name);
+		}
+		return '';
+    }
+
+
+	/**
+	 * Returns data of notary users which are nearest direct or
+	 * indirect parents of the given user in the staff positions tree.
+	 * If passed user himself is a notary, returns his details.
+	 * @access public
+	 * @param integer $user_id     ID of user
+	 * @param integer $lang_id     In which language to return multilingual fields
+	 * @return mysqli_result|null    Result set or null if there were no notaries in the parent chains
+	 */
+	public function getUserNotaries($user_id, $lang_id)
+	{
+		$result = $this->db_query("SELECT getUserNotaries($user_id, NULL) FROM dual");
+		if(($row = $this->db_fetch_row($result)) && !empty($row[0]))
+		{
+			return $this->getUsers(
+				array(
+					'user_ids' => explode(',', $row[0]),
+					'user.show_all' => 1
+				),
+				array($lang_id)
+			);
+		}
+		return null;
+	}
+
+
+	/**
+	 * Returns data of user notary. If user has multiple notaries, return null
+	 * @access public
+	 * @param integer $user_id     ID of user
+	 * @param integer $lang_id     In which language to return multilingual fields
+	 * @return array    Array with user fields as those returned by getUsers(),
+	 * 					empty array if there multiple notaries, or no notaries were found
+	 */
+	public function getUserNotary($user_id, $lang_id)
+	{
+		$user_data = array();
+		$result = $this->getUserNotaries($user_id, $lang_id);
+		if(null !== $result)
+		{
+			while($row = $this->db_fetch_array($result))
+			{
+				if(!empty($user_data)) //there are other notaries except the found one
+				{
+					return null; //return nothing, user should care about selecting which notary is needed
+				}
+				$user_data = $row;
+			}
+		}
+		return $user_data;
+	}
+
+
+    /**
+     * gets notary office(s) by given integer|user_id
+     * @param $user_id
+     * @param $lang_id
+     * @return string|null
+     */
+    public function getNotaryOfficeByUser($user_id, $lang_id)
+    {
+        $q = "
+            SELECT getNotarialOfficeTitle(departments.notarial_office_id,".$lang_id.") AS notary_office
+             FROM bs_users users
+            LEFT JOIN bs_staff_user staff_user ON users.id = staff_user.user_id
+            LEFT JOIN bs_staff staff ON staff_user.staff_id = staff.id
+            LEFT JOIN bs_departments departments ON staff.dep_id = departments.id
+
+            WHERE users.id = ".$user_id.";
+        ";
+        $result = $this->db_query($q);
+        if($row = $this->db_fetch_array($result))
+        {
+            return $row['notary_office'];
+        }
+        return null;
+
+    }
+}

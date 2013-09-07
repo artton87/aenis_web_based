@@ -1,0 +1,23 @@
+
+.tbicon-main-profile-Logout {
+    background-image: url(../../../images/main/toolbox/profile/Logout.png) !important;
+}
+
+.tbicon-main-help-View {
+    background-image: url(../../../images/main/toolbox/help/View.png) !important;
+}
+.tbicon-main-help-About {
+    background-image: url(../../../images/main/toolbox/help/About.png) !important;
+}
+
+.tbicon-main-profile-ChangePasswordDlg {
+    background-image: url(../../../images/main/toolbox/profile/ChangePasswordDlg.png) !important;
+}
+
+.tbicon-main-user-Manage {
+    background-image: url(../../../images/main/toolbox/user/manage.png) !important;
+}
+
+.tbicon-main-department-Manage {
+    background-image: url(../../../images/main/toolbox/department/manage.png) !important;
+}

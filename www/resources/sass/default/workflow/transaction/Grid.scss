@@ -1,0 +1,14 @@
+@import "workflow/transaction_status/*.png";
+@include all-transaction_status-sprites;
+
+.transaction_status {
+  $w: transaction_status-sprite-width('approved');
+  $h: transaction_status-sprite-height('approved');
+  width: $w;
+  height: $h;
+  display: block;
+}
+
+.locked .x-grid-cell{
+  background-color: #ffe2e2;
+}

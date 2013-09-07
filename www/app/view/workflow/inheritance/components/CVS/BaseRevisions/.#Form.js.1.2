@@ -1,0 +1,115 @@
+Ext.define('Aenis.view.workflow.inheritance.components.Form', {
+    extend: 'Ext.form.Panel',
+    alias: 'widget.workflowInheritanceForm',
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.inheritance.components.Form',
+        'BestSoft.mixin.Localized'
+    ],
+
+    border: false,
+
+    initComponent: function() {
+
+        Ext.applyIf(this, {
+            xtype: 'form',
+            ref:'inheritanceSearchForm',
+            defaults: {
+                margin: 5
+            },
+            layout:{
+                type: 'vbox',
+                align: 'stretch'
+            },
+
+            messages:{
+                first_name_is_empty: this.T('first_name_is_empty'),
+                last_name_is_empty: this.T('last_name_is_empty'),
+                second_name_is_empty: this.T('second_name_is_empty'),
+                social_card_number_is_empty: this.T('social_card_number_is_empty'),
+                passport_number_is_empty: this.T('passport_number_is_empty'),
+                fallback: this.T('fallback_message')
+            },
+            border:false,
+            items: [
+                {
+                    xtype:'fieldcontainer',
+                    layout:{
+                        type: 'hbox',
+                        align:'center',
+                        pack:'center'
+                    },
+                    fieldDefaults: {
+                        labelAlign:'right'
+                    },
+                    items:[
+                        {
+                            xtype:'textfield',
+                            name:'first_name',
+                            fieldLabel:this.T('first_name'),
+                            flex:1
+                        },
+                        {
+                            xtype:'textfield',
+                            name:'last_name',
+                            fieldLabel:this.T("last_name"),
+                            flex:1
+                        },
+                        {
+                            xtype:'textfield',
+                            name:'second_name',
+                            fieldLabel:this.T("second_name"),
+                            flex:1
+                        }
+                    ]
+                },
+                {
+                    xtype:'fieldcontainer',
+                    layout:{
+                        type: 'hbox',
+                        align:'center',
+                        pack:'center'
+                    },
+                    fieldDefaults: {
+                        labelAlign:'right'
+                    },
+                    items:[
+                        {
+                            xtype:'textfield',
+                            name:'passport_number',
+                            fieldLabel:this.T('passport_number'),
+                            flex:1,
+                            vtype:'am_passport'
+                        },
+                        {
+                            xtype:'textfield',
+                            name:'social_card_number',
+                            fieldLabel:this.T("social_card_number"),
+                            flex:1,
+                            vtype:'am_ssn'
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    dock: 'bottom',
+                    layout: {
+                        type: 'hbox',
+                        pack: 'center'
+                    },
+                    items: [
+                        {
+                            xtype: 'button',
+                            formBind: true,
+                            text:this.T("search"),
+                            action:'searchInheritance',
+                            iconCls: 'icon-search'
+                        }
+                    ]
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});

@@ -1,0 +1,1178 @@
+Array
+(
+    [1] => Array
+        (
+            [1] => 3204
+        )
+
+    [2] => Array
+        (
+            [1] => 3205
+        )
+
+)
+
+1_1____1_1
+2_1____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3204
+        )
+
+    [2] => Array
+        (
+            [1] => 3205
+        )
+
+)
+
+1_2____1_1
+2_2____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [1] => 3212
+        )
+
+)
+
+1_1____1_1
+2_1____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [1] => 3212
+        )
+
+)
+
+1_2____1_1
+2_2____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [1] => 3212
+        )
+
+)
+
+1_1____1_1
+2_1____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [1] => 3212
+        )
+
+)
+
+1_2____1_1
+2_2____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [1] => 3212
+        )
+
+)
+
+1_2____1_2
+2_2____1_2
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [2] => 3215
+            [1] => 3212
+        )
+
+)
+
+1_1____1_1
+2_1____2_1
+2_1____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [2] => 3215
+            [1] => 3212
+        )
+
+)
+
+1_2____1_2
+2_2____2_2
+2_2____1_2
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [2] => 3215
+            [1] => 3212
+        )
+
+)
+
+1_2____1_1
+2_2____2_1
+2_2____1_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [2] => 3215
+            [1] => 3212
+        )
+
+)
+
+1_2____1_3
+2_2____2_3
+2_2____1_3
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [3] => 3216
+            [1] => 3215
+            [2] => 3212
+        )
+
+)
+
+1_1____1_1
+2_1____3_1
+2_1____1_1
+2_1____2_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [3] => 3216
+            [1] => 3215
+            [2] => 3212
+        )
+
+)
+
+1_2____1_3
+2_2____3_3
+2_2____1_3
+2_2____2_3
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [3] => 3216
+            [1] => 3215
+            [2] => 3212
+        )
+
+)
+
+1_2____1_1
+2_2____3_1
+2_2____1_1
+2_2____2_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3211
+        )
+
+    [2] => Array
+        (
+            [3] => 3216
+            [1] => 3215
+            [2] => 3212
+        )
+
+)
+
+1_2____1_2
+2_2____3_2
+2_2____1_2
+2_2____2_2
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ1JZ1P545136
+    [body_number] => 
+    [body_type] => ՀԵՏՉԲԵԿ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ԱՐԾԱԹԱՓԱՅԼ 
+    [engine_number] => 
+    [engine_power] => 85
+    [model] => VOLKSWAGEN GOLF 1.8 
+    [model_year] => 2001
+    [number] => 01 LL 022
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՍԱՇԱ ՓԻՐՈՒՄՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => H76W0025264
+    [body_number] => 
+    [body_type] => ՈՒՆԻՎԵՐՍԱԼ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՍՊԻՏԱԿ ՄԱՐԳԱՐԻՏ 
+    [engine_number] => 
+    [engine_power] => 88
+    [model] => MITSUBISHI PAJERO IO 1.8 
+    [model_year] => 1999
+    [number] => 11 LL 111
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԷԼԻՏԱՐ ՍՊԸ
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [name] => Anxelq mardy
+)
+
+Array
+(
+    [name] => Anxelq mardy
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [1] => Array
+        (
+            [1] => 3258
+            [2] => 
+        )
+
+)
+
+1_1____1_1
+1_1____2_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3258
+            [2] => 
+        )
+
+)
+
+1_1____1_3
+1_1____2_3
+testing
+Array
+(
+    [1] => Array
+        (
+            [1] => 3258
+            [2] => 3294
+            [4] => 
+        )
+
+)
+
+1_1____1_4
+1_1____2_4
+1_1____4_4
+Array
+(
+    [1] => Array
+        (
+            [1] => 3258
+            [2] => 3294
+            [4] => 
+        )
+
+)
+
+1_1____1_1
+1_1____2_1
+1_1____4_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3258
+            [2] => 3294
+            [4] => 
+        )
+
+)
+
+1_1____1_2
+1_1____2_2
+1_1____4_2
+Array
+(
+    [1] => Array
+        (
+            [1] => 3295
+            [2] => 3258
+            [3] => 3294
+        )
+
+)
+
+1_1____1_1
+1_1____2_1
+1_1____3_1
+Array
+(
+    [1] => Array
+        (
+            [1] => 3295
+            [2] => 3258
+            [3] => 3294
+        )
+
+)
+
+1_1____1_2
+1_1____2_2
+1_1____3_2
+Array
+(
+    [1] => Array
+        (
+            [1] => 3295
+            [2] => 3258
+            [3] => 3294
+        )
+
+)
+
+1_1____1_3
+1_1____2_3
+1_1____3_3
+Array
+(
+    [1] => Array
+        (
+            [1] => 3295
+            [2] => 3258
+            [3] => 3294
+        )
+
+)
+
+1_1____1_4
+1_1____2_4
+1_1____3_4
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [name] => other object
+)
+
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+SELECT
+				tbl.*,
+				tbl_content.label
+        	FROM bs_party_types tbl
+        	LEFT JOIN bs_party_types_content tbl_content ON tbl.id = tbl_content.party_type_id
+			
+        
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [name] => other object
+)
+
+Array
+(
+    [id] => 
+    [vin] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ՇԱՄՊԱՅՆԻ ՇԻԹԵՐ(ԳՈՐՇ) 
+    [engine_number] => 6932294
+    [engine_power] => -1
+    [model] => VAZ 2106 
+    [model_year] => 1983
+    [number] => 02 LL 002
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ՀԱՐՈՒԹՅՈՒՆ ՀՈՎՀԱՆՆԻՍՅԱՆ․․
+)
+
+Array
+(
+    [id] => 
+    [vin] => 5NPET46C97H254261
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՄՈԽՐԱԳՈՒՅՆ ՄՈԽՐԱԳՈՒՅՆ ՄԵՏԱԼԻԿ 
+    [engine_number] => 6450356
+    [engine_power] => 118
+    [model] => HYUNDAI SONATA 2.4 
+    [model_year] => 2006
+    [number] => 05 LL 005
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԿԱՄՈ ՃԱՂԱՐՅԱՆ
+)
+
+Array
+(
+    [id] => 
+    [vin] => XTH311000W0118143
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [number] => 01 LL 001
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+)
+
+Array
+(
+    [name] => nazar
+)
+
+Array
+(
+    [name] => nazar
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+    [vin] => WVWZZZ3BZXP259813
+    [number] => 10 LL 120
+)
+
+Array
+(
+    [name] => Anxelq mardy
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [name] => Anxelq mardy
+)
+
+Array
+(
+    [id] => 
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 691113
+    [color] => ՍՊԻՏԱԿ ՍՊԻՏԱԿ 
+    [engine_number] => 3342369
+    [engine_power] => 74
+    [model] => GAZ 3110 
+    [model_year] => 1998
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԳԱԳԻԿ ՍԱՐԳՍՅԱՆ
+    [vin] => XTH311000W0118143
+    [number] => 01 LL 001
+)
+
+Array
+(
+    [id] => 
+    [vin] => WVWZZZ3BZXP259813
+    [body_number] => 
+    [body_type] => ՍԵԴԱՆ
+    [brand] => 
+    [chassis_number] => 
+    [color] => ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՇԱԳԱՆԱԿԱԳՈՒՅՆ ՎԵՐԵՎԻ ՄԱՍԸ ՍՊԻՏԱԿ 
+    [engine_number] => 
+    [engine_power] => -1
+    [model] => VOLKSWAGEN GOLF 1.9D 
+    [model_year] => 1999
+    [number] => 10 LL 120
+    [type] => ԹԵԹԵՎ ՄԱՐԴԱՏԱՐ
+    [owner] => ԴԱՎԻԹ ՀԱՐՈՒԹՅՈՒՆՅԱՆ
+)
+

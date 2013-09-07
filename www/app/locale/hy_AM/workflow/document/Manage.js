@@ -1,0 +1,43 @@
+Ext.define('Locale.hy_AM.workflow.document.Manage', {
+    constructor: function() {
+    	Ext.applyIf(this.translations["hy_AM"], {
+            "manage_form_title": "Փաստաթղթերի մուտքագրում",
+            "tabTitle": "Փաստաթղթերի ավելացում",
+            "templates": "Ձևեր",
+            "doc_type": "Փաստաթղթի տեսակ",
+            "number": "Համար",
+            "applicant": "Դիմող",
+			"show": "Ցույց տալ",
+            "non_digitals": "Չթվայնացվածները",
+			"digitals": "Թվայնացվածները",
+			"scanned": "Թվայնացված է",
+			"not_scanned": "Թվայնացված չէ",
+            "show_all": "Ցույց տալ բոլորը",
+            "yes": "Այո",
+            "no": "Ոչ",
+			"msg_create_success": "Գործը մուտքագրված է",
+			"msg_update_success": "Գործը խմբագրված է",
+            "msg_create_doc_success": "Փաստաթուղթը մուտքագրված է",
+            "msg_update_doc_success": "Փաստաթուղթը խմբագրված է",
+			"msg_create_page_success": "Էջը մուտքագրված է",
+			"msg_update_page_success": "Էջը խմբագրված է",
+			"doctype": "Տեսակ",
+			"description": "Նկարագրություն",
+			"page_count": "Էջերի քանակ",
+			"doc_num_in_case": "Դիրքը ցուցակում",
+			"history": "Պատմություն",
+			"view_pages": "Դիտել տվյալ փաստաթղթի էջերը",
+			"notary_cases": "Նոտարական գործեր",
+			"notary": "Նոտար",
+			"adding_case": "Նոտարական գործի ավելացում",
+			"adding_document": "Նշված գործին կից նոր փաստաթղթի ավելացում",
+			"pages": "Էջեր",
+			"page_number_in_document": "Էջի համար",
+			"page_size": "Էջի ֆորմատ",
+			"file_uploaded": "Ֆայլը բեռնավորված է",
+			"wait_message": "Բեռնավորվում է...",
+			"are_you_sure": "Համոզվա՞ծ եք",
+			"too_many_pages": "Էջերի քանակի անհամապատասխանություն"
+        });
+    }
+});

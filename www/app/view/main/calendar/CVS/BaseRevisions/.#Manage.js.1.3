@@ -1,0 +1,33 @@
+Ext.require([
+    'BestSoft.calendar.Panel'
+]);
+
+
+Ext.define('Aenis.view.main.calendar.Manage', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.mainCalendarManage',
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.main.calendar.Manage',
+        'BestSoft.mixin.Localized'
+    ],
+
+    initComponent: function(app) {
+
+        Ext.apply(this, {
+            tabConfig: {
+                title: this.T("calendar")
+            },
+            items:[
+                {
+                    //xtype:'bscalendar'
+                    //showDayView: true
+                }
+            ]
+        });
+
+        this.callParent(arguments);
+    }
+
+});

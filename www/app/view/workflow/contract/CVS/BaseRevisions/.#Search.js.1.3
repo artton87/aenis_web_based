@@ -1,0 +1,182 @@
+Ext.require([
+	'BestSoft.grid.Panel',
+	'Ext.form.Panel',
+	'Ext.form.ComboBox',
+	'Ext.layout.container.Border',
+	'Ext.form.FieldContainer',
+	'Ext.form.field.Checkbox',
+	'Aenis.store.workflow.party.Types',
+	'Aenis.view.main.contact.components.SelectionGrid',
+	'Aenis.view.workflow.object.components.SelectionGrid',
+	'Aenis.view.workflow.transaction.components.PropertiesPanel'
+]);
+
+Ext.define('Aenis.view.workflow.contract.Search', {
+	extend: 'Ext.container.Container',
+	alias: 'widget.workflowContractSearch',
+
+	layout: {
+		type: 'border'
+	},
+
+	mixins: [
+		'Locale.hy_AM.Common',
+		'Locale.hy_AM.workflow.contract.Search',
+		'BestSoft.mixin.Localized'
+	],
+
+	initComponent: function() {
+		Ext.apply(this, {
+			tabConfig: {
+				title: this.T("contract_search")
+			},
+			items: [
+				/*{
+					xtype: 'panel',
+					region: 'west',
+					title: this.T("contract_search"),
+					width: 200,
+					border: false,
+					collapsible: true,
+					split: true,
+					layout: {
+						type: 'hbox'
+					},
+					items: [
+						{
+							xtype: 'textfield'
+						}
+					]
+				},*/
+				{
+					xtype: 'container',
+					region: 'north',
+					ref: 'partiesTopBar',
+					layout:{
+						type:'hbox',
+						align:'center',
+						pack:'center'
+					},
+					margin: '10 0 10 0',
+					items: [
+						{
+							xtype: 'combobox',
+							fieldLabel: this.T('party_type'),
+							labelAlign: 'right',
+							labelWidth: 90,
+							ref: 'partyTypesCombo',
+							//formExcluded: true,
+							width: 300,
+							queryMode: 'local',
+							//editable: false,
+							valueField: 'id',
+							displayField: 'label',
+							forceSelection: true,
+							store: Ext.create('Aenis.store.workflow.party.Types')
+						},
+						{
+							xtype:'bsbtnAdd',
+							action:'addPartyTypeGrid',
+							margin: '0 10'
+						}
+					]
+				},
+				{
+					xtype: 'form',
+					region: 'center',
+					//autoScroll:true,
+					//title: this.T("contract_search"),
+					ref: "contractSearchForm",
+					border: false,
+					//collapsible: true,
+					split: true,
+					layout: {
+						type: 'border',
+						align:'center',
+						pack:'center'
+					},
+					defaults:{
+						margin: 5
+					},
+					items: [
+
+						{
+							//xtype: 'panel',
+							region: 'center',
+							title: this.T("parties"),
+							ref: 'partiesPanel',
+							msgSubjectExists: this.T("existing_subject"),
+							layout: {
+								type: 'vbox',
+								align: 'stretch'
+							},
+							autoScroll: true,
+							height: 350,
+							//width:400,
+							flex: 1,
+							//border: false,
+							partyComponentConfig: {
+								xtype: 'mainContactSelectionGrid',
+								margin: '1 2',
+								resizeHandles: 'w e',
+								width: 400
+							},
+							items: []
+						},
+						{
+							xtype: 'panel',
+							region: 'west',
+							collapsible: true,
+							flex: 1,
+							//margin: '0 10 0 0',
+							items: [
+								{
+									xtype:'workflowObjectSelectionGrid',
+									title:this.T('objects'),
+									ref:'objectsGrid',
+									params: {mode:'search'},
+									height:150,
+									enableAttachments: false
+								}
+							]
+						},
+						/*{
+							xtype: 'workflowTransactionPropertiesPanel',
+							region: 'east',
+							margin: '0 10 0 0',
+							//width:400,
+							flex: 1,
+							ref: 'propertiesGrid'
+						}*/
+						{
+							xtype: 'panel',
+							region: 'east',
+							collapsible: true,
+							title: 'attributes',
+							flex: 1,
+							ref: 'propertiesPanel',
+							items: [
+								/*{
+									xtype: 'textfield',
+									fieldLabel: 'MyLabel'
+								}*/
+							]
+						}
+					],
+					bbar: [
+						'->',
+						{
+							xtype:'button',
+							iconCls: 'icon-search',
+							text:this.T("search"),
+							action:'searchTransaction'
+						},
+						'->'
+					]
+				}
+			]
+		});
+
+		this.callParent(arguments);
+	}
+});

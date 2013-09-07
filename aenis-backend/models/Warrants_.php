@@ -1,0 +1,447 @@
+<?php
+/**
+ * Warrants management
+ * @package aenis
+ */
+
+/**
+ * Methods for working with Warrants
+ * @author BestSoft
+ * @package aenis\docmgmt
+ */
+class Warrants_ extends Transactions
+{
+    /**
+     * Returns list of warrants
+     * @param array $search
+     * @param int $start
+     * @param int $limit
+     * @param bool $returnCount
+     * @return integer|mysqli_result
+     */
+    public function getWarrants($search = array(), $start = 0, $limit = 0, $returnCount = false)
+    {
+		$where = array(
+			"tr_types.ui_type = 'warrant'"
+		);
+		$joins = array(
+			'JOIN bs_transaction_types tr_types ON tr_types.id = tr.tr_type_id'
+		);
+
+		if(empty($search['transaction_id']))
+		{
+			$where[] = 'tr.del_user_id IS NULL and tr.new_id IS NULL';
+		}
+		else
+		{
+			$where[] = "tr.id = '".intval($search['id'])."'";
+		}
+
+
+		$n_contact_ids = $j_contact_ids = array();
+		if(isset($search['principals']))
+		{
+			foreach($search['principals'] as $item)
+			{
+				if($item['contactType'] == 'natural')
+					$n_contact_ids[] = $item['n_contact_id'];
+				if($item['contactType'] == 'juridical')
+					$j_contact_ids[] = $item['j_contact_id'];
+			}
+		}
+
+		if(isset($search['agents']))
+		{
+			foreach($search['agents'] as $item)
+			{
+				if($item['contactType'] == 'natural')
+					$n_contact_ids[] = $item['n_contact_id'];
+				if($item['contactType'] == 'juridical')
+					$j_contact_ids[] = $item['j_contact_id'];
+			}
+		}
+
+		$contact_id_conditions = array();
+		$contact_id_condition = empty($n_contact_ids) ? '' : '(subjects.n_contact_id IN ('.implode(',', $n_contact_ids).'))';
+		if(!empty($contact_id_condition))
+			$contact_id_conditions[] = $contact_id_condition;
+		$contact_id_condition = empty($j_contact_ids) ? '' : '(subjects.j_contact_id IN ('.implode(',', $j_contact_ids).'))';
+		if(!empty($contact_id_condition))
+			$contact_id_conditions[] = $contact_id_condition;
+
+		if(!empty($contact_id_conditions))
+		{
+			$contact_id_conditions = implode(' OR ', $contact_id_conditions);
+			$where[] = "(
+					SELECT
+						subjects.id
+					FROM bs_subjects subjects
+					JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL AND parties.new_id IS NULL
+					JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+					WHERE subjects.del_user_id IS NULL
+						  AND rel.tr_id = tr.id
+						  AND ($contact_id_conditions)
+					LIMIT 1
+				) IS NOT NULL";
+		}
+
+
+        $object_ids = array();
+        if(isset($search['objects']))
+        {
+            foreach($search['objects'] as $item)
+            {
+                $object_ids[] = $item['id'];
+            }
+        }
+        $object_id_conditions = array();
+        $object_id_condition =  empty($object_ids) ? '' : '(objects.id IN ('.implode(',', $object_ids).'))';
+        if(!empty($object_id_condition))
+            $object_id_conditions[] = $object_id_condition;
+
+        if(!empty($object_id_conditions))
+        {
+            $object_id_conditions = implode(' OR ', $object_id_conditions);
+            $where[] = "(
+					SELECT
+						objects.id
+					FROM bs_objects objects
+					JOIN bs_object_properties object_properties ON objects.id = object_properties.object_id AND objects.del_user_id IS NULL AND objects.new_id IS NULL
+					JOIN bs_relationships rel ON rel.id = objects.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+					WHERE objects.del_user_id IS NULL
+						  AND rel.tr_id = tr.id
+						  AND ($object_id_conditions)
+					LIMIT 1
+				) IS NOT NULL";
+
+        }
+
+		if(!Acl()->allowed('warrant.show_all_warrants'))
+		{
+			$joins[] = 'JOIN bs_staff_user staff_user ON staff_user.user_id = tr.lu_user_id AND staff_user.is_active = 1';
+			$joins[] = 'JOIN bs_staff staff ON staff_user.staff_id = staff.id';
+			$joins[] = 'JOIN bs_departments dep ON staff.dep_id = dep.id AND dep.notarial_office_id = '.App_Registry::get('temp_sn')->notarial_office_id;
+		}
+
+		$where = implode(' AND ', array_unique($where));
+		$joins = implode(PHP_EOL, array_unique($joins));
+
+
+
+		if($returnCount)
+		{
+			$q = "SELECT
+					COUNT(tr.id)
+				FROM bs_transactions tr
+				$joins
+				WHERE $where
+			";
+			$result = $this->db_query($q);
+			if($row = $this->db_fetch_row($result))
+			{
+				return intval($row[0]);
+			}
+			return 0;
+		}
+		else
+		{
+			$limit = intval($limit);
+			$start = intval($start);
+			$limit = ($limit > 0) ? "LIMIT $start, $limit" : '';
+
+			$oLanguages = new Languages();
+			$default_lang_id = $oLanguages->getDefaultLanguage()->id;
+
+			$q = "SELECT
+					tr.*,
+					tr_types.state_fee_coefficient,
+					tr_types.service_fee_coefficient_min,
+					tr_types.service_fee_coefficient_max,
+					getTransactionPropertyValue(tr.id, 'warrant_end_date') AS warrant_end_date,
+                 	getTransactionPropertyValue(tr.id, 'transaction_code') AS transaction_code,
+                 	getTransactionPropertyValue(tr.id, 'cede_allowed') AS cede_allowed,
+					tr.lu_date,
+					getUserFullName(tr.lu_user_id, $default_lang_id) AS input_user,
+					getUserFullName(tr.notary_id, $default_lang_id) AS notary,
+					transaction_statuses.code AS tr_status_code,
+					transaction_statuses.title AS tr_status_title,
+					tr_types_content.label AS tr_type_label,
+					cases.case_code
+				FROM (
+					SELECT tr.id
+					FROM bs_transactions tr
+		            $joins
+					WHERE $where
+					ORDER BY tr.id DESC
+					$limit
+				) tmp
+				JOIN bs_transactions tr ON tr.id = tmp.id
+				LEFT JOIN bs_transaction_types tr_types ON tr.tr_type_id = tr_types.id
+				LEFT JOIN bs_transaction_types_content tr_types_content
+					   ON tr_types_content.tr_type_id = tr_types.id AND tr_types_content.lang_id = $default_lang_id
+				LEFT JOIN bs_transactions_status tr_status ON tr_status.tr_id = tr.id AND tr_status.del_user_id IS NULL AND tr_status.new_id IS NULL
+				LEFT JOIN bs_transaction_statuses transaction_statuses ON transaction_statuses.id = tr_status.tr_status_id
+				LEFT JOIN bs_cases cases ON tr.case_id = cases.id
+           ";
+			return $this->db_query($q);
+		}
+    }
+
+
+    /**
+     * Add new warrant
+	 * @access public
+     * @param array $data    Array with data for transaction and related tables
+     * @return integer    Id of newly inserted transaction
+     */
+    public function addWarrant($data)
+    {
+		$oCase = new Cases();
+		$data['case_id'] = $oCase->addCase(
+			array(
+				'input_user_id' => App_Registry::get('temp_sn')->user_id,
+				'notary_user_id' => $data['notary_id']
+			)
+		);
+
+        $data['tr_type_id'] = Transaction_Types::TRANSACTION_TYPE_WARRANT;
+        $data['tr_id'] = $this->addTransaction($data);
+        $this->addTransactionChildren($data);
+        return $data['tr_id'];
+    }
+
+
+    /**
+     * Add transaction child tables data
+     * @param array $data
+     */
+    public function addTransactionChildren($data)
+    {
+        $oTransactionStatus = new Transactions_Status();
+        $oTransactionStatus->setTransactionStatus($data['tr_id'], Transaction_Statuses::STATUS_SUBMITTED);
+
+		$oProperties = new Transaction_Properties();
+        foreach($data['properties'] as $value)
+        {
+			$oProperties->addProperty($data['tr_id'], $value['id'], $value['value']);
+        }
+		$oProperties->addProperty($data['tr_id'], 'warrant_end_date', $data['warrant_end_date']);
+		$oProperties->addProperty($data['tr_id'], 'template_content', $data['content']);
+		$oProperties->addProperty($data['tr_id'], 'cede_allowed', $data['cede_allowed']);
+        $oProperties->addProperty($data['tr_id'], 'transaction_password', $this->generatePassword());
+
+        $oRelationship = new Transaction_Relationships();
+        $relationship_id = $oRelationship->addRelationship($data);
+        $oRelationship->handleRelationshipUploadedFiles(
+            $relationship_id,
+            $data['case_id'],
+            $data['relationship_documents'],
+            $this->getUploadedFiles('relationship_documents')
+        );
+
+        $oParty = new Transaction_Relationship_Parties();
+        $data['rel_id'] = $relationship_id;
+
+		$subjects = array();
+		$party_codes = array('principal', 'agent');
+		foreach($party_codes as $party_code)
+		{
+			$data['party_type_code'] = $party_code;
+			$party_id = $oParty->addParty($data);
+
+			$oSubjects = new Transaction_Relationship_Party_Subjects();
+			foreach($data[$party_code] as $item)
+			{
+				$item['party_id'] = $party_id;
+				$subject_id = $oSubjects->addSubject($item);
+
+				if($party_code === 'agent')
+					$subjects[md5(serialize($item['serviceData']))] = $subject_id;
+
+				$oSubjects->handleSubjectUploadedFiles(
+					$subject_id,
+					$data['case_id'],
+					$item['fileData']['existing_files'],
+					$this->getUploadedFiles($item['hash'])
+				);
+			}
+
+			if($party_code === 'agent')
+			{
+				// party rights part
+				$oPartyRight = new Transaction_Relationship_Party_Rights();
+				foreach($data['party_rights'] as $item)
+				{
+					$item['party_id'] = $party_id;
+					$oPartyRight->addPartyRight($item);
+				}
+
+				// subject relations part
+				$oSubjectsRelations = new Subject_Relations();
+				$current_rel_type_id = null;
+				foreach($data['subject_relations'] as $relation)
+				{
+					if($relation['rel_type_id'] != $current_rel_type_id)
+					{
+						$current_rel_type_id = $relation['rel_type_id'];
+						$subject_relations['rel_id'] = $relationship_id;
+						$subject_relations['user_id'] = App_Registry::get('temp_sn')->user_id;
+						$subject_relations['rel_type_id'] = $current_rel_type_id;
+
+						$subject_relation_id = $oSubjectsRelations->addSubjectRelation($subject_relations);
+					}
+					$relation['subject_relation_id'] = $subject_relation_id;
+					$relation['serviceSubject'] = $subjects;
+					$oSubjectsRelations->addSubjectRelationItem($relation);
+				}
+			}
+		}
+
+        // objects part
+        $oObject = new Transaction_Relationship_Objects();
+        foreach($data['objects'] as $item)
+        {
+            Logger::logDebugInformation($item['hash']);
+            $data['rel_id'] = $relationship_id;
+            $data['object_type'] = $item['objectType'];
+
+			$object_id = $oObject->addObject($data, $item['objectData']);
+
+			$oObject->handleObjectUploadedFiles(
+				$object_id,
+				$data['case_id'],
+				$item['fileData']['existing_files'],
+				$this->getUploadedFiles($item['hash'])
+			);
+        }
+
+    }
+
+
+    /**
+     * Edit an existing warrant
+     * @access public
+     * @param integer $transaction_id    Transaction ID
+     * @param array $data   Associative array with fields as in 'transaction' database table
+     * @throws App_Db_Exception_Table if transaction id is not specified
+	 * @return integer    Id of newly inserted transaction
+     */
+    public function updateWarrant($transaction_id, $data)
+    {
+        if(empty($transaction_id))
+            throw new App_Db_Exception_Table('Transaction id is not specified');
+
+		if($row = $this->getActualUsingAdjacencyListModel(array('id'=>$transaction_id)))
+		{
+			$data['case_id'] = $row['case_id'];
+		}
+
+        $data['tr_type_id'] = Transaction_Types::TRANSACTION_TYPE_WARRANT;
+		$data['tr_id'] = $this->updateTransaction($transaction_id, $data);
+        $this->addTransactionChildren($data);
+		return $data['tr_id'];
+    }
+
+
+    /**
+     * approve warrant
+     * @param associative array $data
+     * @param $file
+     */
+    public function approveWarrant($data, $file)
+    {
+		$oRelationships = new Transaction_Relationships();
+		$result = $oRelationships->getRelationships(array('transaction_id' => $data['transaction_id']));
+		if($row = $this->db_fetch_array($result)) //assume, that there can be only one relationship for warrant
+        {
+            $relationship_id = $row['id'];
+        }
+
+		$row = $this->getActualUsingAdjacencyListModel(array('id'=>$data['transaction_id']));
+		$case_id = $row['case_id'];
+
+        $oLanguages = new Languages();
+        $lang_id = $oLanguages->getDefaultLanguage()->id;
+
+        $oDocTypes = new Document_Types();
+        $result = $oDocTypes->getItems(array('tr_type_id'=>$data['tr_type_id']), array($lang_id));
+        if($row = $oDocTypes->db_fetch_array($result))
+        {
+            $doc_type_id = $row['id'];
+        }
+
+		$oDocument = new Documents();
+        $doc_dt_id = $oDocument->addDocument(
+			array(
+				'case_id' => $case_id,
+				'rel_id' => $relationship_id,
+				'doc_type_id' => $doc_type_id,
+                'insert_type' =>4
+			)
+		)->dt_id;
+
+        $oDocument_Files = new Document_Files();
+        $result = $this->db_select('cases',array('case_code'), array('id'=>$case_id));
+        if($row = $this->db_fetch_row($result))
+        {
+            $case_code = $row[0];
+        }
+
+        $oDocument_Files->insert($doc_dt_id, $file, $case_code, true);
+
+        $oTransactionStatuses = new Transactions_Status();
+        $oTransactionStatuses->setTransactionStatus($data['transaction_id'], Transaction_Statuses::STATUS_APPROVED);
+
+        $this->db_insert('payments',array(
+                'transaction_id' => $data['transaction_id'],
+                'type_id' => 1,
+                'amount' => $data['duty'],
+                'creation_date' => self::$DB_TIMESTAMP
+            )
+        );
+
+        $this->db_insert('payments',array(
+                'transaction_id' => $data['transaction_id'],
+                'type_id' => 2,
+                'amount' => $data['paymentNotary'],
+                'creation_date' => self::$DB_TIMESTAMP
+            )
+        );
+    }
+
+
+    /**
+     * Terminate warrant
+     * @param integer $transaction_id
+     */
+    public function terminateWarrant($transaction_id)
+    {
+		$oTransactionStatuses = new Transactions_Status();
+		$oTransactionStatuses->setTransactionStatus($transaction_id, Transaction_Statuses::STATUS_TERMINATED);
+    }
+
+
+    /**
+     * get warrant property value
+     * @param $transaction_id
+     * @param $property_code
+     * @return bool
+     */
+    public function getWarrantPropertyValue($transaction_id,$property_code)
+    {
+        $result = $this->db_select('transactions',array('id'),array('id'=>$transaction_id, 'new_id IS NULL','del_user_id IS NULL'));
+        if($row = $this->db_fetch_row($result))
+        {
+            $propertiesResult = $this->db_select('transaction_properties',array("getTransactionPropertyValue(".$row[0].",'".$property_code."')"), array());
+            if($propertiesRow = $this->db_fetch_row($propertiesResult))
+            {
+                return $propertiesRow[0];
+            }
+            else
+            {
+             	return null;
+            }
+        }
+		return null;
+    }
+}

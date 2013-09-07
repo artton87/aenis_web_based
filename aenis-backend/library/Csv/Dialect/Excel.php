@@ -1,0 +1,33 @@
+<?php
+/**
+ * Excel Dialect
+ * 
+ * This is the dialect that is most similar to the way Microsoft Excel outputs
+ * CSV data (actually I haven't checked, so maybe it isn't).
+ * 
+ * Please read the LICENSE file
+ * 
+ * @package 	PHP CSV Utilities
+ * @subpackage  Dialects
+ * @copyright 	(c) 2010 Luke Visinoni <luke.visinoni@gmail.com>
+ * @author 		Luke Visinoni <luke.visinoni@gmail.com>
+ * @license 	GNU Lesser General Public License
+ * @version 	$Id: Excel.php,v 1.1.1.1 2013/09/07 08:57:47 gevorg.darbinyan Exp $
+ */
+class Csv_Dialect_Excel extends Csv_Dialect {
+
+    public $delimiter = ',';
+    public $quotechar = '"';
+    public $escapechar = "\\";
+    
+    /**
+     * Added by Babayan Hovhannes
+     * Indiciates, that '"' should be escaped like '""' and not like '\"'
+     * @var boolean
+     */
+    public $doublequote = true;
+    
+    public $lineterminator = "\r\n";
+    public $quoting = Csv_Dialect::QUOTE_NONNUMERIC;
+
+}

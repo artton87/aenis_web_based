@@ -1,0 +1,5 @@
+@import "main/user/components/grid/*.png";
+
+.x-btn {
+  @include all-grid-sprites;
+}

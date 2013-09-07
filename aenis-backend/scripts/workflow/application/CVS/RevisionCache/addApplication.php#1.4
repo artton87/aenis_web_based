@@ -1,0 +1,26 @@
+<?php
+user_auth_check(true);
+if(Acl()->allowed('application.add'))
+{
+    $oApplications = new Applications();
+    $data = App_Json::decode($_POST['params'], true);
+    $app_id = $oApplications->addApplications($data);
+    if(isset($data['message']))
+    {
+        $oMessages = new Application_Messages();
+        $mesParams = array(
+            'app_id' =>$app_id,
+            'customer_id' => $data['customer_id'],
+            'message' => $data['message'],
+        );
+        $mes_id = $oMessages->addMessage($mesParams);
+    }
+    $oApplications->db_commit();
+    Ext::sendResponse(true, array(
+        'data' => $app_id
+    ));
+}
+else
+{
+    Ext::sendErrorResponse('Դուք չունեք բավարար իրավունքներ դիմում ավելացնելու համար:');
+}

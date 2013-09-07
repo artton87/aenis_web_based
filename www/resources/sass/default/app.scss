@@ -1,0 +1,28 @@
+@import 'compass';
+@import 'ext4/default/all';
+
+@import 'base';
+
+@import 'main/icons';
+@import 'main/toolbox';
+@import 'main/appicons';
+
+
+.statusbar-panel-busy {
+  background: theme-background-image($theme-name, $loadmask-msg-inner-icon) 0 50% no-repeat !important;
+  padding-left: 20px;
+}
+
+.text-link {
+  text-decoration: none;
+  color: #04408c !important;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.field_required {
+  $image: 'main/required.gif';
+  background: image-url($image, false, false) 50% 100% no-repeat;
+  padding-right: image-width($image)+2;
+}

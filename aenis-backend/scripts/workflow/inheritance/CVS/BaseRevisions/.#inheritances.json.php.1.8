@@ -1,0 +1,162 @@
+<?php
+
+user_auth_check();
+
+$init = $_POST['init'];
+
+$oInheritance = null;
+
+//session object
+$oSession = App_Registry::get('temp_sn');
+
+//Page id, used to distinguish between sessions
+$session_collection_key = 'search_inheritance';
+
+if(1 == $_POST['init']) //if init=1 found in request, reset session
+{
+
+    //unset search parameters
+    $oSession->unsetCollection($session_collection_key);
+
+    //set search parameters into session
+    //if(!empty($_POST['params']))
+    {
+        $params = array(
+            'subject_first_name'=> $_POST['first_name'],
+            'subject_second_name'=> $_POST['second_name'],
+            'subject_last_name'=> $_POST['last_name'],
+            'subject_passport_number'=> $_POST['passport_number'],
+            'subject_social_card_number'=> $_POST['social_card_number'],
+            'tr_type_id'=> $_POST['tr_type_id']
+        );
+        $oSession->setItem('params', new App_Session_Item_Object($params), $session_collection_key);
+    }
+}
+
+//get search parameters from session
+$search = $oSession->getItem('params', $session_collection_key);
+
+$oInheritance = new Inheritances();
+$oTransactionRelationship = new Transaction_Relationships();
+$oParty = new Transaction_Relationship_Parties();
+$oSubject = new Transaction_Relationship_Party_Subjects();
+$oObject = new Transaction_Relationship_Objects();
+$transactionsResult = $oInheritance->getInheritances($search,$start, $limit);
+$inheritances = array();
+
+while($transactionsList = $oInheritance->db_fetch_array($transactionsResult))
+{
+    $relationships = array();
+    $relationshipsResult = $oTransactionRelationship->getRelationships(array('transaction_id' => $transactionsList['id']));
+    while($relationshipsList = $oInheritance->db_fetch_array($relationshipsResult))
+    {
+        $partyResult = $oParty->getParties(array('relationship_id'=>$relationshipsList['id']));
+        while($partyList = $oInheritance->db_fetch_array($partyResult))
+        {
+                $subjectsResult  = $oSubject->getSubjects(array('party_id'=>$partyList['id']));
+                $relationships[$partyList['party_type_code']] = array();
+                while($subjectList = $oInheritance->db_fetch_array($subjectsResult))
+                {
+                    if(!empty($subjectList['n_contact_id']))
+                        $contactName = $subjectList['n_contact_name'];
+                    elseif(!empty($subjectList['j_contact_dt']))
+                        $contactName = $subjectList['j_contact_name'];
+                    $relationships[$partyList['party_type_code']][]= array(
+                        'id' => $subjectList['id'],
+                        'n_contact_id' => $subjectList['n_contact_id'],
+                        'j_contact_id' => $subjectList['j_contact_id'],
+                        'contactName' => $contactName,
+                    );
+                }
+        }
+
+        $objectResult = $oObject->getObjects(array('relationship_id' => $relationshipsList['id']));
+        $relationships['object'] = array();
+        while($objectList = $oInheritance->db_fetch_array($objectResult))
+        {
+            $oObjectProperties = new Transaction_Relationship_Object_Properties();
+            $object_id = $objectList['id'];
+            $relObjectInfo = array(
+                "id" => $object_id,
+                "objectType" => $objectList['object_type_code'],
+            );
+            switch($objectList['object_type_code'])
+            {
+                case 'vehicle':
+                    $object_data = $oObjectProperties->getProperty($object_id, 'data');
+                    $object_data['vin'] = $oObjectProperties->getProperty($object_id, 'vin');
+                    $object_data['number'] = $oObjectProperties->getProperty($object_id, 'vehicle_number');
+                    $relObjectInfo += array(
+                        "objectName" => $object_data['number'].' '.$object_data['body_type'].' '.$object_data['type'].' '.$object_data['model'].' '.$object_data['model_year'],
+                        "objectData" => $object_data
+                    );
+                    break;
+                case 'other':
+                    $other_description = $oObjectProperties->getProperty($object_id, 'other_description');
+                    $relObjectInfo += array(
+                        "objectName" => $other_description,
+                        "objectData" => array(
+                            'name' => $other_description
+                        )
+                    );
+                    break;
+                case 'realty':
+                    $object_data = $oObjectProperties->getProperty($object_id, 'data');
+                    $object_data['certificate_number'] = $oObjectProperties->getProperty($object_id, 'registration_number');
+                    $relObjectInfo += array(
+                        "objectName" => $object_data['certificate_number'].' '.$object_data['address'].' '.$object_data['building_total_area'].' '.$object_data['building_type'],
+                        "objectData" => $object_data
+                    );
+                    break;
+                case 'share':
+                    //@TODO Add data for share
+                    $relObjectInfo += array(
+                        "objectName" => '',
+                        "objectData" => array()
+                    );
+                    break;
+                case 'stock':
+                    //@TODO Add data for stock
+                    $relObjectInfo += array(
+                        "objectName" => '',
+                        "objectData" => array()
+                    );
+                    break;
+            }
+            $relationships['object'][] = $relObjectInfo;
+        }
+    }
+
+    $inheritances[] = array(
+        'id' => $transactionsList['id'],
+        'relationships' => $relationships,
+        'notary' => $transactionsList['notary'],
+        'transaction_code' => $transactionsList['transaction_code'],
+        'tr_status_code' => $transactionsList['tr_status_code'],
+        'tr_status' => $transactionsList['tr_status_title'],
+        'locked_user_id' => $transactionsList['locked_user_id'],
+        'tr_type_id' => $transactionsList['tr_type_id'],
+        'tr_type_label'=> $transactionsList['tr_type_label'],
+        'state_fee_coefficient' => $transactionsList['state_fee_coefficient'],
+        'service_fee_coefficient_min' => $transactionsList['service_fee_coefficient_min'],
+        'service_fee_coefficient_max' => $transactionsList['service_fee_coefficient_max'],
+        'case_code'=> $transactionsList['case_code'],
+        'input_user'=> $transactionsList['input_user'],
+        'tr_creation_date'=> $transactionsList['lu_date'],
+    );
+}
+if($init == 1)
+{
+    $total = $oInheritance->getInheritances($search, 0, 0, true);
+    $oSession->setItem('total', new App_Session_Item_Object($total), $session_collection_key);
+}
+else
+{
+    $total = $oSession->getItem('total', $session_collection_key);
+}
+//Logger::out($inheritances);
+Ext::sendResponse(true, array(
+    'data' => $inheritances,
+    'total' => $total
+));
+

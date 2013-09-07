@@ -1,0 +1,691 @@
+<?php
+/**
+ * Natural contact management
+ * @package aenis\Contact
+ */
+
+/**
+ * Methods for natural contact management
+ * @author BestSoft
+ * @package aenis\Contact
+ */
+class Contact_Natural extends HistoricalTable
+{
+	/**
+	 * Database table name
+	 * @var string
+	 */
+	protected $_table = 'n_contacts';
+
+
+	/*const NORQ_WSDL = "http://10.30.0.1";
+
+	const NORQ_LOGIN = "";
+
+	const NORQ_PASSWORD = "";*/
+
+	const NORQ_WSDL = "http://10.30.0.1:6767/Fine?wsdl";
+
+	const NORQ_LOGIN = "Kadastr";
+
+	const NORQ_PASSWORD = "055071019";
+
+	/**
+	 * Mergelyan service constants
+	 * @see getContactsFromMergelyan
+	 */
+	const MERGELYAN_WEB_SERVICE_URL = "http://83.139.39.46/kadastr/kadastr.asmx/kadastr";
+
+
+	/**
+	 * Returns list of natural contacts matching to the given criteria or their count
+	 * @param $search    Array with search parameters
+	 * @param int $start    Optional. Starting from which record to return results.
+	 * @param int $limit    Optional. Passing 0 will return all records.
+	 * @param bool $returnCount    Optional. Whenever to return record count
+	 * @return integer|mysqli_result
+	 */
+	public function getContacts($search, $start = 0, $limit = 0, $returnCount = false)
+	{
+            
+		$joins = array();
+		$where = array();
+
+		if(empty($search['contact_id']))
+		{
+			$where[] = 'contact.new_id IS NULL';
+		}
+		else
+		{
+			$where[] = "contact.id = '".intval($search['contact_id'])."'";
+		}
+
+		if(!empty($search['exclude_contact_id']))
+			$where[] = "contact.id <> '".intval($search['exclude_contact_id'])."'";
+
+		if(!empty($search['first_name']))
+		{
+			$search_first_name = mb_strtoupper($this->db_escape_string($search['first_name']));
+			$where[] = 'contact.first_name LIKE \''.$search_first_name.'%\'';
+		}
+		elseif(1 == $search['empty_first_name'])
+			$where[] = "(contact.first_name = '' OR contact.first_name IS NULL)";
+
+		if(!empty($search['last_name']))
+		{
+			$search_last_name = mb_strtoupper($this->db_escape_string($search['last_name']));
+			$where[] = 'contact.last_name LIKE \''.$search_last_name.'%\'';
+		}
+		elseif(1 == $search['empty_last_name'])
+			$where[] = "(contact.last_name = '' OR contact.last_name IS NULL)";
+
+		if(!empty($search['second_name']))
+		{
+			$search_second_name = mb_strtoupper($this->db_escape_string($search['second_name']));
+			$where[] = 'contact.second_name LIKE \''.$search_second_name.'%\'';
+		}
+		elseif(1 == $search['empty_second_name'])
+			$where[] = "(contact.second_name = '' OR contact.second_name IS NULL)";
+
+		$search['social_card_number'] = trim($search['social_card_number']);
+		if(!empty($search['social_card_number']))
+			$where[] = 'contact.social_card_number = \''.$this->db_escape_string($search['social_card_number']).'\'';
+		elseif(1 == $search['empty_social_card_number'])
+			$where[] = "(contact.social_card_number = '' OR contact.social_card_number IS NULL)";
+
+		if(!empty($search['death_certificate']))
+			$where[] = 'contact.death_certificate = \''.$this->db_escape_string($search['death_certificate']).'\'';
+
+		if(!empty($search['passport_number']))
+			$where[] = 'contact.passport_number = \''.$this->db_escape_string($search['passport_number']).'\'';
+		elseif(1 == $search['empty_passport_number'])
+			$where[] = "(contact.passport_number = '' OR contact.passport_number IS NULL)";
+
+		if(!empty($search['date_of_birth']))
+			$where[] = 'contact.date_of_birth = '. App_Date::str2SqlDate($search['date_of_birth'], true);
+		elseif(1 == $search['empty_date_of_birth'])
+			$where[] = "(contact.date_of_birth IS NULL)";
+
+		$where = implode(' AND ', array_unique($where));
+		$joins = implode(PHP_EOL, array_unique($joins));
+
+		if($returnCount)
+		{
+			$q = "SELECT
+					COUNT(contact.id) AS c
+				FROM bs_n_contacts contact
+				$joins
+				WHERE $where
+			";
+			$result = $this->db_query($q);
+			if($row = $this->db_fetch_row($result))
+			{
+				return intval($row[0]);
+			}
+			return 0;
+		}
+		else
+		{
+			$limit = intval($limit);
+			$start = intval($start);
+			$limit = ($limit > 0) ? "LIMIT $start, $limit" : '';
+
+			$oLanguages = new Languages();
+			$lang_id = $oLanguages->getDefaultLanguage()->id;
+
+			$q = "SELECT
+					contact.*,
+					country.name AS country_name
+				FROM (
+					SELECT contact.id
+					FROM bs_n_contacts contact
+		            $joins
+					WHERE $where
+					ORDER BY contact.last_name ASC, contact.first_name ASC
+					$limit
+				) tmp
+				JOIN bs_n_contacts contact ON contact.id = tmp.id
+				LEFT JOIN bs_loc_countries country ON country.id = contact.country_id
+           ";
+
+			return $this->db_query($q);
+		}
+	}
+
+
+	/**
+	 * Returns fields for inserting into database
+	 * @access protected
+	 * @param array $data     Array with data for 'n_contacts' table
+	 * @return array
+	 */
+	protected function getDbFields($data)
+	{
+		if(empty($data['country_id']))
+		{
+			$oCountry = new Countries();
+			$data['country_id'] = $oCountry->getDefaultCountry()->id;
+		}
+
+		//these fields can be set to null, if they (or their trimmed version) are empty
+		$null_trim_keys = array(
+			'first_name', 'last_name', 'second_name', 'social_card_number', 'passport_number', 'authority',
+			'address', 'zip', 'email', 'fax', 'phone_home', 'phone_office', 'phone_mobile', 'country_id',
+			'organization_name', 'staff_name'
+		);
+		$db_data = array();
+		foreach($null_trim_keys as $key)
+		{
+			$v = trim($data[$key]);
+			$db_data[$key] = empty($v) ? self::$DB_NULL : $v;
+		}
+
+		return $db_data + array(
+			'date_of_birth' => empty($data['date_of_birth']) ? self::$DB_NULL : App_Date::str2SqlDate($data['date_of_birth']),
+			'given_date' => empty($data['given_date']) ? self::$DB_NULL : App_Date::str2SqlDate($data['given_date']),
+			'from_portal' => empty($data['from_portal']) ? 0 : 1,
+		);
+	}
+
+
+	/**
+	 * Insert natural contact
+	 * @access public
+	 * @param array $data     Array with data for 'n_contacts' table
+	 * @throws App_Db_Exception_Validate
+	 * @return integer    Id of newly inserted record
+	 */
+	public function addContact($data)
+	{
+		$this->validateContact(0, $data);
+		return $this->insertUsingAdjacencyListModel($this->getDbFields($data));
+	}
+
+
+	/**
+	 * Update natural contact
+	 * @access public
+	 * @param integer $contact_id    Contact id
+	 * @param array $data    Array with fields for 'n_contacts' table
+	 * @throws App_Db_Exception_Table if contact id is not specified
+	 * @return integer    ID of newly inserted record
+	 */
+	public function updateContact($contact_id, $data)
+	{
+		if(empty($contact_id))
+			throw new App_Db_Exception_Table('Contact id is not specified');
+
+		$this->validateContact($contact_id, $data);
+		return $this->updateUsingAdjacencyListModel($contact_id, $this->getDbFields($data));
+	}
+
+
+	/**
+	 * Checks natural contact data
+	 * @access protected
+	 * @param integer $id   Contact id. Set to 0 for update case.
+	 * @param array $data   Associative array with contact fields
+	 * @throws App_Db_Exception_Validate
+	 */
+	protected function validateContact($id, $data)
+	{
+		if(empty($data['social_card_number']) && empty($data['passport_number']))
+			throw new App_Db_Exception_Validate('Ոչ սոց. քարտի համարը, ոչ էլ անձնագրի համարը լրացված չեն:');
+
+		if(1 == $data['strict_checks'])
+		{
+			if(empty($data['first_name']))
+				throw new App_Db_Exception_Validate('Անունը լրացված չէ:');
+
+			if(empty($data['last_name']))
+				throw new App_Db_Exception_Validate('Ազգանունը լրացված չէ:');
+
+			if(empty($data['second_name']))
+				throw new App_Db_Exception_Validate('Հայրանունը լրացված չէ:');
+		}
+
+		if($this->existsContact($data, $id))
+		{
+			throw new App_Db_Exception_Validate('Տրված սոց. քարտ / անձնագրի համարով կոնտակտ արդեն գրանցված է շտեմարանում:');
+		}
+	}
+
+
+	/**
+	 * Checks whenever contact with the given social card number exists
+	 * @access public
+	 * @param array $data
+	 * @param integer $excludeId    Optional. If given, will not take this id into account
+	 * @throws App_Db_Exception_Table if neither social card number nor passport were specified
+	 * @return integer    Id of found contact if any
+	 */
+	public function existsContact($data, $excludeId = 0)
+	{
+		if(empty($data['social_card_number']) && !empty($data['passport_number']))
+		{
+			$search = array(
+				'empty_social_card_number'=>1,
+				'passport_number'=>$data['passport_number'],
+				'exclude_contact_id'=>$excludeId
+			);
+		}
+		elseif(!empty($data['social_card_number']) && empty($data['passport_number']))
+		{
+			$search = array(
+				'social_card_number'=>$data['social_card_number'],
+				'empty_passport_number'=>1,
+				'exclude_contact_id'=>$excludeId
+			);
+		}
+		elseif(!empty($data['social_card_number']) && !empty($data['passport_number']))
+		{
+			$search = array(
+				'social_card_number'=>$data['social_card_number'],
+				'passport_number'=>$data['passport_number'],
+				'exclude_contact_id'=>$excludeId
+			);
+		}
+		else throw new App_Db_Exception_Table('Neither social card number nor passport were specified.');
+
+		$result = $this->getContacts($search, 0, 1);
+		if($row = $this->db_fetch_array($result))
+		{
+			return $row['id'];
+		}
+		return 0;
+	}
+
+
+	/**
+	 * gets contacts full data comparing each field
+	 * @param associative array $data
+	 * @return int|null
+	 */
+	public function existContactFullData($data, $from_portal = false)
+	{
+		if($from_portal)
+		{
+			$fields = array(
+				//'first_name' => $data['first_name'],
+				//'last_name' => $data['last_name'],
+				'passport_number' => $data['passport_number'],
+			);
+		}
+		else
+		{
+			$fields = array(
+				'first_name' => $data['first_name'],
+				'second_name' => $data['second_name'],
+				'last_name' => $data['last_name'],
+				'social_card_number' => $data['social_card_number'],
+				'passport_number' => $data['passport_number'],
+				//'date_of_birth' => App_Date::str2SqlDate($data['date_of_birth'])
+			);
+		}
+
+		$result = $this->db_select('n_contacts', array(),$fields);
+		if($row = $this->db_fetch_array($result))
+		{
+			return $row['id'];
+		}
+		return null;
+	}
+
+
+	/**
+	 * Returns contacts using web service of Visa and Passport Department of Police
+	 * @access public
+	 * @param array $search    Array with search parameters
+	 * @param bool $returnCount    Optional. Whenever to return record count
+	 * @throws App_Exception on SOAP failures
+	 * @return integer|array    Number of matching records if $returnCount=true, matches - otherwise
+	 */
+	public function  getContactsUsingAvvWebService($search = array())
+	{
+
+		$wsdl = 'http://192.168.1.53/aenis_web_based/Service1.svc.xml?WSDL';
+
+		$trace = true;
+		$exceptions = true;
+		$client = new SoapClient($wsdl, array('trace' => $trace, 'exceptions' => $exceptions));
+
+		$xml_array = array();
+		if(!empty($search['passport_number']))
+		{
+			$xml_array['Paspn'] = $search['passport_number'];
+		}
+		elseif(!empty($search['social_card_number']))
+		{
+			$xml_array['Pnum'] = $search['social_card_number'];
+		}
+		elseif( !empty($search['last_name']) &&
+			!empty($search['first_name']) &&
+			!empty($search['second_name'])
+		)
+		{
+			$xml_array['ANUN'] = $search['first_name'];
+			$xml_array['AZGANUN'] = $search['last_name'];
+			$xml_array['HAYR'] = $search['second_name'];
+		}
+		//$xml_array['Paspn'] ='ԱԱ355426';
+
+		/*$xml_array['MARZ'] = 'ԱՐԱԳԱԾՈՏՆ';
+		//$xml_array['ANUN'] = 'ԳԵՎՈՐԳ';
+		//$xml_array['Paspn'] = 'AG0494106';
+		$xml_array['HAMAYNQ'] = 'ՕՇԱԿԱՆ';
+		$xml_array['POXOC'] = 'ՆԱԼԲԱՆԴՅԱՆ Փ. 3 ՆՐԲ.';
+		$xml_array['TUN'] = '1';
+		$xml_array['TUNTESAK'] = 'Տ';*/
+
+		try
+		{
+			$client = new SoapClient($wsdl, array('trace' => $trace, 'exceptions' => $exceptions));
+			$response = $client->AVVFIND_PERSON_XML($xml_array);
+		}
+
+		catch (Exception $e)
+		{
+			echo "Error!";
+			echo $e -> getMessage ();
+			echo 'Last response: '. $client->__getLastResponse();
+		}
+
+		$response1 = $response->AVVFIND_PERSON_XMLResult;
+		$xml = simplexml_load_string($response1);
+
+		$xml = (is_object($xml)) ? (array) $xml : $xml;
+
+
+		//Logger::out($xml);
+		$contact[] = array(
+			'authority' => $xml['BAJIN'][0],
+			'first_name' => $xml['ANUN'][0],
+			'last_name' => $xml['AZGANUN'][0],
+			'second_name' => $xml['HAYR'][0],
+			'date_of_birth' => $xml['BORN'][0],
+			'passport_number' => $xml['PaspN'][0],
+			'social_card_number' => $xml['PNUM'][0],
+			'passport_given_date' => $xml['TDATE'][0],
+			'address' => $xml['MARZ'][0].' '.$xml['HAMAYNQ'][0].' '.$xml['POXOC'][0].' '.$xml['TUNTESAK'][0].' '.$xml['TUN'][0].' '
+		);
+		return $contact;
+	}
+
+
+	/**
+	 * Վերադարձնում է սուբյեկներ Նորք տեղեկատվական կենտրոնից
+	 * @access public
+	 * @param array $search    Ասոցիատիվ զանգված որոնման պարամետրերով
+	 * @param bool $returnCount    Optional. Whenever to return record count
+	 * @return integer|mysqli_result
+	 */
+	public function getContactsFromNorq($search, $returnCount = false)
+	{
+		$client = new SoapClient(self::NORQ_WSDL);
+
+		$login_result = $client->Login(array('argLogin' => self::NORQ_LOGIN, 'argPassword' => self::NORQ_PASSWORD));
+		$login_guid = $login_result->LoginResult;
+
+		$contacts = array();
+
+
+		$args = array('', '', '', '', '', '', '', '', '');
+
+		if(isset($search['social_card_number']))
+			$args[0] = $search['social_card_number'];
+
+		if(isset($search['passport_number']))
+			$args[1] = $search['passport_number'];
+
+		if(isset($search['first_name']))
+			$args[2] = mb_strtoupper($search['first_name'], "utf-8");
+
+		if(isset($search['last_name']))
+			$args[3] = mb_strtoupper($search['last_name'], "utf-8");
+
+		if(isset($search['second_name']))
+			$args[4] = mb_strtoupper($search['second_name'], "utf-8");
+
+		if(isset($search['date_of_birth']))
+			$args[5] = App_Date::str2SqlDate($search['date_of_birth']);
+
+		$result = $client->GetPersonData(array('argGuid' => "$login_guid", 'args' => $args));
+
+
+
+		if(!is_array($result->argPersonData->PrivateData) && NULL != $result->argPersonData->PrivateData)
+			$fetchResult = array($result->argPersonData->PrivateData);
+		else
+			$fetchResult = $result->argPersonData->PrivateData;
+
+		foreach($fetchResult AS $contact) {
+			$first_name = mb_strtoupper(mb_substr($contact->Firstname, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Firstname, 1, mb_strlen($contact->Firstname, "utf-8"),"utf-8"), "utf-8");
+			$last_name = mb_strtoupper(mb_substr($contact->Lastname, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Lastname, 1, mb_strlen($contact->Lastname, "utf-8"), "utf-8"), "utf-8");
+			$second_name = mb_strtoupper(mb_substr($contact->Middlename, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Middlename, 1, mb_strlen($contact->Middlename, "utf-8"), "utf-8"), "utf-8");
+
+			$address_array = array();
+
+			if($contact->Marz != "")
+				$address_array[] = mb_strtoupper(mb_substr($contact->Marz, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Marz, 1, mb_strlen($contact->Marz, "utf-8"),"utf-8"), "utf-8");
+
+			if($contact->Dist != "")
+				$address_array[] = mb_strtoupper(mb_substr($contact->Dist, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Dist, 1, mb_strlen($contact->Dist, "utf-8"),"utf-8"), "utf-8");
+
+			if($contact->Street != "")
+				$address_array[] = mb_strtoupper(mb_substr($contact->Street, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($contact->Street, 1, mb_strlen($contact->Street, "utf-8"),"utf-8"), "utf-8");
+
+			if(!empty($contact->Home))
+				$address_array[] = $contact->Home;
+
+			if(!empty($contact->Apt))
+				$address_array[] = $contact->Apt;
+
+			//Logger::out($contact);
+
+			$contacts[] = array(
+				'social_card_number' => $contact->Soccard,
+				'passport_number' => $contact->Pasport,
+				'first_name' => $first_name,
+				'last_name' => $last_name,
+				'second_name' => $second_name,
+				'date_of_birth' => substr(str_replace("T", " ", $contact->Born), 0, 10),
+				'address' => implode(" ", $address_array));
+		}
+
+
+		if($returnCount) //return number of found records
+		return count($contacts);
+
+		return $contacts;
+	}
+
+	/**
+	 * Վերադարձնում է սուբյեկներ Մերգելյան տեղեկատվական համակարգից
+	 * @access public
+	 * @param array $search    Ասոցիատիվ զանգված որոնման պարամետրերով
+	 * @param bool $returnCount    Optional. Whenever to return record count
+	 * @throws App_Exception on service errors
+	 * @return integer|array
+	 */
+	public function getContactsFromMergelyan($search, $returnCount = false)
+	{
+		if(!empty($search['passport_number']))
+		{
+			$mode = '
+				<Document>
+					<Document_Type>NON_BIOMETRIC_PASSPORT</Document_Type>
+					<Document_Number>'.$search['passport_number'].'</Document_Number>
+				</Document>
+			';
+		}
+		elseif(!empty($search['social_card_number']))
+		{
+			$mode = '
+				<PNum>'.$search['social_card_number'].'</PNum>
+			';
+		}
+		elseif( !empty($search['last_name']) &&
+			!empty($search['first_name']) &&
+			!empty($search['second_name'])
+		)
+		{
+			$mode = '
+				<Person>
+					<Last_Name>'.mb_strtoupper($search['last_name'],  "utf-8").'</Last_Name>
+					<First_Name>'.mb_strtoupper($search['first_name'],  "utf-8").'</First_Name>
+					<Patronymic_Name>'.mb_strtoupper($search['second_name'],  "utf-8").'</Patronymic_Name>
+				</Person>
+			';
+		}
+		else
+		{
+			throw new App_Exception(
+				'Either (first_name, last_name, second_name) or passport or social_card number should be given'
+			);
+		}
+
+		$xml_request ='<?xml version="1.0" encoding="utf-8"?>
+			<AVVRequest xmlns="http://ermmgi.org/avv/kadastr">
+				<Request_Date>'. date('d/m/Y') .'</Request_Date>
+				<Search>
+					<Mode3>
+						'.$mode.'
+					</Mode3>
+				</Search>
+			</AVVRequest>
+    	';
+
+		$ch = curl_init(self::MERGELYAN_WEB_SERVICE_URL);
+
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: text/xml'));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml_request);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+		$response = curl_exec($ch);
+		if(false === $response)
+		{
+			$curl_error = curl_error($ch);
+			$curl_error_no = curl_errno($ch);
+			curl_close($ch);
+			throw new App_Exception("Mergelyan service error (Error #$curl_error_no): ".PHP_EOL.$curl_error);
+		}
+		curl_close($ch);
+
+		$xml_data = simplexml_load_string($response);
+		//Logger::out($xml_data);
+		$data_arr = App_Array::objectsIntoArray($xml_data);
+
+		if($data_arr['Exit_Code'] == '-1') //success
+		{
+			if(0 == $data_arr['Record_Count'])
+			{
+				return ($returnCount) ? 0 : array();
+			}
+
+			$persons = $data_arr['Mode3Response']['Person'];
+
+			$contacts = array();
+
+			if(isset($persons['PNum']))
+				$persons = array($persons);
+
+			if(empty($persons)) return $returnCount ? 0 : array();
+
+			foreach($persons as $tmp)
+			{
+				if(!empty($tmp))
+				{
+					if(isset($tmp['Documents']['Document']['Document_Status']))
+					{
+						$tmp['Documents']['Document'] = array($tmp['Documents']['Document']);
+					}
+
+					foreach($tmp['Documents']['Document'] as $doc)
+					{
+						if($doc['Document_Status'] == 'ACTIVE' && $doc['Document_Type'] == 'NON_BIOMETRIC_PASSPORT')
+						{
+							$pass = $doc;
+							break;
+						}
+					}
+
+					//Logger::dump($tmp['AVVAddresses']['AVVAddress']);
+					if(isset($tmp['AVVAddresses']['AVVAddress']))
+					{
+						if(isset($tmp['AVVAddresses']['AVVAddress']['Registration_Region']))
+						{
+							$registration_info = $tmp['AVVAddresses']['AVVAddress'];
+						}
+
+						else
+						{
+
+							$registration_info = array_shift($tmp['AVVAddresses']['AVVAddress']);
+						}
+
+						//if(isset($tmp['AVVAddresses']['AVVAddress']['Registration_Region']))
+						{
+							$addr_arr = array($registration_info);
+							$addr_arr = end($addr_arr);
+
+							//**** remove unnecessary elements
+							// unset($addr_arr['Registration_Building_type'], $addr_arr['Registration_Date']);
+							$registration_date = $addr_arr['Registration_Date'];
+							unset($addr_arr['Registration_Date']);
+
+							foreach($addr_arr as &$elem)
+							{
+								$elem = mb_strtoupper(mb_substr($elem, 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($elem, 1, mb_strlen($elem, "utf-8"),"utf-8"), "utf-8");
+							}
+							unset($elem);
+							$address_info = implode(", ", $addr_arr);
+						}
+					}
+
+					$first_name = mb_strtoupper(mb_substr($pass['First_Name'], 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($pass['First_Name'], 1, mb_strlen($pass['First_Name'], "utf-8"),"utf-8"), "utf-8");
+					$last_name = mb_strtoupper(mb_substr($pass['Last_Name'], 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($pass['Last_Name'], 1, mb_strlen($pass['Last_Name'], "utf-8"),"utf-8"), "utf-8");
+					$second_name = mb_strtoupper(mb_substr($pass['Patronymic_Name'], 0, 1, "utf-8"), "utf-8").mb_strtolower(mb_substr($pass['Patronymic_Name'], 1, mb_strlen($pass['Patronymic_Name'], "utf-8"),"utf-8"), "utf-8");
+
+					$contacts[] = array(
+						'social_card_number' => $tmp['PNum'],
+						'passport_number' => $pass['Document_Number'],
+						'first_name' => $first_name,
+						'last_name' => $last_name,
+						'second_name' => $second_name,
+						'date_of_birth' => $pass['Birth_Date'],
+						'given_date' => $registration_date,
+						'address' => $address_info
+					);
+				}
+			}
+
+			if($returnCount)
+				return count($contacts);
+
+			return $contacts;
+		}
+		else //error
+		{
+			throw new App_Exception($data_arr['Exit_Message']);
+		}
+	}
+
+
+    /**
+     * @param $data
+     */
+    public function setPlaceOfResidence($data)
+    {
+        $result = $this->db_select($this->_table,array(),array('death_certificate'=>$data['death_certificate']));
+        if($row = $this->db_fetch_array($result))
+        {
+            $this->db_update($this->_table,array('place_of_residence'=>$data['place_of_residence']),array('id'=>$row['id']));
+        }
+    }
+
+
+}

@@ -1,0 +1,29 @@
+Ext.define('Locale.hy_AM.main.contact.components.Natural', {
+
+    constructor: function() {
+        Ext.applyIf(this.translations["hy_AM"], {
+            "first_name":"Անուն",
+            "social_card_number":"Սոց. քարտի համար",
+            "last_name":"Ազգանուն",
+            "passport_number":"Անձնագրի համար",
+            "second_name":"Հայրանուն",
+            "date_of_birth":"Ծննդյան ամսաթիվ",
+            "death_certificate":"Մահվան վկայական",
+            "search_place":"Որոնման վայրը`",
+            "from_database":"Շտեմարան",
+            "from_Nork_Information_Center":"Նորք տեղեկատվական կենտրոն",
+            "from_Mergelyan_Information_Center":"Անձնագրային վարչություն",
+            "address":"Հասցե",
+            "death_certificate":"Մահվան վկայական",
+            "displayMessage":"Արդյունքներ {0} - {1} ընդհանուր {2}",
+            "noResult":"Արդյունք հայտնաբերված չէ",
+            "results":"Որոնման արդյունքներ",
+            "first_name_is_empty":"Լրացրեք անունը",
+            "last_name_is_empty":"Լրացրեք ազգանունը",
+            "social_card_number_is_empty":"Լրացրեք սոց. քարտի համարը",
+            "passport_number_is_empty":"Լրացրեք անձնագիրը",
+            "death_certificate_is_empty":"Լրացրեք մահվան վկայականը",
+            "fallback_message": "Լրացրեք կամ անուն/ազգանունը, կամ անձնագրի համարը, կամ սոց. քարտի համարը"
+        });
+    }
+});

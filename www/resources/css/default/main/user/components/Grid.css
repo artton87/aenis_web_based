@@ -1,0 +1,10 @@
+.grid-sprite, .x-btn .grid-is_ws_consumer_0, .x-btn .grid-is_ws_consumer_1 {
+  background: url('../../../../../images/default/main/user/components/grid-se5997b72e5.png') no-repeat;
+}
+
+.x-btn .grid-is_ws_consumer_0 {
+  background-position: 0 -16px;
+}
+.x-btn .grid-is_ws_consumer_1 {
+  background-position: 0 0;
+}

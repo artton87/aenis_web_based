@@ -1,0 +1,109 @@
+Ext.require([
+    'Ext.form.FieldSet',
+    'Aenis.view.workflow.contract.components.Grid'
+]);
+
+Ext.define('Aenis.view.workflow.contract.SearchResults', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.workflowContractSearchResults',
+
+    allowMultipleInstances: true,
+
+    layout:{
+      type:'vbox',
+      align:'stretch'
+    },
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.contract.SearchResults',
+        'BestSoft.mixin.Localized'
+    ],
+
+    initComponent: function() {
+        var store = Ext.create('Aenis.store.workflow.Contracts');
+        Ext.apply(this, {
+            tabConfig: {
+                title: this.T("contract_search_results")
+            },
+            ref: 'tabView',
+            tpl: [
+                '<p>warrant_code: {params.warrant_code}</p>'
+            ],
+            items: [
+                {
+                    region: 'center',
+                    xtype: 'workflowContractGrid',
+                    autoHeight: true,
+                    autoLoadStore:false,
+                    ref: 'contractSearchGrid',
+                    title: this.T("search_results"),
+                    flex: 1,
+                    bbar:
+                        {
+                            xtype: 'pagingtoolbar',
+                            dock:'top',
+                            store: store,
+                            displayInfo: true,
+                            displayMsg: this.T('displayMessage'),
+                            emptyMsg: this.T('noResult')
+                        }
+                },
+                {
+                    xtype:'container',
+                    layout:{
+                        type:'vbox',
+                        align:'stretch',
+                        pack: 'end'
+                    },
+                    ref:'contractContentView',
+                    height:400,
+                    autoScroll: true,
+                    defaults:{
+                        margin: '20px 5px'
+                    },
+                    items:[
+                        {
+                            xtype:'fieldcontainer',
+                            layout:{
+                                type:'hbox'
+                            },
+                            items:[
+                                {
+                                    xtype:'fieldset',
+                                    title:this.T("principals"),
+                                    ref:'principalsPanel',
+                                    flex:1,
+                                    border: false,
+                                    items:[]
+                                },
+                                {
+                                    xtype:'fieldset',
+                                    title:this.T("agents"),
+                                    ref:'agentsPanel',
+                                    flex:1,
+                                    border: false,
+                                    items:[]
+                                },
+                                {
+                                    xtype:'fieldset',
+                                    title:this.T("objects"),
+                                    ref:'objectsPanel',
+                                    flex:2,
+                                    border: false,
+                                    items:[]
+                                }
+
+                            ]
+                        }
+
+                    ]
+
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+
+
+});

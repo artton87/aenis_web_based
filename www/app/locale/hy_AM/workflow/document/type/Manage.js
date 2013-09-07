@@ -1,0 +1,19 @@
+Ext.define('Locale.hy_AM.workflow.document.type.Manage', {
+
+    constructor: function() {
+    	Ext.applyIf(this.translations["hy_AM"], {
+            "manage_form_title": "Փաստաթղթի տեսակի մուտքագրում",
+            "types": "Փաստաթղթի տեսակներ",
+            "label": "Անվանում",
+            "parent": "Վերադաս",
+            "doc_type_code": "Ծրագրային կոդ",
+            "is_used_in_portal": "Օգտագործվում է կայքում",
+            "order_in_list": "Դիրքը ցուցակում",
+            "transaction_type": "Գործարքի տեսակ",
+            "transaction_type_select_tip": "Ընտրել թե գործարքի որ տեսակի համար է այս փաստաթուղթը ավարտական",
+            "hidden": "Թաքցնել",
+            "msg_create_success": "Փաստաթղթի տեսակը մուտքագրված է",
+            "msg_update_success": "Փաստաթղթի տեսակը խմբագրված է"
+        });
+    }
+});

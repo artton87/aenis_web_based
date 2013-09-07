@@ -1,0 +1,588 @@
+A) Timestamp: 31/07/2013 15:41:01   Client IP: 192.168.1.36
+B) Message
+couldn't connect to host
+C) Stack trace
+#0 [internal function]: App_Exception::errorHandler(1024, 'couldn't connec...', '/home/data/wwwr...', 58, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/Curl.php(58): trigger_error('couldn't connec...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Objects.php(48): Curl::curl_post('http://police.e...', '<?xml version="...', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/main/vehicle/vehicles_from_service.json.php(75): Objects->getTransportDetails('01', 'LL', '158', '')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('main/vehicle/ve...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#7 {main}
+
+
+A) Timestamp: 31/07/2013 16:30:20   Client IP: 192.168.1.53
+B) Message
+file_get_contents(/home/data/wwwroot/data/files/aenis/storage/aenis1/0002000001/3706_7527376813264_passport_1_applicant_2_1375273768_j.pdf): failed to open stream: No such file or directory
+C) Stack trace
+#0 [internal function]: App_Exception::errorHandler(2, 'file_get_conten...', '/home/data/wwwr...', 12, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_file.php(12): file_get_contents('/home/data/wwwr...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#5 {main}
+
+
+A) Timestamp: 31/07/2013 16:39:27   Client IP: 192.168.1.53
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''appointment_date') AS value,
+            transaction_property_types.label
+   ' at line 2
+Query is:
+
+        SELECT
+            getTransactionPropertyValue(,'appointment_date') AS value,
+            transaction_property_types.label
+            FROM bs_transactions transactions
+            LEFT JOIN bs_transaction_properties transaction_properties ON transactions.id = transaction_properties.tr_id
+            LEFT JOIN bs_transaction_property_types transaction_property_types ON transaction_properties.transaction_property_type_id = transaction_property_types.id
+            WHERE transaction_property_types.code = 'appointment_date'
+            AND transactions.new_id IS NULL AND transactions.del_user_id IS NULL AND transactions.id = 
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('??        SELEC...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): Transactions->db_query('??        SELEC...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_meeting_time.php(10): Transactions->getTransactionPropertyValue(NULL, 'appointment_dat...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 31/07/2013 16:39:29   Client IP: 192.168.1.53
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''appointment_date') AS value,
+            transaction_property_types.label
+   ' at line 2
+Query is:
+
+        SELECT
+            getTransactionPropertyValue(,'appointment_date') AS value,
+            transaction_property_types.label
+            FROM bs_transactions transactions
+            LEFT JOIN bs_transaction_properties transaction_properties ON transactions.id = transaction_properties.tr_id
+            LEFT JOIN bs_transaction_property_types transaction_property_types ON transaction_properties.transaction_property_type_id = transaction_property_types.id
+            WHERE transaction_property_types.code = 'appointment_date'
+            AND transactions.new_id IS NULL AND transactions.del_user_id IS NULL AND transactions.id = 
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('??        SELEC...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): Transactions->db_query('??        SELEC...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_meeting_time.php(10): Transactions->getTransactionPropertyValue(NULL, 'appointment_dat...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 31/07/2013 16:40:00   Client IP: 192.168.1.53
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''appointment_date') AS value,
+            transaction_property_types.label
+   ' at line 2
+Query is:
+
+        SELECT
+            getTransactionPropertyValue(,'appointment_date') AS value,
+            transaction_property_types.label
+            FROM bs_transactions transactions
+            LEFT JOIN bs_transaction_properties transaction_properties ON transactions.id = transaction_properties.tr_id
+            LEFT JOIN bs_transaction_property_types transaction_property_types ON transaction_properties.transaction_property_type_id = transaction_property_types.id
+            WHERE transaction_property_types.code = 'appointment_date'
+            AND transactions.new_id IS NULL AND transactions.del_user_id IS NULL AND transactions.id = 
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('??        SELEC...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): Transactions->db_query('??        SELEC...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_meeting_time.php(10): Transactions->getTransactionPropertyValue(NULL, 'appointment_dat...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 31/07/2013 17:29:13   Client IP: 192.168.1.36
+B) Message
+Column 'doc_type_id' cannot be null
+Query is:
+INSERT INTO `bs_documents_dt` (`doc_id`,`document_description`,`document_date`,`page_count`,`doc_num_in_case`,`is_last`,`lu_user_id`,`lu_date`,`doc_type_id`) VALUES ('3633',NULL,CURRENT_TIMESTAMP(),'',NULL,'1','522',CURRENT_TIMESTAMP(),getDocumentTypeIdByCode(""))
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Adapter/Mysql.php(403): App_Db_Adapter_Mysql->query('INSERT INTO `bs...')
+#1 [internal function]: App_Db_Adapter_Mysql->insert('documents_dt', Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Documents.php(60): App_Db_Table_Abstract->__call('db_insert', Array)
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Documents.php(60): Documents->db_insert('documents_dt', Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contracts.php(439): Documents->addDocument(Array)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/contract/approve.php(8): Contracts->approveContract(Array, Array)
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#8 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/contra...')
+#9 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#10 {main}
+
+
+A) Timestamp: 31/07/2013 18:02:10   Client IP: 192.168.1.53
+B) Message
+Invalid argument supplied for foreach()
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/createTransaction.php(290): App_Exception::errorHandler(2, 'Invalid argumen...', '/home/data/wwwr...', 290, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#3 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#4 {main}
+
+
+A) Timestamp: 31/07/2013 18:13:12   Client IP: 192.168.1.53
+B) Message
+Invalid argument supplied for foreach()
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/createTransaction.php(290): App_Exception::errorHandler(2, 'Invalid argumen...', '/home/data/wwwr...', 290, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#3 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#4 {main}
+
+
+A) Timestamp: 31/07/2013 18:13:54   Client IP: 192.168.1.53
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''appointment_date') AS value,
+            transaction_property_types.label
+   ' at line 2
+Query is:
+
+        SELECT
+            getTransactionPropertyValue(,'appointment_date') AS value,
+            transaction_property_types.label
+            FROM bs_transactions transactions
+            LEFT JOIN bs_transaction_properties transaction_properties ON transactions.id = transaction_properties.tr_id
+            LEFT JOIN bs_transaction_property_types transaction_property_types ON transaction_properties.transaction_property_type_id = transaction_property_types.id
+            WHERE transaction_property_types.code = 'appointment_date'
+            AND transactions.new_id IS NULL AND transactions.del_user_id IS NULL AND transactions.id = 
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('??        SELEC...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): Transactions->db_query('??        SELEC...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_meeting_time.php(10): Transactions->getTransactionPropertyValue(NULL, 'appointment_dat...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 31/07/2013 18:14:03   Client IP: 192.168.1.53
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''appointment_date') AS value,
+            transaction_property_types.label
+   ' at line 2
+Query is:
+
+        SELECT
+            getTransactionPropertyValue(,'appointment_date') AS value,
+            transaction_property_types.label
+            FROM bs_transactions transactions
+            LEFT JOIN bs_transaction_properties transaction_properties ON transactions.id = transaction_properties.tr_id
+            LEFT JOIN bs_transaction_property_types transaction_property_types ON transaction_properties.transaction_property_type_id = transaction_property_types.id
+            WHERE transaction_property_types.code = 'appointment_date'
+            AND transactions.new_id IS NULL AND transactions.del_user_id IS NULL AND transactions.id = 
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('??        SELEC...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(399): Transactions->db_query('??        SELEC...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/get_meeting_time.php(10): Transactions->getTransactionPropertyValue(NULL, 'appointment_dat...')
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 31/07/2013 18:14:38   Client IP: 192.168.1.53
+B) Message
+Invalid argument supplied for foreach()
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/createTransaction.php(290): App_Exception::errorHandler(2, 'Invalid argumen...', '/home/data/wwwr...', 290, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#3 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#4 {main}
+
+
+A) Timestamp: 31/07/2013 18:17:37   Client IP: 192.168.1.53
+B) Message
+Invalid argument supplied for foreach()
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/createTransaction.php(278): App_Exception::errorHandler(2, 'Invalid argumen...', '/home/data/wwwr...', 278, Array)
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#3 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#4 {main}
+
+
+A) Timestamp: 01/08/2013 09:22:32   Client IP: 192.168.1.36
+B) Message
+Unknown column 'transaction_types_content.label' in 'field list'
+Query is:
+SELECT
+					tr.*,
+					tr_types.state_fee_coefficient,
+					tr_types.service_fee_coefficient_min,
+					tr_types.service_fee_coefficient_max,
+					getUserFullName(tr.lu_user_id, 1) AS lu_user,
+					getUserFullName(tr.notary_id, 1) AS notary,
+					transaction_statuses.code AS tr_status_code,
+					transaction_statuses.title AS tr_status_title,
+					transaction_types_content.label AS tr_type_label
+				FROM (
+					SELECT tr.id
+					FROM bs_transactions tr
+		            JOIN bs_transaction_types tr_types ON tr_types.id = tr.tr_type_id
+JOIN bs_staff_user staff_user ON staff_user.user_id = tr.lu_user_id AND staff_user.is_active = 1
+JOIN bs_staff staff ON staff_user.staff_id = staff.id
+JOIN bs_departments dep ON staff.dep_id = dep.id AND dep.notarial_office_id = 64
+					WHERE tr_types.ui_type = 'inheritance' AND tr.new_id IS NULL AND tr.del_user_id IS NULL AND tr.tr_type_id = 63 AND (
+					SELECT
+						subjects.id
+					FROM bs_subjects subjects
+					JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL AND parties.new_id IS NULL
+					JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+					WHERE subjects.del_user_id IS NULL
+						  AND rel.tr_id = tr.id
+						  AND subjects.n_contact_id IN (998)
+					LIMIT 1
+				) IS NOT NULL
+					ORDER BY tr.id DESC
+					
+				) tmp
+				JOIN bs_transactions tr ON tr.id = tmp.id AND tr.del_user_id IS NULL
+				LEFT JOIN bs_transaction_types tr_types ON tr.tr_type_id = tr_types.id
+				LEFT JOIN bs_transaction_types_content tr_types_content
+			         ON tr_types_content.tr_type_id = tr_types.id AND tr_types_content.lang_id = 1
+				LEFT JOIN bs_transactions_status tr_status ON tr_status.tr_id = tr.id AND tr_status.new_id IS NULL AND tr_status.del_user_id IS NULL
+				LEFT JOIN bs_transaction_statuses transaction_statuses ON transaction_statuses.id = tr_status.tr_status_id
+                WHERE tr_types.ui_type = 'inheritance' AND tr.new_id IS NULL AND tr.del_user_id IS NULL AND tr.tr_type_id = 63 AND (
+					SELECT
+						subjects.id
+					FROM bs_subjects subjects
+					JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL AND parties.new_id IS NULL
+					JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+					WHERE subjects.del_user_id IS NULL
+						  AND rel.tr_id = tr.id
+						  AND subjects.n_contact_id IN (998)
+					LIMIT 1
+				) IS NOT NULL
+           
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT???????tr...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(148): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(148): Inheritances->db_query('SELECT???????tr...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/inheritances.json.php(44): Inheritances->getInheritances(Array, NULL, NULL)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 01/08/2013 10:16:14   Client IP: 192.168.1.36
+B) Message
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND tmp.vehicle_number = "1" OR  AND tmp.object_data = "1"' at line 27
+Query is:
+SELECT tmp.* FROM
+              (
+                  SELECT
+                    objects.*,
+                    (
+				SELECT
+					object_properties.value
+				FROM bs_object_properties object_properties
+                WHERE object_properties.transaction_property_type_id=(
+                    SELECT
+                    transaction_property_types.id
+                    FROM bs_transaction_property_types transaction_property_types
+                    WHERE transaction_property_types.code = 'data'
+                    )
+                    AND object_properties.object_id = objects.id
+			) AS object_data,
+
+                    object_types_content.label AS object_type_label,
+                    object_types.code AS object_type_code
+                FROM bs_objects objects
+                LEFT JOIN bs_object_types object_types ON object_types.id = objects.obj_type_id
+                LEFT JOIN bs_object_types_content object_types_content ON object_types.id = object_types_content.object_type_id
+                JOIN bs_relationships rel ON rel.id = objects.rel_id AND rel.del_user_id IS NULL AND rel.new_id IS NULL
+JOIN bs_transactions tr ON tr.id = rel.tr_id AND tr.del_user_id IS NULL AND tr.new_id IS NULL
+                WHERE objects.id = '1' AND object_types.code = '1' AND rel.id = '1' AND tr.id = '1'
+              ) tmp
+             WHERE 1=1  AND tmp.vin = "1" OR  AND tmp.vehicle_number = "1" OR  AND tmp.object_data = "1"
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT tmp.* FR...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Objects.php(137): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Objects.php(137): Transaction_Relationship_Objects->db_query('SELECT tmp.* FR...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Template/Variable/Abstract/Object.php(32): Transaction_Relationship_Objects->getObjects('1187', Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Templates.php(78): Template_Variable_Abstract_Object->getVariableValue('27', Array, Array)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/print.php(29): Templates->getHTML('???????????????...', Array)
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#8 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#9 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#10 {main}
+
+
+A) Timestamp: 01/08/2013 12:58:16   Client IP: 192.168.1.37
+B) Message
+Unknown column 'nct.address_id' in 'field list'
+Query is:
+SELECT
+				subjects.*,
+            	getNContactName(subjects.n_contact_id) AS n_contact_name,
+            	getJContactName(subjects.j_contact_id) AS j_contact_name,
+            	nct.first_name AS n_first_name,
+				nct.last_name AS n_last_name,
+				nct.second_name AS n_second_name,
+				nct.date_of_birth AS n_date_of_birth,
+				nct.social_card_number AS n_social_card_number,
+				nct.passport_number AS n_passport_number,
+				nct.authority AS n_authority,
+				nct.given_date AS n_given_date,
+				nct.country_id AS n_country_id,
+				nct.address AS n_address,
+				nct.zip AS n_zip,
+				nct.email AS n_email,
+				nct.fax AS n_fax,
+				nct.phone_home AS n_phone_home,
+				nct.phone_office AS n_phone_office,
+				nct.phone_mobile AS n_phone_mobile,
+				nct.organization_name AS n_organization_name,
+				nct.staff_name AS n_staff_name,
+				nct.address_id AS n_address_id,
+				jct.organization_name AS j_organization_name,
+				jct.organization_type_id AS j_organization_type_id,
+				j_org_types.name AS j_organization_type_name,
+				j_org_types.abbreviation AS j_organization_type_abbreviation,
+				jct.registration_number AS j_registration_number,
+				jct.tax_account AS j_tax_account,
+				jct.foundation_date AS j_foundation_date,
+				jct.certificate_number AS j_certificate_number,
+				jct.phone AS j_phone,
+				jct.fax AS j_fax,
+				jct.website AS j_website,
+				jct.email AS j_email,
+				jct.country_id AS j_country_id,
+				jct.address_id AS j_address_id,
+				jct.additional_information AS j_additional_information,
+				jct.address AS j_address
+            FROM bs_subjects subjects
+            LEFT JOIN bs_n_contacts nct ON nct.id = subjects.n_contact_id AND nct.new_id IS NULL
+			LEFT JOIN bs_j_contacts jct ON jct.id = subjects.j_contact_id AND jct.new_id IS NULL
+			LEFT JOIN bs_j_contact_organization_types j_org_types ON j_org_types.id = jct.organization_type_id
+            JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL
+            WHERE subjects.del_user_id IS NULL AND subjects.new_id IS NULL AND parties.id = '1870'
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT??????sub...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Party/Subjects.php(126): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Party/Subjects.php(126): Transaction_Relationship_Party_Subjects->db_query('SELECT??????sub...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/transaction/get_transaction_by_id.php(147): Transaction_Relationship_Party_Subjects->getSubjects(Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/transa...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 01/08/2013 12:58:56   Client IP: 192.168.1.37
+B) Message
+Unknown column 'contact.address_id' in 'field list'
+Query is:
+SELECT
+					contact.*,
+					country.name AS country_name,
+					getAddressName(contact.address_id, 1) AS address
+				FROM (
+					SELECT contact.id
+					FROM bs_n_contacts contact
+		            
+					WHERE contact.new_id IS NULL AND contact.passport_number = 'AG0489492'
+					ORDER BY contact.last_name ASC, contact.first_name ASC
+					
+				) tmp
+				JOIN bs_n_contacts contact ON contact.id = tmp.id
+				LEFT JOIN bs_loc_countries country ON country.id = contact.country_id
+           
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT???????co...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contact/Natural.php(147): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contact/Natural.php(147): Contact_Natural->db_query('SELECT???????co...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(62): Contact_Natural->getContacts(Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/inheritances.json.php(44): Inheritances->getInheritances(Array, NULL, NULL)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#8 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#9 {main}
+
+
+A) Timestamp: 01/08/2013 13:23:53   Client IP: 192.168.1.36
+B) Message
+Unknown column 'contact.address_id' in 'field list'
+Query is:
+SELECT
+					contact.*,
+					country.name AS country_name,
+					getAddressName(contact.address_id, 1) AS address
+				FROM (
+					SELECT contact.id
+					FROM bs_n_contacts contact
+		            
+					WHERE contact.new_id IS NULL AND contact.passport_number = 'AG0489492'
+					ORDER BY contact.last_name ASC, contact.first_name ASC
+					
+				) tmp
+				JOIN bs_n_contacts contact ON contact.id = tmp.id
+				LEFT JOIN bs_loc_countries country ON country.id = contact.country_id
+           
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT???????co...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contact/Natural.php(147): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contact/Natural.php(147): Contact_Natural->db_query('SELECT???????co...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(62): Contact_Natural->getContacts(Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/inheritances.json.php(44): Inheritances->getInheritances(Array, NULL, NULL)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#8 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#9 {main}
+
+
+A) Timestamp: 01/08/2013 13:27:37   Client IP: 192.168.1.36
+B) Message
+Unknown column 'jct.address_id' in 'field list'
+Query is:
+SELECT
+				subjects.*,
+            	getNContactName(subjects.n_contact_id) AS n_contact_name,
+            	getJContactName(subjects.j_contact_id) AS j_contact_name,
+            	nct.first_name AS n_first_name,
+				nct.last_name AS n_last_name,
+				nct.second_name AS n_second_name,
+				nct.date_of_birth AS n_date_of_birth,
+				nct.social_card_number AS n_social_card_number,
+				nct.passport_number AS n_passport_number,
+				nct.authority AS n_authority,
+				nct.given_date AS n_given_date,
+				nct.country_id AS n_country_id,
+				nct.address AS n_address,
+				nct.zip AS n_zip,
+				nct.email AS n_email,
+				nct.fax AS n_fax,
+				nct.phone_home AS n_phone_home,
+				nct.phone_office AS n_phone_office,
+				nct.phone_mobile AS n_phone_mobile,
+				nct.organization_name AS n_organization_name,
+				nct.staff_name AS n_staff_name,
+				jct.organization_name AS j_organization_name,
+				jct.organization_type_id AS j_organization_type_id,
+				j_org_types.name AS j_organization_type_name,
+				j_org_types.abbreviation AS j_organization_type_abbreviation,
+				jct.registration_number AS j_registration_number,
+				jct.tax_account AS j_tax_account,
+				jct.foundation_date AS j_foundation_date,
+				jct.certificate_number AS j_certificate_number,
+				jct.phone AS j_phone,
+				jct.fax AS j_fax,
+				jct.website AS j_website,
+				jct.email AS j_email,
+				jct.country_id AS j_country_id,
+				jct.address_id AS j_address_id,
+				jct.additional_information AS j_additional_information,
+				jct.address AS j_address
+            FROM bs_subjects subjects
+            LEFT JOIN bs_n_contacts nct ON nct.id = subjects.n_contact_id AND nct.new_id IS NULL
+			LEFT JOIN bs_j_contacts jct ON jct.id = subjects.j_contact_id AND jct.new_id IS NULL
+			LEFT JOIN bs_j_contact_organization_types j_org_types ON j_org_types.id = jct.organization_type_id
+            JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL
+            WHERE subjects.del_user_id IS NULL AND subjects.new_id IS NULL AND parties.id = '1870'
+        
+C) Stack trace
+#0 [internal function]: App_Db_Adapter_Mysql->query('SELECT??????sub...')
+#1 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Party/Subjects.php(125): App_Db_Table_Abstract->__call('db_query', Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Party/Subjects.php(125): Transaction_Relationship_Party_Subjects->db_query('SELECT??????sub...')
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/transaction/get_transaction_by_id.php(147): Transaction_Relationship_Party_Subjects->getSubjects(Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/transa...')
+#7 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#8 {main}
+
+
+A) Timestamp: 01/08/2013 13:29:51   Client IP: 192.168.1.36
+B) Message
+Unknown column 'address_id' in 'field list'
+Query is:
+INSERT INTO `bs_n_contacts` (`lu_user_id`,`lu_date`,`first_name`,`last_name`,`second_name`,`social_card_number`,`passport_number`,`authority`,`address`,`zip`,`email`,`fax`,`phone_home`,`phone_office`,`phone_mobile`,`country_id`,`organization_name`,`staff_name`,`date_of_birth`,`given_date`,`address_id`,`from_portal`) VALUES ('522',CURRENT_TIMESTAMP(),'Արամ','Գեվորգյան','Չարկազի','4101750564','AG0499494',NULL,'Կոտայք, Նոր հաճն, Սպորտային փ., 1, Շ, 23',NULL,NULL,NULL,NULL,NULL,NULL,'7',NULL,NULL,'1975-01-31','1999-05-12',NULL,'0')
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Adapter/Mysql.php(403): App_Db_Adapter_Mysql->query('INSERT INTO `bs...')
+#1 [internal function]: App_Db_Adapter_Mysql->insert('n_contacts', Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): App_Db_Table_Abstract->__call('db_insert', Array)
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): Contact_Natural->db_insert('n_contacts', Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Contact/Natural.php(197): HistoricalTable->insertUsingAdjacencyListModel(Array)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transaction/Relationship/Party/Subjects.php(169): Contact_Natural->addContact(Array)
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(267): Transaction_Relationship_Party_Subjects->addSubject(Array)
+#8 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(173): Inheritances->addTransactionChildren(Array)
+#9 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/add_edit.php(29): Inheritances->addInheritance(Array)
+#10 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#11 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#12 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#13 {main}
+
+
+A) Timestamp: 01/08/2013 13:30:39   Client IP: 192.168.1.36
+B) Message
+Cannot add or update a child row: a foreign key constraint fails (`aenis_web_based`.`bs_transactions`, CONSTRAINT `FK_transactions_tr_type_id` FOREIGN KEY (`tr_type_id`) REFERENCES `bs_transaction_types` (`id`))
+Query is:
+INSERT INTO `bs_transactions` (`lu_user_id`,`lu_date`,`app_id`,`case_id`,`parent_id`,`notary_id`,`tr_type_id`,`locked_user_id`) VALUES ('522',CURRENT_TIMESTAMP(),NULL,'844',NULL,'','',NULL)
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Adapter/Mysql.php(403): App_Db_Adapter_Mysql->query('INSERT INTO `bs...')
+#1 [internal function]: App_Db_Adapter_Mysql->insert('transactions', Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): App_Db_Table_Abstract->__call('db_insert', Array)
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): Inheritances->db_insert('transactions', Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(228): HistoricalTable->insertUsingAdjacencyListModel(Array)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Inheritances.php(172): Transactions->addTransaction(Array)
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/inheritance/add_edit.php(29): Inheritances->addInheritance(Array)
+#8 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#9 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/inheri...')
+#10 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#11 {main}
+
+
+A) Timestamp: 01/08/2013 17:35:57   Client IP: 192.168.1.53
+B) Message
+Cannot add or update a child row: a foreign key constraint fails (`aenis_web_based`.`bs_transactions`, CONSTRAINT `FK_transactions_notary_id` FOREIGN KEY (`notary_id`) REFERENCES `bs_users` (`id`))
+Query is:
+INSERT INTO `bs_transactions` (`lu_user_id`,`lu_date`,`app_id`,`case_id`,`parent_id`,`notary_id`,`tr_type_id`,`locked_user_id`) VALUES ('2',CURRENT_TIMESTAMP(),'556','860',NULL,'','67',NULL)
+C) Stack trace
+#0 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Adapter/Mysql.php(403): App_Db_Adapter_Mysql->query('INSERT INTO `bs...')
+#1 [internal function]: App_Db_Adapter_Mysql->insert('transactions', Array)
+#2 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Db/Table/Abstract.php(155): call_user_func_array(Array, Array)
+#3 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): App_Db_Table_Abstract->__call('db_insert', Array)
+#4 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/HistoricalTable.php(34): Transactions->db_insert('transactions', Array)
+#5 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/models/Transactions.php(228): HistoricalTable->insertUsingAdjacencyListModel(Array)
+#6 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/scripts/workflow/application/createTransaction.php(90): Transactions->addTransaction(Array)
+#7 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(88): include('/home/data/wwwr...')
+#8 /home/data/wwwroot/data/data/aenis_web_based/aenis-backend/library/App/Dispatcher/Simple.php(68): App_Dispatcher_Simple->render('workflow/applic...')
+#9 /home/data/wwwroot/data/data/aenis_web_based/www/php/index.php(47): App_Dispatcher_Simple->dispatch()
+#10 {main}
+
+

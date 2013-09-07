@@ -1,0 +1,7 @@
+@import "appicons/large/*.png";
+.x-btn {
+  @include all-large-sprites;
+}
+
+@import "appicons/small/*.png";
+@include all-small-sprites;

@@ -1,0 +1,74 @@
+<?php
+user_auth_check();
+
+$o = null;
+try {
+	$data = $_POST['data'];
+	$data = App_Json::decode($data, true);
+	$id = $data['id'];
+
+	/*$update_array = array(
+		'app_id' => $data->app_id,
+		'parent_id' => $data->parent_id,
+		'label' => $data->label,
+		'code' => $data->code,
+		'hidden' => $data->hidden,
+		'order_in_list' => $data->order_in_list
+	);*/
+	$update_array = App_Array::pick($data, array(
+		'app_id',
+		'parent_id',
+		'label',
+		'code',
+		'hidden',
+		'order_in_list',
+		'contentData' => 'content'
+	));
+
+	if(empty($id))
+    {
+		if(Acl()->denied('object.type.add'))
+            throw new App_Exception_Permission('Դուք չունեք բավարար իրավունքներ օբյեկտի տեսակի ավելացման համար:');
+
+		if(!App_Registry::get('temp_sn')->user_is_root) //non-root users cannot add some fields
+		{
+			unset($update_array['code']);
+		}
+
+        $o = new Object_Types();
+        $id = $o->addItem($update_array);
+    }
+    else
+    {
+		if(Acl()->denied('object.type.edit'))
+			throw new App_Exception_Permission('Դուք չունեք բավարար իրավունքներ օբյեկտի տեսակի խմբագրման համար:');
+
+		$o = new Object_Types();
+		if(!App_Registry::get('temp_sn')->user_is_root) //non-root users should not change some fields
+		{
+			$new_code = $update_array['code'];
+			if(!empty($new_code))
+			{
+				$result = $o->getItems(array('id'=>$id));
+				if($row = $o->db_fetch_array($result))
+				{
+					if($row['code'] != $new_code) //attempt to change code
+					{
+						throw new App_Db_Exception_Validate('Դուք չունեք բավարար իրավունքներ օբյեկտի տեսակի կոդի խմբագրման համար');
+					}
+				}
+			}
+		}
+		$o->updateItem($id, $update_array);
+    }
+
+    $o->db_commit();
+	Ext::sendResponse(true, array(
+		'data' =>array('id' => $id, 'code' => $update_array['code'])
+	));
+}
+catch(App_Exception_NonCritical $e)
+{
+	if(null!==$o) $o->db_rollback();
+	Ext::sendErrorResponse($e->getMessage());
+}

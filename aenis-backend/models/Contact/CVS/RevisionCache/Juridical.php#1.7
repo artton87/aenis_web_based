@@ -1,0 +1,326 @@
+<?php
+/**
+ * Juridical contact management
+ * @package aenis\Contact
+ */
+
+/**
+ * Methods for juridical contact management
+ * @author BestSoft
+ * @package aenis\Contact
+ */
+class Contact_Juridical extends HistoricalTable
+{
+    /**
+     * Database table name
+     * @var string
+     */
+    protected $_table = 'j_contacts';
+
+
+
+    const REGISTER_WEB_SERVICE_URL = "http://10.8.8.8/data/web-service";
+
+
+    /**
+     * Returns list of juridical contacts matching to the given criteria or their count
+     * @param $search    Array with search parameters
+     * @param int $start    Optional. Starting from which record to return results.
+     * @param int $limit    Optional. Passing 0 will return all records.
+     * @param bool $returnCount    Optional. Whenever to return record count
+     * @return integer|mysqli_result
+     */
+    public function getContacts($search, $start = 0, $limit = 0, $returnCount = false)
+    {
+        $joins = array();
+        $where = array();
+
+        if(empty($search['contact_id']))
+        {
+            $where[] = 'contact.new_id IS NULL';
+        }
+        else
+        {
+            $where[] = "contact.id = '".intval($search['contact_id'])."'";
+        }
+
+        if(!empty($search['exclude_contact_id']))
+            $where[] = "contact.id <> '".intval($search['exclude_contact_id'])."'";
+
+        if(!empty($search['organization_name']))
+        {
+            $search_organization_name = mb_strtoupper($this->db_escape_string($search['organization_name']));
+            $where[] = '(
+					(contact.organization_name LIKE \''.$search_organization_name .'%\')
+					OR
+					(substr(contact.organization_name,2) LIKE \''.$search_organization_name .'%\')
+					OR
+					(substr(contact.organization_name,3) LIKE \''.$search_organization_name .'%\')
+				)';
+        }
+        elseif(1 == $search['empty_organization_name'])
+            $where[] = "(contact.organization_name = '' OR contact.organization_name IS NULL)";
+
+        if(!empty($search['tax_account']))
+            $where[] = 'contact.tax_account = \''.$this->db_escape_string($search['tax_account']).'%\'';
+        elseif(1 == $search['empty_tax_account'])
+            $where[] = "(contact.tax_account = '' OR contact.tax_account IS NULL)";
+
+        if(!empty($search['registration_number']))
+            $where[] = 'contact.registration_number = \''.$this->db_escape_string($search['registration_number']).'%\'';
+        elseif(1 == $search['empty_registration_number'])
+            $where[] = "(contact.registration_number = '' OR contact.registration_number IS NULL)";
+
+        $where = implode(' AND ', array_unique($where));
+        $joins = implode(PHP_EOL, array_unique($joins));
+
+        if($returnCount)
+        {
+            $q = "SELECT
+					COUNT(contact.id) AS c
+				FROM bs_j_contacts contact
+				$joins
+				WHERE $where
+			";
+            $result = $this->db_query($q);
+            if($row = $this->db_fetch_row($result))
+            {
+                return intval($row[0]);
+            }
+            return 0;
+        }
+        else
+        {
+            $limit = intval($limit);
+            $start = intval($start);
+            $limit = ($limit > 0) ? "LIMIT $start, $limit" : '';
+
+            $oLanguages = new Languages();
+            $lang_id = $oLanguages->getDefaultLanguage()->id;
+
+            $q = "SELECT
+					contact.*,
+					organization_type.name AS organization_type_name,
+					organization_type.abbreviation AS organization_type_name_abbr,
+					country.name AS country_name
+				FROM (
+					SELECT contact.id
+					FROM bs_j_contacts contact
+		            $joins
+					WHERE $where
+					ORDER BY contact.organization_name ASC
+					$limit
+				) tmp
+				JOIN bs_j_contacts contact ON contact.id = tmp.id
+				LEFT JOIN bs_loc_countries country ON country.id = contact.country_id
+				LEFT JOIN bs_j_contact_organization_types AS organization_type ON contact.organization_type_id = organization_type.id
+           ";
+            return $this->db_query($q);
+        }
+    }
+
+
+    /**
+     * Returns fields for inserting into database
+     * @access protected
+     * @param array $data     Array with data for 'j_contacts' table
+     * @return array
+     */
+    protected function getDbFields($data)
+    {
+        if(empty($data['country_id']))
+        {
+            $oCountry = new Countries();
+            $data['country_id'] = $oCountry->getDefaultCountry()->id;
+        }
+
+        //these fields can be set to null, if they (or their trimmed version) are empty
+        $null_trim_keys = array(
+            'organization_name', 'registration_number', 'tax_account', 'certificate_number',
+            'phone', 'fax', 'website', 'email', 'address', 'additional_information', 'country_id'
+        );
+        $db_data = array();
+        foreach($null_trim_keys as $key)
+        {
+            $v = trim($data[$key]);
+            $db_data[$key] = empty($v) ? self::$DB_NULL : $v;
+        }
+
+        return $db_data + array(
+            'organization_type_id' => empty($data['organization_type_id']) ? self::$DB_NULL : $data['organization_type_id'],
+            'foundation_date' => empty($data['foundation_date']) ? self::$DB_NULL : App_Date::str2SqlDate($data['foundation_date']),
+            'address_id' => empty($data['address_id']) ? self::$DB_NULL : $data['address_id'],
+            'from_portal' => empty($data['from_portal']) ? 0 : 1,
+        );
+    }
+
+
+    /**
+     * Insert juridical contact
+     * @access public
+     * @param array $data     Array with data for 'j_contacts' table
+     * @throws App_Db_Exception_Validate
+     * @return integer    Id of newly inserted record
+     */
+    public function addContact($data)
+    {
+        $this->validateContact(0, $data);
+        return $this->insertUsingAdjacencyListModel($this->getDbFields($data));
+    }
+
+    /**
+     * Update juridical contact
+     * @access public
+     * @param integer $contact_id    Contact id
+     * @param array $data    Array with fields for 'j_contacts' table
+     * @throws App_Db_Exception_Table if contact id is not specified
+     * @return integer    ID of newly inserted record
+     */
+    public function updateContact($contact_id, $data)
+    {
+        if(empty($contact_id))
+            throw new App_Db_Exception_Table('Contact id is not specified');
+
+        $this->validateContact($contact_id, $data);
+        return $this->updateUsingAdjacencyListModel($contact_id, $this->getDbFields($data));
+    }
+
+
+    /**
+     * Checks juridical contact data
+     * @access protected
+     * @param integer $id   Contact id. Set to 0 for update case.
+     * @param array $data   Associative array with contact fields
+     * @throws App_Db_Exception_Validate
+     */
+    protected function validateContact($id, $data)
+    {
+        if(empty($data['organization_name']) && empty($data['tax_account']) && empty($data['registration_number']))
+        {
+            throw new App_Db_Exception_Validate('Ոչ անվանումը, ոչ գրանցման համարը, ոչ ՀՎՀՀ համարը մուտքագրված չեն:');
+        }
+
+        if($this->existsContact($data['tax_account'], $data['registration_number'], $id))
+        {
+            throw new App_Db_Exception_Validate('Տրված ՀՎՀՀ / գրանցաման համարով կոնտակտ արդեն գրանցված է շտեմարանում:');
+        }
+    }
+
+
+    /**
+     * Checks whenever contact with the given tax account / registration number number exists
+     * @access public
+     * @param string $tax_account
+     * @param string $registration_number
+     * @param integer $excludeId    Optional. If given, will not take this id into account
+     * @throws App_Db_Exception_Table if neither tax account nor registration number were specified
+     * @return integer    Id of found contact if any
+     */
+    public function existsContact($tax_account, $registration_number, $excludeId = 0)
+    {
+        if(empty($tax_account) && !empty($registration_number))
+        {
+            $search = array('empty_tax_account'=>1, 'registration_number'=>$registration_number, 'exclude_contact_id'=>$excludeId);
+        }
+        elseif(!empty($tax_account) && empty($registration_number))
+        {
+            $search = array('tax_account'=>$tax_account, 'empty_registration_number'=>1, 'exclude_contact_id'=>$excludeId);
+        }
+        elseif(!empty($tax_account) && !empty($registration_number))
+        {
+            $search = array('tax_account'=>$tax_account, 'registration_number'=>$registration_number, 'exclude_contact_id'=>$excludeId);
+        }
+        else throw new App_Db_Exception_Table('Neither tax account nor registration number were specified.');
+
+        $result = $this->getContacts($search, 0, 1);
+        if($row = $this->db_fetch_array($result))
+        {
+            return $row['id'];
+        }
+        return 0;
+    }
+
+
+    /**
+     * gets contacts full data comparing each field
+     * @param associative array $data
+     * @return int|null
+     */
+    public function existContactFullData($data)
+    {
+        $fields = array(
+            'organization_name' => $data['first_name'],
+            'registration_number' => $data['registration_number'],
+            'tax_account' => $data['tax_account']
+        );
+
+        $result = $this->db_select('j_contacts', array(),$fields);
+        if($row = $this->db_fetch_array($result))
+        {
+            return $row['id'];
+        }
+        return null;
+    }
+
+
+    /**
+     * Վերադարձնում է սուբյեկներ պետական ռեգիստրից
+     * @access public
+     * @param array $search    Ասոցիատիվ զանգված որոնման պարամետրերով
+     * @return array|bool
+     */
+    public function getContactsFromRegister($search)
+    {
+        if (isset($search['registration_number']))
+        {
+            $xml_request = '<company reg_num="'.$search['registration_number'].'" />';
+        }
+        if (isset($search['organization_name']))
+        {
+            $xml_request = '<company name="'.mb_strtoupper($search['organization_name'], "utf-8").'" />';
+        }
+
+        $random_number = rand(100000, 999999);
+        $xml_request = '<?xml version="1.0" encoding="UTF-8" ?><request action="INFO" subject="COMPANY" id="'.$random_number.'">'.$xml_request.'</request>';
+        $url = self::REGISTER_WEB_SERVICE_URL;
+        $header =  array("Content-type: text/xml\r\n");
+        $response_xml = Curl::curl_post($url, $xml_request, $header);
+        $xmlObj = simplexml_load_string($response_xml);
+        $arrXml = App_Array::objectsIntoArray($xmlObj);
+
+        $contacts = array();
+        if(isset($arrXml['company-info']) && is_array($arrXml['company-info']))
+        {
+            if(isset($arrXml['company-info'][0]))
+            {
+                $company = $arrXml['company-info'][0];
+                $contacts[] = array(
+                    'organization_name' => 				$company['name-am'],
+                    'organization_type_abbreviation' => $company['company-type'],
+                    'organization_type' => 				$company['company-type-long'],
+                    'registration_number' => 			$company['reg-num'],
+                    'tax_account' => 					is_array($company['taxid']) ? $company['taxid'][0] : $company['taxid'],
+                    'address' => 						$company['address']['street1']
+                );
+            }
+            else
+            {
+                $company = $arrXml['company-info'];
+                $contacts[] = array(
+                    'organization_name' => 				$company['name-am'],
+                    'organization_type_abbreviation' => $company['company-type'],
+                    'organization_type' => 				$company['company-type-long'],
+                    'registration_number' => 			$company['reg-num'],
+                    'tax_account' => 					is_array($company['taxid']) ? $company['taxid'][0] : $company['taxid'],
+                    'address' => 						$company['address']['street1']
+                );
+            }
+
+        }
+        else
+        {
+            return FALSE;
+        }
+        return $contacts;
+    }
+}

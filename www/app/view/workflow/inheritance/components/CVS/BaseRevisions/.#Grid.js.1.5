@@ -1,0 +1,191 @@
+Ext.require([
+    'BestSoft.grid.Panel',
+    'Ext.toolbar.Paging',
+    'Aenis.store.workflow.Inheritances'
+]);
+
+Ext.define('Aenis.view.workflow.inheritance.components.Grid', {
+    extend: 'BestSoft.grid.Panel',
+    alias: 'widget.workflowInheritanceGrid',
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.inheritance.components.Grid',
+        'BestSoft.mixin.Localized',
+        'BestSoft.mixin.StyleSheetLoader'
+    ],
+
+    styleSheets: [
+        'workflow/transaction/Grid.css'
+    ],
+
+
+    statusIconColumnRenderer: function(value/*, metadata, record*/){
+        return '<div class="transaction_status transaction_status-'+value+'"></div>';
+    },
+
+    objectList: function(value){
+        if(value.object.length == 1)
+            value = value.object[0].objectName;
+        else if(value.object.length > 1)
+            value = value.object[0].objectName + ', ... (' + value.object.length+')';
+        return value;
+    },
+
+    testatorItem: function(value){
+        if(value.testator.length == 1)
+            value = value.testator[0].contactName;
+        else if(value.testator.length > 1)
+            value = value.testator[0].contactName + ', ... (' + value.testator.length+')';
+        return value;
+    },
+
+    inheritorItem: function(value){
+        if(value.inheritor.length == 1)
+            value = value.inheritor[0].contactName;
+        else if(value.inheritor.length > 1)
+            value = value.inheritor[0].contactName + ', ... (' + value.inheritor.length+')';
+        return value;
+    },
+
+    applicantItem: function(value){
+        if(value.applicant.length == 1)
+            value = value.applicant[0].contactName;
+        else if(value.applicant.length > 1)
+            value = value.applicant[0].contactName + ', ... (' + value.applicant.length+')';
+        return value;
+    },
+
+    initComponent: function() {
+
+        this.loadStyleSheets();
+
+        var me = this;
+        var store = this.store || Ext.create('Aenis.store.workflow.Inheritances',{});
+        Ext.applyIf(store.proxy.extraParams, {
+            view_uid: me.getId(),
+            params: Ext.JSON.encode({
+                ui_type: 'inheritance'
+            })
+        });
+        Ext.applyIf(this, {
+            xtype: 'bsgrid',
+            ref: 'inheritancesGrid',
+            hidden:true,
+            autoLoadStore: false,
+            header: false,
+            height:150,
+            margin:'3 0',
+            store: store,
+            tools: [],
+            columns:[
+                {
+                    dataIndex:'id',
+                    hidden:true
+                },
+                {
+                    width: 27,
+                    dataIndex: 'tr_status_code',
+                    resizable: false,
+                    hideable: false,
+                    renderer: this.statusIconColumnRenderer,
+                    alignTo: 'center'
+                },
+                {
+                    text: this.T('status'),
+                    dataIndex: 'tr_status'
+                },
+                {
+                    text: this.T('transaction_code'),
+                    dataIndex: 'transaction_code',
+                    width:150
+                },
+                {
+                    text: this.T('case_code'),
+                    width:80,
+                    dataIndex: 'case_code'
+                },
+                {
+                    text: this.T('transaction_type'),
+                    dataIndex: 'tr_type_label',
+                    flex:2
+                },
+                /*{
+                 text:this.T('testator'),
+                 dataIndex:'relationships',
+                 flex:1,
+                 renderer:this.testatorItem
+                 },
+                 {
+                 text:this.T('inheritor'),
+                 dataIndex:'relationships',
+                 flex:1,
+                 renderer:this.inheritorItem
+                 },
+                 {
+                 text:this.T('applicant'),
+                 dataIndex:'relationships',
+                 flex:1,
+                 renderer:this.applicantItem
+                 },
+                {
+                    text:this.T('objects'),
+                    dataIndex:'relationships',
+                    flex:1,
+                    renderer:this.objectList
+                },*/
+                {
+                    text:this.T('notary'),
+                    dataIndex:'notary',
+                    flex:1
+                },
+                {
+                    text: this.T('input_user'),
+                    flex:1,
+                    dataIndex: 'input_user'
+                },
+                {
+                    xtype: 'datecolumn',
+                    format: Ext.util.Format.dateFormat+" H:i",
+                    text: this.T('tr_creation_date'),
+                    dataIndex: 'tr_creation_date'
+                }
+            ],
+            bbar: {
+                xtype: 'pagingtoolbar',
+                store: store,
+                displayInfo: true,
+                displayMsg: this.T('pagingtoolbar_displayMessage'),
+                emptyMsg: this.T('pagingtoolbar_emptyMessage')
+            },
+            tbar:[
+                {
+                    xtype:'bsbtnEdit',
+                    ref: 'editAction',
+                    disabled:true
+                },
+                {
+                    ref:'viewAction',
+                    iconCls:'icon-view',
+                    text:this.T("view"),
+                    disabled:true
+                },
+                {
+                    xtype:'button',
+                    iconCls:'icon-view',
+                    text:this.T('view_complete_document'),
+                    ref:'viewCompleteAction',
+                    hidden: true
+                },
+                '->',
+                {
+                    ref:'approveAction',
+                    iconCls:'icon-ok',
+                    text:this.T("approve"),
+                    disabled:true
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});

@@ -1,0 +1,19 @@
+Ext.define('Aenis.model.workflow.subject.Relation', {
+    extend: 'Ext.data.Model',
+
+    idProperty: "id",
+
+    fields: [
+        {type: 'int', name: 'id'},
+        {type: 'int', name: 'rel_dt_id'},
+        {type: 'int', name: 'subject_relation_id'},
+        {type: 'int', name: 'rel_type_id'},
+        {type: 'string', name: 'label'},
+        {type: 'int', name: 'contactId'},
+        {type: 'string', name: 'contactName'},
+        {type: 'int', name: 'subject_id'},
+        {type: 'auto', name: 'serviceData'},
+        {type: 'string', name: 'contactType'}
+
+    ]
+});

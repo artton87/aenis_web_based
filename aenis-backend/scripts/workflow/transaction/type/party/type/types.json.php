@@ -1,0 +1,41 @@
+<?php
+user_auth_check();
+
+
+
+$filters = json_decode($_GET['filter'], true);
+
+$search = array();
+foreach($filters as $filter)
+{
+	$search[$filter['property']] = $filter['value'];
+}
+
+$cache_id = 'transaction_type_party_types_'.md5(serialize(array($search)));
+if(false === ($items = App_Cache()->get($cache_id, true, true)))
+{
+	$items = array();
+	$o = new Transaction_Type_Party_Types();
+	$result = $o->getRecords($search);
+	while($row = $o->db_fetch_array($result))
+	{
+		$items[] = array(
+			'tr_type_id' => $row['tr_type_id'],
+			'party_type_id' => $row['party_type_id'],
+			'is_required' => $row['is_required'],
+			'order_in_list' => $row['order_in_list'],
+			'party_type_label' => $row['party_type_label'],
+			'parent_party_type_id' => $row['parent_party_type_id'],
+		);
+	}
+	App_Cache()->set($cache_id, $items, null, array(
+		Transaction_Type_Party_Types::CACHE_TAG,
+		Party_Types::CACHE_TAG,
+		Transaction_Types::CACHE_TAG
+	), true);
+}
+
+Ext::sendResponse(true, array(
+	'data' => $items
+));
+

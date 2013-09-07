@@ -1,0 +1,22 @@
+Ext.define('Aenis.controller.main.profile.Manage', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Aenis.view.main.profile.Manage'
+    ],
+
+    mixins: [
+        'Locale.hy_AM.main.profile.Manage',
+        'BestSoft.mixin.Localized'
+    ],
+
+    onLaunch: function(app) {
+        app.loadMainViewTab(this, function(oView) {
+            this.addComponentRefs(oView);
+            oView.control({
+
+            }, null, this);
+        });
+    }
+
+});

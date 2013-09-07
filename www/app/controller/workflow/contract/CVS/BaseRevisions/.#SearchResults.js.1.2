@@ -1,0 +1,42 @@
+Ext.define('Aenis.controller.workflow.contract.SearchResults', {
+    extend: 'Ext.app.Controller',
+
+    requires: [
+        'Aenis.view.workflow.contract.SearchResults'
+    ],
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.contract.SearchResults',
+        'BestSoft.mixin.Localized'
+    ],
+
+    openTab: function(params) {
+        this.application.loadMainViewTab(this, function(oView) {
+            this.addComponentRefs(oView);
+			var me = this;
+            oView.params = params || {};
+            oView.control({
+                '.': {
+                    afterrender: {fn: me.onAfterRenderTabView, single: true}
+                },
+                '[ref=warrantSearchGrid]':{
+                   // selectionchange: this.onclickWarrantSelection
+                },
+                '[ref=dataItem]':{
+
+                }
+            }, null, this)
+        });
+    },
+
+    onAfterRenderTabView: function(oView) {
+        var view = this.getTabView(oView);
+        this.getContractSearchGrid(oView).loadStore({
+            params: view.params
+         });
+
+        this.getContractContentView(oView).hide();
+    }
+
+});

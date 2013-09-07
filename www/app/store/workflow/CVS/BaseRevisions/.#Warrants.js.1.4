@@ -1,0 +1,44 @@
+Ext.define('Aenis.store.workflow.Warrants', {
+    extend: 'Ext.data.Store',
+
+    autoLoad: false,
+    autoDestroy: true,
+
+    fields: [
+        {type: 'int', name: 'id'},
+        {type: 'int', name: 'notary_name'},
+
+        {type: 'auto', name: 'relationships'},
+        {type: 'date', name: 'end_date', dateFormat:'d/m/Y'},
+
+        {type: 'string', name: 'status', persist: false},
+        {type: 'string', name: 'code'},
+        {type: 'int', name: 'locked_user_id'},
+
+        {name: 'tr_type_id', type: 'int'},
+        {name: 'tr_type_label', type: 'string'},
+
+        {name: 'state_fee_coefficient', type: 'int'},
+        {name: 'service_fee_coefficient_min', type: 'int'},
+        {name: 'service_fee_coefficient_max', type: 'int'}
+
+
+
+    ],
+
+    proxy: {
+        type: 'ajax',
+        actionMethods: {
+            read: 'POST'
+        },
+        api: {
+            read: 'workflow/warrant/warrant.json.php'
+        },
+        reader: {
+            type: 'json',
+            root: 'data',
+            successProperty: 'success',
+            totalProperty: 'total'
+        }
+    }
+});

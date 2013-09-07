@@ -1,0 +1,152 @@
+Ext.require([
+    'Ext.tab.Panel',
+    'Ext.form.field.Hidden',
+    'Ext.form.Label',
+    'Ext.form.field.File'
+]);
+
+Ext.define('Aenis.view.workflow.inheritance.ApproveDlg', {
+    extend:'Ext.window.Window',
+
+    alias: 'widget.workflowInheritanceApproveDlg',
+
+    modal: true,
+    closeAction: 'destroy',
+
+    layout:{
+        type: 'vbox',
+        align: 'stretch'
+    },
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.inheritance.ApproveDlg',
+        'BestSoft.mixin.Localized'
+    ],
+
+    initComponent: function(){
+        Ext.apply(this, {
+            title: this.T("approve_inheritance"),
+            width: 500,
+            height: 200,
+            items: [
+                {
+                    xtype: 'form',
+                    flex: 1,
+                    border: false,
+                    ref: 'approveInheritanceForm',
+                    url: 'workflow/inheritance/approve.php',
+                    waitMsg: this.T("file_is_uploading"),
+                    messages: {
+                        inheritance_approved: this.T("inheritance_approved")
+                    },
+                    items: [
+                        {
+                            xtype:'form',
+                            ref:'paymentPanel',
+                            border: false,
+                            layout:{
+                                type:'vbox',
+                                align:'center'
+                            },
+                            items:[
+                                {
+                                    xtype:'numberfield',
+                                    ref: 'dutyValue',
+                                    fieldLabel:this.T('duty'),
+                                    margin: 5
+                                },
+                                {
+                                    xtype:'numberfield',
+                                    ref: 'paymentNotaryValue',
+                                    fieldLabel:this.T('payment_notary'),
+                                    margin: 5
+                                }
+                            ]
+                        },
+
+                        {
+                            xtype: 'fieldcontainer',
+                            hidden: true,
+                            border: true,
+                            layout:{
+                                type: 'hbox',
+                                align: 'center',
+                                pack: 'center'
+                            },
+                            flex:1,
+                            ref: 'paidPanel',
+                            margin:'15 0',
+                            items:[
+                                {
+                                    xtype: 'displayfield',
+                                    ref:'paidDutyValue',
+                                    fieldLabel: this.T('duty'),
+                                    style:'font-weight:bold',
+                                    margin:'0 10'
+                                },
+                                {
+                                    xtype: 'displayfield',
+                                    ref:'paidPaymentNotaryValue',
+                                    fieldLabel: this.T('payment_notary'),
+                                    style:'font-weight:bold'
+                                },
+                                {
+                                    xtype:'button',
+                                    ref:'resetPayment',
+                                    iconCls:'icon-reset',
+                                    tooltip: this.T('reset')
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'filefield',
+                            hidden: true,
+                            ref:'fileWill',
+                            name: 'file_warrant',
+                            fieldLabel: this.T('attach_file'),
+                            labelWidth: 100,
+                            labelAlign: 'right',
+                            margin: 5,
+                            msgTarget: 'side',
+                            allowBlank: false,
+                            anchor: '100%',
+                            buttonText: this.T('select'),
+                            iconCls: 'icon-browse'
+                        }
+                    ]
+                }
+            ],
+            buttons: [
+                {
+                    text: this.T('print'),
+                    ref: 'printAction',
+                    iconCls: 'icon-print',
+                    hidden: true
+                },
+                '->',
+                {
+                    xtype:'button',
+                    ref:'payAction',
+                    iconCls:'icon-pay',
+                    margin: 5,
+                    text: this.T('pay')
+                },
+                {
+                    text: this.T('approve'),
+                    ref: 'approveAction',
+                    iconCls: 'icon-ok',
+                    hidden: true
+                },
+                {
+                    text: this.T('close'),
+                    action: 'cancel',
+                    iconCls: 'icon-cancel'
+                }
+            ]
+        });
+        this.callParent(arguments);
+    }
+});
+
+

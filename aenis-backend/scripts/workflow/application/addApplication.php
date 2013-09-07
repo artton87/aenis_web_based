@@ -1,0 +1,16 @@
+<?php
+user_auth_check(true);
+if(Acl()->allowed('application.add'))
+{
+    $oApplications = new Applications();
+    $data = App_Json::decode($_POST['params'], true);
+    $app_id = $oApplications->addApplications($data);
+    $oApplications->db_commit();
+    Ext::sendResponse(true, array(
+        'data' => $app_id
+    ));
+}
+else
+{
+    Ext::sendErrorResponse('Դուք չունեք բավարար իրավունքներ դիմում ավելացնելու համար:');
+}

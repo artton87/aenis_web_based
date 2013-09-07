@@ -1,0 +1,21 @@
+body {
+    font-size:12px;
+    line-height:18px;
+}
+h1 {font-size:160%;}
+h2 {font-size:140%;}
+h3 {font-size:120%;}
+h4 {font-size:110%;}
+h5 {font-size:100%;}
+
+.template_variable {
+    border-radius: 2px;
+    border: 1px solid #6D95E0;
+    background-color: #BBCEF1;
+    padding: 2px 3px !important;
+    margin: 1px;
+    -webkit-border-radius: 2px;
+    o-border-radius: 2px;
+    khtml-border-radius: 2px;
+    -moz-border-radius: 2px;
+}

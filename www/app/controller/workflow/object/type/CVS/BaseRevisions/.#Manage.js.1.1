@@ -1,0 +1,183 @@
+Ext.define('Aenis.controller.workflow.object.type.Manage', {
+	extend: 'Ext.app.Controller',
+	
+    requires: [
+        'Aenis.view.workflow.object.type.Manage',
+        'Aenis.store.workflow.object.Types'
+    ],
+
+    onLaunch: function(app) {
+        app.loadMainViewTab(this, function(oView) {
+            this.addComponentRefs(oView);
+            oView.control({
+                'textfield': {
+                    specialkey: {fn: this.onTextFieldSpecialKey, buffer:BestSoft.eventDelay}
+                },
+                '[action=reset]': {
+                    click: this.onclickResetBtn
+                },
+                '[ref=addAction]': {
+                    click: {fn: this.onclickAddBtn, buffer:BestSoft.eventDelay}
+                },
+                '[ref=editAction]': {
+                    click: {fn: this.onclickSaveBtn, buffer:BestSoft.eventDelay}
+                },
+                '[ref=deleteAction]': {
+                    click: {fn: this.onclickDeleteBtn, buffer:BestSoft.eventDelay}
+                },
+                '[ref=parentItemSelectAction]': {
+                    click: this.onclickSelectParentBtn
+                },
+                '[ref=parentItemResetAction]': {
+                    click: this.onclickResetParentBtn
+                },
+                '[ref=itemsTree]': {
+                    selectionchange: this.onSelectionChangeItemsTree,
+                    beforerender: this.onBeforeRenderItemsTree
+                },
+                '.': {
+                    afterrender: {fn: this.onAfterRenderMainView, single:true}
+                }
+            }, null, this);
+        });
+    },
+
+    onAfterRenderMainView: function(oView) {
+        oView.showConditionalElements();
+    },
+
+    modelSyncHandler: function(record, operation) {
+        if(!operation.wasSuccessful()) return;
+        if(operation.action == 'create' || operation.action == 'update')
+        {
+            Ext.Msg.show({
+                title: this.application.title,
+                msg: this.getDetailsForm().messages[operation.action+'Success'],
+                icon: Ext.MessageBox.INFO,
+                buttons: Ext.MessageBox.OK
+            });
+        }
+        this.getItemsTree().getStore().reload();
+        this.onclickResetBtn();
+    },
+
+    onclickSelectParentBtn: function() {
+        var me = this;
+        var oController = this.application.loadController('workflow.object.type.SelectDlg');
+        oController.showDialog().on({
+            itemSelected: function(ev) {
+                this.getParentItemNameField().setValue(ev.name);
+                this.getParentItemField().parentId = ev.id;
+                this.getParentItemResetAction().enable();
+            },
+            scope: me
+        });
+    },
+
+    onclickResetParentBtn: function() {
+        this.getParentItemNameField().setValue("");
+        this.getParentItemResetAction().disable();
+        this.getParentItemField().parentId = 0;
+    },
+
+    onTextFieldSpecialKey: function(field, event) {
+    	if(event.getKey() == event.ENTER) {
+            var oForm = this.getDetailsForm().getForm();
+            var oRecord = oForm.getRecord();
+            if(oRecord)
+    		{
+    			this.onclickSaveBtn();
+    		}
+    		else
+    		{
+                this.onclickAddBtn();
+    		}
+    	}
+    },
+
+    onclickAddBtn: function() {
+        var oForm = this.getDetailsForm().getForm();
+        if(oForm.isValid())
+        {
+            var values = oForm.getValues();
+            values.id = 0;
+            values.parent_id = this.getParentItemField().parentId;
+            var model = Ext.create('Aenis.model.workflow.object.Type', values);
+            model.save({
+                scope: this,
+                callback: this.modelSyncHandler
+            });
+        }
+    },
+
+    onclickSaveBtn: function() {
+        var oForm = this.getDetailsForm().getForm();
+        if(oForm.isValid())
+        {
+            var values = oForm.getValues();
+            values.id = oForm.getRecord().get('id');
+            values.parent_id = this.getParentItemField().parentId;
+            var model = Ext.create('Aenis.model.workflow.object.Type', values);
+            model.save({
+                scope: this,
+                callback: this.modelSyncHandler
+            });
+        }
+    },
+
+    onclickDeleteBtn: function() {
+        var oGrid = this.getItemsTree();
+        var selection = oGrid.getSelectionModel().getSelection();
+        if(selection.length > 0)
+        {
+            var model = Ext.create('Aenis.model.workflow.object.Type', {
+                id: selection[0].data.id
+            });
+            model.destroy({
+                scope: this,
+                callback: this.modelSyncHandler
+            });
+        }
+    },
+
+    onclickResetBtn: function() {
+        this.getDetailsForm().getForm().reset();
+        this.getEditAction().disable();
+        this.getParentItemResetAction().disable();
+        this.getParentItemSelectAction().enable();
+        this.getParentItemNameField().reset();
+        this.getParentItemField().parentId = 0;
+        this.getItemsTree().getSelectionModel().deselectAll();
+    },
+
+    onBeforeRenderItemsTree: function(oTree) {
+        oTree.loadStore({params:{detailed:1}});
+    },
+
+    onSelectionChangeItemsTree: function(model, selected) {
+        var oForm = this.getDetailsForm().getForm();
+        if(selected.length > 0)
+        {
+            oForm.loadRecord(selected[0]);
+            if(selected[0].data.parent_id)
+            {
+                this.getParentItemNameField().setValue(selected[0].get('parent_label'));
+                this.getParentItemField().parentId = selected[0].get('parent_id');
+                this.getParentItemResetAction().enable();
+            }
+            else
+            {
+                this.getParentItemNameField().reset();
+                this.getParentItemField().parentId = 0;
+                this.getParentItemResetAction().disable();
+            }
+            this.getEditAction().enable();
+            this.getDeleteAction().enable();
+        }
+        else
+        {
+            this.getDeleteAction().disable();
+            this.onclickResetBtn();
+        }
+    }
+});

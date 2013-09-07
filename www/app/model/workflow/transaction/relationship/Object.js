@@ -1,0 +1,223 @@
+Ext.define('Aenis.model.workflow.transaction.relationship.Object', {
+    extend: 'Ext.data.Model',
+
+    requires:[
+        'Aenis.model.workflow.Document',
+        'Ext.form.field.File'
+    ],
+
+    mixins: [
+        'BestSoft.mixin.ModelFileField'
+    ],
+
+    idProperty: "id",
+
+    fields: [
+        {type: 'int', name: 'id'},
+        {type: 'int', name: 'rel_id'},
+        {type: 'string', name: 'objectName'},
+        {type: 'string', name: 'objectType'},
+        {type: 'auto', name: 'objectData'},
+
+        //fields for file selection
+        {type: 'int', name: 'doc_type_id'},
+        {type: 'string', name: 'doc_type_label', persist: false},
+        {type: 'int', name: 'file_id'},
+        {type: 'string', name: 'file_name', persist: false},
+        {type: 'auto', name: 'fileData'},
+
+        //unique hash for each contact selection model
+        {type: 'string', name: 'hash', persist: false, convert: function(v, record) {
+            return record.getHash();
+        }}
+    ],
+
+
+    /**
+     * Returns display name, which can be used in group header template
+     */
+    getSelectionName: function() {
+        return this.get('objectName');
+    },
+
+
+    /**
+     * Update hash after each edit
+     */
+    afterEdit: function() {
+        this.callParent(arguments);
+        this.data.hash = this.getHash();
+    },
+
+
+    /**
+     * Resets fields for document type selection
+     */
+    resetDocTypeSelection: function() {
+        this.set({
+            doc_type_label: '',
+            doc_type_id: 0
+        });
+    },
+
+
+    /**
+     * Returns hash, which identifies this model in a unique way.
+     * Can be used for both records which come from DB and records, which come from service.
+     * @return {String}
+     */
+    getHash: function() {
+        var hash = [];
+        var type = this.get('objectType');
+        hash.push(type);
+        if(type == 'vehicle')
+        {
+            hash.push(this.data.objectData.vin);
+            hash.push(this.data.objectData.number.replace(/ /g,"_"));
+        }
+        else if(type == 'realty')
+        {
+            hash.push(this.data.objectData.certificate_number);
+        }
+        else if(type == 'share')
+        {
+            //@TODO Add hash generation for 'share' type objects
+        }
+        else if(type == 'stock')
+        {
+            //@TODO Add hash generation for 'stock' type objects
+        }
+        else if(type == 'other')
+        {
+            hash.push(Ext.String.crc32(this.data.objectData.name));
+        }
+        return hash.join('##');
+    },
+
+    /**
+     * Compares this model with the given one. Similarity is checked by the following algorithm:
+     *    Function compares vin for 'vehicle' type objects,
+     *    'certificate_number' for 'realty' type objects,
+     *    '?' for 'stock' type objects,
+     *    '?' for 'share' type objects,
+     *    properties of 'objectData' for 'other' type objects
+     * @param {Aenis.model.workflow.transaction.relationship.Object} record    A model to compare this model against
+     * @return {Boolean}    True, if record contains the 'same' model
+     */
+    compareWith: function(record) {
+        return this.getHash() === record.getHash();
+    },
+
+
+    /**
+     * Sets selection fields using object model
+     * @param {Aenis.model.workflow.transaction.relationship.Object} model
+     */
+    fromObject: function(model) {
+        this.set({
+            id: model.getId(),
+            rel_id: model.get('rel_id'),
+            objectName: model.get('objectName'),
+            objectType: model.get('objectType'),
+            objectData: model.get('objectData')
+        });
+    },
+
+
+    /**
+     * Sets selection fields using vehicle model
+     * @param {Aenis.model.main.Vehicle} model
+     */
+    fromVehicle: function(model) {
+        this.set({
+            id: 0,
+            objectName: model.getName(),
+            objectType: 'vehicle',
+            objectData: model.getData()
+        });
+    },
+
+    /**
+     * Sets selection fields using vehicle model
+     * @param {Aenis.model.main.Realty} model
+     */
+    fromRealty: function(model) {
+        this.set({
+            id: 0,
+            objectName: model.getName(),
+            objectType: 'realty',
+            objectData: model.getData()
+        });
+    },
+
+    /**
+     * Sets selection fields using stock model
+     * @param {Aenis.model.main.Stock} model
+     */
+    fromStock: function(model) {
+        this.set({
+            id: 0,
+            objectName: model.getName(),
+            objectType: 'stock',
+            objectData: model.getData()
+        });
+    },
+
+    /**
+     * Sets selection fields using share model
+     * @param {Aenis.model.main.Share} model
+     */
+    fromShare: function(model) {
+        this.set({
+            id: 0,
+            objectName: model.getName(),
+            objectType: 'share',
+            objectData: model.getData()
+        });
+    },
+
+    /**
+     * Sets selection fields using data
+     * @param {Object} data
+     */
+    fromData: function(data) {
+        this.set({
+            id: 0,
+            objectName: data.name,
+            objectType: 'other',
+            objectData: data
+        });
+    },
+
+
+
+    proxy: {
+        type: 'ajax',
+
+        api: {
+            create: 'workflow/object/add_edit.php',
+            read: 'workflow/object/objects.json.php',
+            update: 'workflow/object/add_edit.php'
+        },
+
+        reader: {
+            type: 'json',
+            root: 'data'
+        },
+
+        writer: {
+            type: 'json',
+            root: 'data',
+            encode: true
+        }
+    },
+
+    hasMany:[
+        {
+            foreignKey: 'object_id',
+            associationKey: 'documents',
+            name: 'documents',
+            model: 'Aenis.model.workflow.Document'
+        }
+    ]
+});

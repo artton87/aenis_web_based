@@ -1,0 +1,197 @@
+Ext.define("Aenis.controller.workflow.inheritance.ApproveDlg", {
+    extend: 'Ext.app.Controller',
+    requires: [
+        'Aenis.view.workflow.inheritance.ApproveDlg'
+    ],
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.workflow.inheritance.ApproveDlg',
+        'BestSoft.mixin.Localized'
+    ],
+
+
+    /**
+     * Shows dialog and returns created instance of
+     * dialog so caller can listen to dialog events.
+     * @param {Object} params    {Aenis.model.workflow.Transaction} model
+     * @return {Aenis.view.workflow.will.ApproveDlg}
+     */
+    showDialog: function(params) {
+        this.oDlg = this.createMainView();
+        this.addComponentRefs(this.oDlg);
+        this.oDlg.addEvents(
+            /**
+             * @event approved
+             * Fired when user approves warrant
+             * Return FALSE from event handler to prevent dialog from closing.
+             */
+            'actionCompleted',
+
+            /**
+             * @event cancelled
+             * Fired when user closes the dialog without any action
+             */
+            'cancelled'
+        );
+        this.oDlg.returnValue = null;
+        this.oDlg.params = params || {};
+        this.oDlg.control({
+            '[ref=approveAction]': {
+                click: {fn: this.onApproveInheritance, buffer:BestSoft.eventDelay}
+            },
+            '[action=cancel]': {
+                click:this.onclickCloseBtn
+            },
+            '[ref=printAction]':{
+                click: {fn: this.printInheritance, buffer:BestSoft.eventDelay}
+            },
+            '[ref=approveInheritanceForm]': {
+                afterrender: {fn:this.afterRenderApproveDialogForm, single:true},
+                actioncomplete: this.onFormActionComplete,
+                actionfailed: this.onFormActionFailed
+            },
+            '[ref=payAction]':{
+                click: this.onclickPayAction
+            },
+            '[ref=resetPayment]':{
+                click: this.onclickResetPaymentAction
+            },
+            '.': {
+                beforeclose: function(oDlg) {
+                    if(oDlg.returnValue)
+                    {
+                        if(!oDlg.fireEvent('actionCompleted', oDlg.returnValue))
+                        {
+                            oDlg.returnValue = null;
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        oDlg.fireEvent('cancelled');
+                    }
+                    delete this.oDlg;
+                    return true;
+                }
+            }
+        }, null, this);
+        this.oDlg.show();
+        return this.oDlg;
+    },
+
+    afterRenderApproveDialogForm: function(){
+        this.getApproveInheritanceForm().transaction_id = this.oDlg.params.model.getId();
+        this.getApproveInheritanceForm().tr_type_id =  this.oDlg.params.model.get('tr_type_id');
+
+        this.getDutyValue().setValue(this.oDlg.params.model.get('state_fee_coefficient'));
+        this.getPaymentNotaryValue().setMinValue(this.oDlg.params.model.get('service_fee_coefficient_min'));
+        this.getPaymentNotaryValue().setMaxValue(this.oDlg.params.model.get('service_fee_coefficient_max'));
+    },
+
+    onclickPayAction: function(){
+        var oForm = this.getPaymentPanel().getForm();
+        var dutyValue = this.getDutyValue().getValue();
+        var paymentNotaryValue = this.getPaymentNotaryValue().getValue();
+        if(oForm.isValid() && dutyValue > 0 && paymentNotaryValue > 0)
+        {
+            this.getPaidDutyValue().setValue(dutyValue);
+            this.getPaidPaymentNotaryValue().setValue(paymentNotaryValue);
+            this.getPaymentPanel().hide();
+            this.getPaidPanel().show();
+            this.getFileWill().show();
+            this.getPrintAction().show();
+            this.getApproveAction().show();
+            this.getPayAction().hide();
+        }
+
+    },
+
+    onclickResetPaymentAction: function(){
+        this.getPaidDutyValue().setValue();
+        this.getPaidPaymentNotaryValue().setValue();
+        this.getPaymentPanel().show();
+        this.getPaidPanel().hide();
+        this.getFileWill().hide();
+        this.getPrintAction().hide();
+        this.getApproveAction().hide();
+        this.getPayAction().show();
+        this.getPaymentNotaryValue().setValue(this.oDlg.params.model.get('service_fee_coefficient_min'));
+    },
+
+
+    printInheritance: function(){
+        var model = this.oDlg.params.model;
+        Ext.Ajax.request({
+            url: 'workflow/inheritance/print.php',
+            method: 'POST',
+            params: {
+                init: 1,
+                transaction_id: model.getId()
+            },
+            callback: function(options, success, response) {
+                if(Aenis.application.handleAjaxResponse(response))
+                {
+                    response = Ext.JSON.decode(response.responseText);
+                    if(response.success && response.key)
+                    {
+                        window.open(
+                            BestSoft.config.server + 'workflow/inheritance/print.php?key='+response.key,
+                            '_blank',
+                            'resizable=yes'
+                        )
+                    }
+                }
+            }
+        });
+
+    },
+
+    onFormActionComplete: function(oForm, action) {
+        if(action instanceof Ext.form.action.Submit)
+        {
+            Ext.MessageBox.alert({
+                title: this.application.title,
+                msg: this.getApproveInheritanceForm().messages.inheritance_approved,
+                icon: Ext.MessageBox.INFO, buttons: Ext.MessageBox.OK
+            });
+            this.oDlg.returnValue = true;
+            var model = this.oDlg.params.model;
+            model.set('tr_status_code','approved');
+            model.set('tr_status',this.T('approved'));
+            model.commit();
+            this.oDlg.close();
+        }
+    },
+
+    onFormActionFailed: function(oForm, action) {
+        if(action instanceof Ext.form.action.Submit)
+        {
+            if(action.failureType == Ext.form.action.Action.SERVER_INVALID)
+            {
+                var obj = Ext.JSON.decode(action.response.responseText);
+                Ext.Msg.alert({
+                    title: this.application.title,
+                    msg: obj.errors.reason,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.Msg.ERROR
+                });
+            }
+        }
+    },
+
+    onApproveInheritance: function(){
+        var oForm = this.getApproveInheritanceForm().getForm();
+        oForm.submit({params:{
+            transaction_id: this.getApproveInheritanceForm().transaction_id,
+            tr_type_id: this.getApproveInheritanceForm().tr_type_id,
+            duty: this.getPaidDutyValue().getValue(),
+            paymentNotary: this.getPaidPaymentNotaryValue().getValue()
+        }});
+    },
+
+    onclickCloseBtn: function() {
+        this.oDlg.close();
+    }
+});
+

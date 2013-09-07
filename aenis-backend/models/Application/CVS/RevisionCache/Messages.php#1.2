@@ -1,0 +1,68 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: Bestsoft
+ * Date: 6/26/13
+ * Time: 12:12 PM
+ * To change this template use File | Settings | File Templates.
+ */
+
+class Application_Messages extends App_Db_Table_Abstract
+{
+
+    protected $_table = 'application_messages';
+
+    public function addMessage($data)
+    {
+        $params = array(
+            'date' => self::$DB_TIMESTAMP,
+            'notary_id' => empty($data['notary_id']) ? self::$DB_NULL : $data['notary_id'],
+            'customer_id' => empty($data['customer_id']) ? self::$DB_NULL : $data['customer_id'],
+            'parent_id' => empty($data['parent_id']) ? self::$DB_NULL : $data['parent_id'],
+        );
+        $params = array_merge($data,$params);
+        $this->db_insert($this->_table,$params);
+    }
+
+    public function getMessages($app_id)
+    {
+        $select = "messages.id,messages.app_id,messages.date,messages.customer_id,messages.notary_id,messages.parent_id,messages.message,user_content.first_name,user_content.last_name,cus.name,cus.last_name AS cus_last_name";
+        $query = "SELECT $select FROM bs_application_messages AS messages
+         LEFT JOIN bs_customers cus ON cus.id = messages.customer_id
+         LEFT JOIN bs_users user ON user.id = messages.notary_id
+         LEFT JOIN bs_users_content user_content ON user_content.user_id = user.id
+         WHERE app_id='$app_id' ORDER BY date ";
+        $result = $this->db_query($query);
+        while($row = $this->db_fetch_array($result))
+        {
+            $return[] = $row;
+        }
+        return $return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

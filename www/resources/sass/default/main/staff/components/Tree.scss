@@ -1,0 +1,6 @@
+@import "main/staff/components/tree/*.png";
+
+.x-grid-cell-inner {
+/*  width:16px;*/
+  @include all-tree-sprites;
+}

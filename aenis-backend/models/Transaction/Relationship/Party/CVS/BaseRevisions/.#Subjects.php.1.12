@@ -1,0 +1,265 @@
+<?php
+/**
+ * Transaction party subjects management
+ * @package aenis
+ */
+
+/**
+ * Contains methods for transaction party subjects management
+ * @author BestSoft
+ * @package aenis\workflow
+ */
+class Transaction_Relationship_Party_Subjects extends HistoricalTable
+{
+	/**
+	 * Database table name
+	 * @var string
+	 */
+	protected $_table = 'subjects';
+
+
+	/**
+	 * Returns party subjects
+	 * @access public
+	 * @param array $search    Optional. Array with the following search criteria:
+	 * 						   subject_id, party_id, party_type_id, party_type_code, relationship_id, transaction_id
+	 * @return mysqli_result
+	 */
+	public function getSubjects($search = array())
+	{
+		$where = array();
+		$joins = array();
+
+		if(empty($search['subject_id']))
+		{
+			$where[] = 'subjects.del_user_id IS NULL';
+			$where[] = 'subjects.new_id IS NULL';
+		}
+		else
+		{
+			$where[] = "subjects.id = '".intval($search['subject_id'])."'";
+		}
+
+		if(!empty($search['party_id']))
+		{
+			$where[] = "parties.id = '".intval($search['party_id'])."'";
+			$joins[] = 'JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL';
+		}
+
+		if(!empty($search['party_type_id']))
+		{
+			$where[] = "parties.party_type_id = '".intval($search['party_type_id'])."'";
+			$joins[] = 'JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL';
+		}
+
+		if(!empty($search['party_type_code']))
+		{
+			$where[] = "party_types.party_type_code = '".$this->db_escape_string($search['party_type_code'])."'";
+			$joins[] = 'JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL';
+			$joins[] = "LEFT JOIN bs_party_types party_types ON party_types.id = parties.party_type_id";
+		}
+
+		if(!empty($search['relationship_id']))
+		{
+			$where[] = "rel.id = '".intval($search['relationship_id'])."'";
+			$joins[] = 'JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL';
+			$joins[] = 'JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL and rel.new_id IS NULL';
+		}
+
+		if(!empty($search['transaction_id']))
+		{
+			$where[] = "tr.id = '".intval($search['transaction_id'])."'";
+			$joins[] = 'JOIN bs_parties parties ON parties.id = subjects.party_id AND parties.del_user_id IS NULL and parties.new_id IS NULL';
+			$joins[] = 'JOIN bs_relationships rel ON rel.id = parties.rel_id AND rel.del_user_id IS NULL and rel.new_id IS NULL';
+			$joins[] = 'JOIN bs_transactions tr ON tr.id = rel.tr_id AND tr.del_user_id IS NULL and tr.new_id IS NULL';
+		}
+
+		$where = implode(' AND ', $where);
+		$joins = implode(PHP_EOL, array_unique($joins));
+
+		$q = "SELECT
+				subjects.*,
+            	getNContactName(subjects.n_contact_id) AS n_contact_name,
+            	getJContactName(subjects.j_contact_id) AS j_contact_name,
+            	nct.first_name AS n_first_name,
+				nct.last_name AS n_last_name,
+				nct.second_name AS n_second_name,
+				nct.date_of_birth AS n_date_of_birth,
+				nct.social_card_number AS n_social_card_number,
+				nct.passport_number AS n_passport_number,
+				nct.authority AS n_authority,
+				nct.given_date AS n_given_date,
+				nct.country_id AS n_country_id,
+				nct.address AS n_address,
+				nct.zip AS n_zip,
+				nct.email AS n_email,
+				nct.fax AS n_fax,
+				nct.phone_home AS n_phone_home,
+				nct.phone_office AS n_phone_office,
+				nct.phone_mobile AS n_phone_mobile,
+				nct.organization_name AS n_organization_name,
+				nct.staff_name AS n_staff_name,
+				jct.organization_name AS j_organization_name,
+				jct.organization_type_id AS j_organization_type_id,
+				j_org_types.name AS j_organization_type_name,
+				j_org_types.abbreviation AS j_organization_type_abbreviation,
+				jct.registration_number AS j_registration_number,
+				jct.tax_account AS j_tax_account,
+				jct.foundation_date AS j_foundation_date,
+				jct.certificate_number AS j_certificate_number,
+				jct.phone AS j_phone,
+				jct.fax AS j_fax,
+				jct.website AS j_website,
+				jct.email AS j_email,
+				jct.country_id AS j_country_id,
+				jct.additional_information AS j_additional_information,
+				jct.address AS j_address
+            FROM bs_subjects subjects
+            LEFT JOIN bs_n_contacts nct ON nct.id = subjects.n_contact_id AND nct.new_id IS NULL
+			LEFT JOIN bs_j_contacts jct ON jct.id = subjects.j_contact_id AND jct.new_id IS NULL
+			LEFT JOIN bs_j_contact_organization_types j_org_types ON j_org_types.id = jct.organization_type_id
+            $joins
+            WHERE $where
+        ";
+		return $this->db_query($q);
+	}
+
+
+	/**
+	 * Returns contact names of party subjects as array
+	 * @see getSubjects
+	 * @access public
+	 * @param array $search    Optional. Array with the following search criteria:
+	 * 						   party_id, relation_id, transaction_id, party_type_code
+	 * @return array
+	 */
+	public function getSubjectContactNames($search = array())
+	{
+		$result = $this->getSubjects($search);
+		$contact_names = array();
+		while($row = $this->db_fetch_array($result))
+		{
+			if(!empty($row['n_contact_id']))
+				$contact_names[] = $row['n_contact_name'];
+			if(!empty($row['j_contact_id']))
+				$contact_names[] = $row['j_contact_name'];
+		}
+		return $contact_names;
+	}
+
+
+	/**
+	 * Add new subject
+	 * @access public
+	 * @param array $data    Associative array with 'subjects', database table field values
+	 * @return integer    Id of newly inserted record
+	 */
+	public function addSubject($data)
+	{
+		$n_contact_id = $data['n_contact_id'];
+		if($n_contact_id == 0 && $data['contactType'] == 'natural')
+		{
+            if(isset($data['serviceData']['passport_number']) || isset($data['serviceData']['social_card_number']))
+            {
+			    $oNatural = new Contact_Natural();
+                $n_contact_id = $oNatural->existsContact($data['serviceData']);
+
+                if(0 == $n_contact_id)
+                {
+                    $n_contact_id = $oNatural->addContact($data['serviceData']);
+                }
+                else
+                {
+                    if($oNatural->existContactFullData($data['serviceData']))
+                    {
+                        $n_contact_id = $oNatural->existContactFullData($data['serviceData']);
+                    }
+                    else
+                    {
+                        $n_contact_id = $oNatural->updateContact($n_contact_id, $data['serviceData']);
+                    }
+
+                }
+            }
+		}
+
+
+		$j_contact_id = $data['j_contact_id'];
+		if($j_contact_id == 0 && $data['contactType'] == 'juridical')
+		{
+                    if(isset($data['serviceData']['registration_number']) || isset($data['serviceData']['tax_account']) || isset($data['serviceData']['organization_name']))
+                    {
+                        $oJuridical = new Contact_Juridical();
+                        $j_contact_id = $oJuridical->existsContact($data['serviceData']['tax_account'], $data['serviceData']['registration_number']);
+                        if(0 == $j_contact_id)
+                        {                           
+                            $j_contact_id = $oJuridical->addContact($data['serviceData']);
+                        }
+                        else
+                        {
+                            if($oJuridical->existContactFullData($data['serviceData']))
+                            {
+                                $j_contact_id = $oJuridical->existContactFullData($data['serviceData']);
+                            }
+                            else
+                            {
+                                $j_contact_id = $oJuridical->updateContact($j_contact_id, $data['serviceData']);
+                            }
+                        }
+                    }
+		}
+
+
+		$insert_data = array(
+			'party_id' => $data['party_id'],
+			'n_contact_id' => empty($n_contact_id) ? self::$DB_NULL : $n_contact_id,
+			'j_contact_id' => empty($j_contact_id) ? self::$DB_NULL : $j_contact_id,
+		);
+
+		return $this->insertUsingAdjacencyListModel($insert_data);
+	}
+
+
+	/**
+	 * Handles files uploaded for this subject
+	 * @access public
+	 * @param integer $subject_id   Subject id
+	 * @param integer $case_id    Case id to be passed to addDocument
+	 * @param array $existing_files    Array with information about existing files (doc_type_id and file_id)
+	 * @param object $info    Uploaded files info
+	 */
+	public function handleSubjectUploadedFiles($subject_id, $case_id, $existing_files, $info)
+	{
+		$oDoc = new Documents();
+		$oDocFiles = new Document_Files();
+		foreach($existing_files as $existing_file)
+		{
+			$doc_dt_id = $oDoc->addDocument(array(
+				'subject_id' => $subject_id,
+				'doc_type_id' => $existing_file['doc_type_id'],
+				'case_id' => $case_id,
+                'insert_type' =>1
+			))->dt_id;
+			$oDocFiles->addDocumentFile($doc_dt_id, $existing_file['file_id']);
+		}
+
+		$files_backup = $_FILES;
+		$_FILES = $info->files;
+		foreach($_FILES as $key=>$file)
+		{
+			$doc_dt_id = $oDoc->addDocument(array(
+				'subject_id' => $subject_id,
+				'doc_type_id' => $info->fileKey_docTypeId_map[$key],
+				'case_id' => $case_id,
+                'insert_type' =>1
+			))->dt_id;
+            $result = $this->db_select('cases',array('case_code'), array('id'=>$case_id));
+            if($row = $this->db_fetch_row($result))
+            {
+                $case_code = $row[0];
+            }
+            $oDocFiles->insert($doc_dt_id, array($key=>$file), $case_code);
+		}
+		$_FILES = $files_backup;
+	}
+}

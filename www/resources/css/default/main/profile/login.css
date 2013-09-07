@@ -1,0 +1,14 @@
+.x-btn .icon-login {
+  background-image: url('../../../../images/default/main/login/login.png');
+}
+
+.login-message {
+  margin: 10px;
+  background-color: #FFFF88;
+  color: #36393D;
+  border: 1px solid #99bce8 !important;
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  font-size: 90%;
+}

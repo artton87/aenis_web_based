@@ -1,0 +1,29 @@
+@import "main/icon/*.png";
+.x-btn {
+  @include all-icon-sprites;
+}
+@include all-icon-sprites;
+
+@import "main/icon/lang/*.png";
+@include all-lang-sprites;
+
+.ml-content-icon {
+  @include all-lang-sprites;
+  $w: lang-sprite-width('hy_AM');
+  $h: lang-sprite-height('hy_AM');
+  width: $w;
+  height: $h;
+  float: left;
+  display: block;
+  margin-right: 2px;
+
+  .lang-sprite {
+    width: $w;
+    height: $h;
+    display: block;
+  }
+}
+
+.ml-content-missing {
+  opacity:0.1;
+}

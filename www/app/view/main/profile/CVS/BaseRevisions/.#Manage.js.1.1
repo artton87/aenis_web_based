@@ -1,0 +1,59 @@
+Ext.define('Aenis.view.main.profile.Manage', {
+    extend: 'Ext.container.Container',
+
+    alias: 'widget.mainProfileManage',
+
+    layout: 'fit',
+
+    mixins: [
+        'Locale.hy_AM.Common',
+        'Locale.hy_AM.main.profile.Manage',
+        'BestSoft.mixin.Localized',
+        'BestSoft.mixin.StyleSheetLoader'
+    ],
+
+    initComponent: function() {
+        this.loadStyleSheets();
+
+        Ext.apply(this, {
+            tabConfig: {
+                title: this.T("viewTabTitle")
+            },
+            items: [
+                {
+                    xtype: 'tabpanel',
+                    plugins: Ext.create('Ext.ux.TabReorderer'),
+                    enableTabScroll: true,
+                    deferredRender: false,
+                    plain: true,
+                    items:[
+                        {
+                            title: this.T("calendar"),
+                            ref: 'calendar',
+                            layout: {
+                                type: 'hbox',
+                                align: 'stretch',
+                                pack: 'center'
+                            },
+                            items: []
+                        },
+                        {
+                            xtype: 'panel',
+                            title: this.T("reports"),
+                            layout: {
+                                type: 'border'
+                            },
+                            defaults: {
+                                margin: 1
+                            },
+                            items: [
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        this.callParent(arguments);
+    }
+});
